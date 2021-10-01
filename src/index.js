@@ -1,12 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from './Routes';
 import './styles/_reset.scss';
-import './styles/_common.scss';
+import Router from './Routes';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Router />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+ReactDOM.render(<Router />, document.getElementById('root'));
