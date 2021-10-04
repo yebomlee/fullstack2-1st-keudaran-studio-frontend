@@ -1,155 +1,156 @@
+@import '../mixin.scss';
+
 #description {
   h3 {
-    font-size: 25px;
+    @include fontSizeWight(25px, bold, none);
+    @include fontFamily('Anton', sans-serif);
     margin: 10px 0 30px 15px;
-    font-weight: bold;
-    font-family: 'Anton', sans-serif;
   }
+
   .price {
-    font-size: 23px;
-    font-weight: bold;
-    font-family: 'Nunito', sans-serif;
+    @include fontSizeWight(23px, bold, none);
+    @include fontFamily('Nunito', sans-serif);
+
     em {
-      font-size: 20px;
-      font-weight: 400;
+      @include fontSizeWight(20px, 400, none);
     }
   }
+
   #info {
     margin: 0 0 40px 0;
+
     #table {
       margin: 20px 0 20px 0;
+
       .tableCal {
         td {
-          font-size: 12px;
-          color: #777;
+          @include fontSizeWight(12px, none, #777);
         }
+
         th {
-          display: flex;
-          font-size: 12px;
-          color: #3d3d3d;
+          @include flexStyle();
+          @include fontSizeWight(12px, none, #3d3d3d);
           padding: 9px 0 9px 0;
         }
       }
     }
+
     .option {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include flexStyle(center, space-between);
       padding: 20px 10px 20px 0;
       border-top: #3d3d3d solid 1px;
       border-bottom: #3d3d3d solid 1px;
+
       .optionText {
-        font-size: 13px;
-        color: #3d3d3d;
+        @include fontSizeWight(13px, none, #3d3d3d);
       }
+
       dd .optionBox {
-        width: 330px;
-        height: 35px;
-        font-size: 14px;
-        color: #696969;
+        @include widthHeight(330px, 35px);
+        @include fontSizeWight(14px, none, #696969);
+        padding: 0 0 0 10px;
         border: 1px solid #e2e2e2;
         border-radius: 5px;
-        padding: 0 0 0 10px;
       }
     }
+
     .productCount {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include flexStyle(center, space-between);
       padding: 20px 10px 20px 0;
       border-bottom: #3d3d3d solid 1px;
+
       .productText {
-        font-size: 13px;
-        color: #3d3d3d;
+        @include fontSizeWight(13px, none, #3d3d3d);
         margin: 0 150px 0 0;
       }
+
       .countBox {
-        display: flex;
-        align-items: center;
+        @include flexStyle(center);
+
         .countInput {
-          font-size: 12px;
-          width: 35px;
-          height: 30px;
-          padding: 0;
-          color: #696969;
-          border: 1px solid #e2e2e2;
-          font-family: 'Nunito', sans-serif;
+          @include widthHeight(35px, 30px);
+          @include fontSizeWight(12px, none, #696969);
+          @include fontFamily('Nunito', sans-serif);
           vertical-align: middle;
           text-align: center;
+          padding: 0;
+          border: 1px solid #e2e2e2;
         }
+
         .countButton {
-          display: flex;
-          flex-direction: column;
+          @include flexStyle(none, none, column);
+
           .arrowButton {
+            @include widthHeight(none, 15px);
+            @include fontSizeWight(none, none, #696969);
             margin: 0 0 0 5px;
             border: 1px solid #e2e2e2;
-            height: 15px;
-            color: #696969;
             cursor: pointer;
+
             &:hover {
+              @include fontSizeWight(none, none, black);
               border: 2px solid black;
-              color: black;
             }
           }
         }
       }
+
       .changePrice {
-        font-size: 15px;
-        font-family: 'Nunito', sans-serif;
-        font-weight: bold;
+        @include fontSizeWight(15px, bold);
+        @include fontFamily('Nunito', sans-serif);
+
         em {
-          font-size: 12px;
-          font-weight: 400px;
+          @include fontSizeWight(12px, 400px);
         }
       }
     }
+
     .totalPrice {
-      display: flex;
-      justify-content: space-between;
+      @include flexStyle(none, space-between);
       padding: 30px 10px 20px 0;
+
       strong {
-        font-family: 'Anton', sans-serif;
-        font-weight: bold;
-        font-size: 22px;
+        @include fontSizeWight(22px, bold);
+        @include fontFamily('Anton', sans-serif);
       }
+
       .resultPrice {
-        font-size: 22px;
-        font-family: 'Nunito', sans-serif;
-        font-weight: bold;
+        @include fontSizeWight(22px, bold);
+        @include fontFamily('Nunito', sans-serif);
+
         em {
-          font-size: 20px;
-          font-weight: 400px;
+          @include fontSizeWight(20px, 400px);
         }
       }
     }
   }
 
   .footerButton {
-    display: flex;
-    justify-content: space-between;
+    @include flexStyle(none, space-between);
+
     p {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 58px;
+      @include flexStyle(center, center);
+      @include widthHeight(none, 58px);
       margin: 0 7px 0 0;
     }
+
     .buyButton {
-      width: 200px;
+      @include widthHeight(200px);
+      @include fontSizeWight(none, none, #fff);
       border: 1px solid #2e2e2e;
       background-color: #2e2e2e;
-      color: #fff;
     }
+
     .bargetButton {
-      width: 200px;
+      @include widthHeight(200px);
+      @include fontSizeWight(none, none, #000000);
       border: 1px solid #000000;
-      color: #000000;
     }
+
     .likeButton {
-      font-size: 58px;
+      @include fontSizeWight(58px, none, #1c1c1c);
       padding: 17px;
       border: 1px solid #000000;
-      color: #1c1c1c;
     }
   }
 }

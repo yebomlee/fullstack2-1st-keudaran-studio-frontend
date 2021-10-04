@@ -17,12 +17,12 @@ class ProductDetail extends Component {
           </header>
           <section id="product">
             <div id="main">
-              <ProductPhoto></ProductPhoto>
-              <ProductDescription></ProductDescription>
+              <ProductPhoto />
+              <ProductDescription />
             </div>
             <article id="content">
-              <ProductMiddleNav></ProductMiddleNav>
-              <ProductContents></ProductContents>
+              <ProductMiddleNav />
+              <ProductContents />
             </article>
           </section>
           <footer id="footer">{/*예봄리~*/}하단 footer</footer>

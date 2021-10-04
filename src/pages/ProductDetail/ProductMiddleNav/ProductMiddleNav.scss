@@ -1,23 +1,21 @@
+@import '../mixin.scss';
+
 .contentNav {
-  display: flex;
-  justify-content: space-around;
+  @include flexStyle(none, space-around);
 
   li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexStyle(center, center);
+    @include widthHeight(540px, 47px);
+    @include fontSizeWight(16px, none, none);
     border: 1px solid black;
-    width: 540px;
-    font-size: 16px;
-    height: 47px;
   }
+
   .menuDetail {
     background-color: #333;
-    color: #fff;
-    font-weight: 500;
+    @include fontSizeWight(none, none, #fff);
   }
+
   .menuReview {
-    color: #8b8b8b;
-    font-weight: 500;
+    @include fontSizeWight(none, none, #8b8b8b);
   }
 }
