@@ -5,7 +5,6 @@ import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
 import ProductContents from './ProductContents/ProductContents';
 import ProductData from './data.json';
 import './ProductDetail.scss';
-import './common.scss';
 
 class ProductDetail extends Component {
   constructor() {

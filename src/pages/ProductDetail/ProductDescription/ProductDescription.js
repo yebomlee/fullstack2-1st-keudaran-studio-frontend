@@ -24,7 +24,9 @@ class ProductDescription extends Component {
             <tbody className="tableBody">
               <tr className="tableCol">
                 <td>적립금</td>
-                <th>3 %</th>
+                <th>
+                  3 <span>%</span>
+                </th>
               </tr>
               <tr className="tableCol">
                 <td>배송비</td>
@@ -55,7 +57,7 @@ class ProductDescription extends Component {
           <div className="productCount">
             <span className="productText">브라키오 책갈피</span>
             <div className="countBox">
-              <input className="countInput" type="text" value="1" />
+              <input className="countInput" type="text" value="1" readOnly />
               <span className="countButton">
                 <FontAwesomeIcon className="arrowButton" icon={faCaretUp} />
                 <FontAwesomeIcon className="arrowButton" icon={faCaretDown} />

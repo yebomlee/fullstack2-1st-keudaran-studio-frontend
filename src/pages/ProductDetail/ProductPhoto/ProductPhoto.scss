@@ -1,42 +1,43 @@
-@import '../mixin.scss';
+@import '/src/styles/mixin';
 
 .ProductPhoto {
-  @include widthHeight(500px, 720px);
+  @include widthHeight(520px, 720px);
+  margin: 0 0 100px 0;
 
   .mainPhoto {
     @include flexStyle(center);
     .mainImage {
-      @include widthHeight(460px, 460px);
+      @include widthHeight(520px, 520px);
     }
     .photoButton {
-      @include fontSizeWight(45px, none, #fff);
+      @include fontSizeWight(50px, none, #fff);
       position: relative;
       cursor: pointer;
     }
     .leftButton {
-      right: 450px;
-      margin: 0 -70px 0 0;
+      right: 500px;
+      margin: 0 -80px 0 0;
       &:hover {
-        font-size: 50px;
-        margin: 0 -73px 0 0;
+        font-size: 60px;
+        margin: 0 -86px 0 0;
       }
     }
     .rightButton {
       &:hover {
-        font-size: 50px;
+        font-size: 60px;
       }
     }
   }
 
-  #subPhotos {
+  .subPhotos {
     display: flex;
     margin: 20px 0 0 0;
 
     .subImage {
-      margin: 0 7px 0 0;
+      margin: 0 10px 0 0;
 
       img {
-        @include widthHeight(110px, 110px);
+        @include widthHeight(123px, 123px);
         cursor: pointer;
         &:hover {
           transform: scale(1.05);

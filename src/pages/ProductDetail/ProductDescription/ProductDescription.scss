@@ -1,6 +1,7 @@
-@import '../mixin.scss';
+@import '/src/styles/mixin';
 
 .ProductDescription {
+  width: 520px;
   h3 {
     @include fontSizeWight(25px, bold, none);
     @include fontFamily('Anton', sans-serif);
@@ -17,32 +18,32 @@
   }
 
   .info {
-    margin: 0 0 40px 0;
+    margin: 0 0 50px 0;
 
     .table {
-      margin: 20px 0 20px 0;
+      margin: 30px 0 20px 0;
 
       .tableCol {
         td {
-          @include fontSizeWight(12px, none, #777);
+          @include fontSizeWight(13px, none, #777);
         }
 
         th {
           @include flexStyle();
-          @include fontSizeWight(12px, none, #3d3d3d);
-          padding: 9px 0 9px 0;
+          @include fontSizeWight(13px, none, #3d3d3d);
+          padding: 10px 0 10px 0;
         }
       }
     }
 
     .option {
       @include flexStyle(center, space-between);
-      padding: 20px 10px 20px 0;
+      padding: 30px 10px 30px 0;
       border-top: #3d3d3d solid 1px;
       border-bottom: #3d3d3d solid 1px;
 
       .optionText {
-        @include fontSizeWight(13px, none, #3d3d3d);
+        @include fontSizeWight(14px, none, #3d3d3d);
       }
 
       dd .optionBox {
@@ -60,11 +61,11 @@
 
     .productCount {
       @include flexStyle(center, space-between);
-      padding: 20px 10px 20px 0;
+      padding: 30px 10px 30px 0;
       border-bottom: #3d3d3d solid 1px;
 
       .productText {
-        @include fontSizeWight(13px, none, #3d3d3d);
+        @include fontSizeWight(14px, none, #3d3d3d);
         margin: 0 150px 0 0;
       }
 
@@ -99,7 +100,7 @@
       }
 
       .changePrice {
-        @include fontSizeWight(15px, bold);
+        @include fontSizeWight(17px, none);
         @include fontFamily('Nunito', sans-serif);
 
         em {
@@ -142,21 +143,21 @@
     }
 
     .buyButton {
-      @include widthHeight(200px);
+      @include widthHeight(250px);
       @include fontSizeWight(none, none, #fff);
       border: 1px solid #2e2e2e;
       background-color: #2e2e2e;
     }
 
     .basketButton {
-      @include widthHeight(200px);
+      @include widthHeight(250px);
       @include fontSizeWight(none, none, #000000);
       border: 1px solid #000000;
     }
 
     .likeButton {
-      @include fontSizeWight(58px, none, #1c1c1c);
-      padding: 17px;
+      @include fontSizeWight(60px, none, #1c1c1c);
+      padding: 15px;
       border: 1px solid #000000;
       cursor: pointer;
       &:hover {

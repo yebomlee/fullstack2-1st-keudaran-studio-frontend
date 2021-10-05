@@ -8,15 +8,12 @@ import {
 
 class ProductPhoto extends Component {
   render() {
+    const { id, name, thumbailURL, productImg } = this.props.mainData;
+    console.log(productImg);
     return (
       <div className="ProductPhoto">
         <main className="mainPhoto">
-          <img
-            className="mainImage"
-            alt="메인 이미지"
-            src=" 
-            https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
-          />
+          <img className="mainImage" alt={name} src={thumbailURL} key={id} />
           <FontAwesomeIcon
             className="leftButton photoButton"
             icon={faChevronLeft}
@@ -26,29 +23,29 @@ class ProductPhoto extends Component {
             icon={faChevronRight}
           />
         </main>
-        <ul id="subPhotos">
+        <ul className="subPhotos">
           <li className="subImage">
             <img
-              alt="크리스마스 포스트카드"
-              src=" https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
+              alt={name}
+              src="https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
             />
           </li>
           <li className="subImage">
             <img
-              alt="안경잡이 루돌프"
-              src="https://image.freepik.com/free-vector/smiling-moon-sky-night-with-santa-claus-sleigh_1308-55030.jpg"
+              alt={name}
+              src="https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
             />
           </li>
           <li className="subImage">
             <img
-              alt="달나라로 여행가는 산타"
-              src="https://image.freepik.com/free-vector/santa-claus-boat-summer-theme_1308-53272.jpg"
+              alt={name}
+              src="https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
             />
           </li>
           <li className="subImage">
             <img
-              alt="일광욕 즐기는 산타"
-              src="https://image.freepik.com/free-vector/santa-claus-reindeers-with-christmas-tree_197582-107.jpg"
+              alt={name}
+              src="https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
             />
           </li>
         </ul>

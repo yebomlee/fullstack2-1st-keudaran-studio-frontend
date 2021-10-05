@@ -1,11 +1,11 @@
-@import '../mixin.scss';
+@import '/src/styles/mixin';
 
 .ProductMiddleNav {
   @include flexStyle(none, space-around);
 
   li {
     @include flexStyle(center, center);
-    @include widthHeight(540px, 47px);
+    @include widthHeight(600px, 60px);
     @include fontSizeWight(16px, none, none);
     border-bottom: 1px solid #000;
     cursor: pointer;
