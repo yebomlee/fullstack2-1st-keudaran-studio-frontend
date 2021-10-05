@@ -1,0 +1,42 @@
+.Carousel {
+  position: relative;
+  overflow: hidden;
+
+  .container {
+    width: 400vw;
+    transition: transform 0.5s;
+
+    .inner {
+      width: 100vw;
+      float: left;
+
+      img {
+        width: 100vw;
+        height: 30vw;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .btnWraper {
+    position: absolute;
+    bottom: 10px;
+    left: 47vw;
+
+    .btn {
+      border: none;
+      border-radius: 20px;
+      margin: 3px;
+      width: 15px;
+      height: 7px;
+      opacity: 0.6;
+      background-color: #999999;
+      z-index: 1;
+    }
+
+    .selected {
+      width: 20px;
+      opacity: 1;
+    }
+  }
+}
