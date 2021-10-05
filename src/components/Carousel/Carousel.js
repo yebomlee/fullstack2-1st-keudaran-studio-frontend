@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import SlideImage from './SlideImage';
-import imgData from './mockData';
+import DATA from './mockData';
 import './Carousel.scss';
+import DotButton from './DotButton';
 
 class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgData: imgData,
+      imgData: DATA,
       currentImg: 0,
     };
   }
@@ -19,12 +20,7 @@ class Carousel extends Component {
     document.querySelector(
       '.container'
     ).style.transform = `translateX(-${e.target.className.charAt(3)}00vw)`;
-    this.setState({ currentImg: +e.target.className.charAt(3) }, () => {
-      document.querySelector('.selected').classList.remove('selected');
-      document
-        .querySelector(`.btn${this.state.currentImg}`)
-        .classList.toggle('selected');
-    });
+    this.setState({ currentImg: +e.target.className.charAt(3) }, () => {});
   };
 
   slideRight = e => {
@@ -36,12 +32,7 @@ class Carousel extends Component {
       '00'
     )}vw)`;
 
-    this.setState({ currentImg: ImgIdx }, () => {
-      document.querySelector('.selected').classList.remove('selected');
-      document
-        .querySelector(`.btn${this.state.currentImg}`)
-        .classList.toggle('selected');
-    });
+    this.setState({ currentImg: ImgIdx }, () => {});
   };
 
   slideLeft = e => {
@@ -53,12 +44,7 @@ class Carousel extends Component {
       '00'
     )}vw)`;
 
-    this.setState({ currentImg: ImgIdx }, () => {
-      document.querySelector('.selected').classList.remove('selected');
-      document
-        .querySelector(`.btn${this.state.currentImg}`)
-        .classList.toggle('selected');
-    });
+    this.setState({ currentImg: ImgIdx }, () => {});
   };
 
   render() {
@@ -66,15 +52,20 @@ class Carousel extends Component {
       <div className="Carousel">
         <div className="container">
           {this.state.imgData.map(data => {
-            return (
-              <SlideImage id={data.id} url={data.imgUrl} name={data.name} />
-            );
+            return <SlideImage key={data.id} url={data.imgUrl} />;
           })}
         </div>
         <div className="dotBtnWraper">
-          <button className="btn0 dotBtn selected" onClick={this.slideToN} />
-          <button className="btn1 dotBtn" onClick={this.slideToN} />
-          <button className="btn2 dotBtn" onClick={this.slideToN} />
+          {this.state.imgData.map(data => {
+            return (
+              <DotButton
+                key={data.id}
+                id={data.id}
+                currentImg={this.state.currentImg}
+                slideToN={this.slideToN}
+              />
+            );
+          })}
         </div>
         <FontAwesomeIcon
           icon={faAngleLeft}
