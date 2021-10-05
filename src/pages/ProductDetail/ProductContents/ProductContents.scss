@@ -2,7 +2,7 @@
 
 #content {
   .middleContent {
-    @include flexStyle(none, none, colum);
+    @include flexStyle(none, none, column);
     margin: 30px 0 50px;
   }
 }
