@@ -18,12 +18,12 @@
     }
   }
 
-  .btnWraper {
+  .dotBtnWraper {
     position: absolute;
     bottom: 10px;
-    left: 47vw;
+    left: 45vw;
 
-    .btn {
+    .dotBtn {
       border: none;
       border-radius: 20px;
       margin: 3px;
@@ -32,11 +32,40 @@
       opacity: 0.6;
       background-color: #999999;
       z-index: 1;
+      transition: all 0.4s;
     }
 
     .selected {
-      width: 20px;
+      width: 25px;
       opacity: 1;
+    }
+  }
+
+  .leftBtn {
+    position: absolute;
+    top: 13vw;
+    left: 25vw;
+    font-size: 30px;
+    color: grey;
+    &:hover {
+      opacity: 0.6;
+    }
+    &:active {
+      opacity: 0.1;
+    }
+  }
+
+  .rightBtn {
+    position: absolute;
+    top: 13vw;
+    right: 25vw;
+    font-size: 30px;
+    color: grey;
+    &:hover {
+      opacity: 0.6;
+    }
+    &:active {
+      opacity: 0.1;
     }
   }
 }
