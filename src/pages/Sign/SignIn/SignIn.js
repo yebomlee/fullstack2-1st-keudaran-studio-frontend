@@ -1,8 +1,14 @@
 import React from 'react';
+import SignInBox from './SignInBox';
+import './SignIn.scss';
 
 class SignIn extends React.Component {
   render() {
-    return <div></div>;
+    return (
+      <div className="SignIn">
+        <SignInBox />
+      </div>
+    );
   }
 }
 
