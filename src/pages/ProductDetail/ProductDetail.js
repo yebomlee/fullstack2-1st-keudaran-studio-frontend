@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import './ProductDetail.scss';
 import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
 import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
 import ProductContents from './ProductContents/ProductContents';
+import './ProductDetail.scss';
 import './common.scss';
 
 class ProductDetail extends Component {
   render() {
     return (
-      <div className="Detail">
+      <div id="Detail">
         <div className="total">
           <header className="header">
             <header className="navbar">상단 top</header>
             <nav className="navbar">메뉴부분</nav>
           </header>
-          <section id="product">
-            <div id="main">
+          <section className="product">
+            <div className="main">
               <ProductPhoto />
               <ProductDescription />
             </div>
-            <article id="content">
+            <article className="content">
               <ProductMiddleNav />
               <ProductContents />
             </article>
           </section>
-          <footer id="footer">{/*예봄리~*/}하단 footer</footer>
+          <footer className="footer">하단 footer</footer>
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 @import '../mixin.scss';
 
-.contentNav {
+#ProductMiddleNav {
   @include flexStyle(none, space-around);
 
   li {

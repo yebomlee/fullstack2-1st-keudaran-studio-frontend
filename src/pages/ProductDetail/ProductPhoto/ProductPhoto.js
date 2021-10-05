@@ -4,7 +4,7 @@ import './ProductPhoto.scss';
 class ProductPhoto extends Component {
   render() {
     return (
-      <div id="Photo">
+      <div id="ProductPhoto">
         <main id="mainPhoto">
           <img
             alt="메인 이미지"

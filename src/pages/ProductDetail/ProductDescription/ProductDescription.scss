@@ -1,6 +1,6 @@
 @import '../mixin.scss';
 
-#description {
+#ProductDescription {
   h3 {
     @include fontSizeWight(25px, bold, none);
     @include fontFamily('Anton', sans-serif);
@@ -16,13 +16,13 @@
     }
   }
 
-  #info {
+  .info {
     margin: 0 0 40px 0;
 
-    #table {
+    .table {
       margin: 20px 0 20px 0;
 
-      .tableCal {
+      .tableCol {
         td {
           @include fontSizeWight(12px, none, #777);
         }
@@ -71,10 +71,10 @@
           @include widthHeight(35px, 30px);
           @include fontSizeWight(12px, none, #696969);
           @include fontFamily('Nunito', sans-serif);
-          vertical-align: middle;
-          text-align: center;
           padding: 0;
           border: 1px solid #e2e2e2;
+          vertical-align: middle;
+          text-align: center;
         }
 
         .countButton {
@@ -128,7 +128,7 @@
   .footerButton {
     @include flexStyle(none, space-between);
 
-    p {
+    .commonButton {
       @include flexStyle(center, center);
       @include widthHeight(none, 58px);
       margin: 0 7px 0 0;
