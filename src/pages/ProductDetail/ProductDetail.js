@@ -3,16 +3,27 @@ import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
 import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
 import ProductContents from './ProductContents/ProductContents';
+import ProductData from './data.json';
 import './ProductDetail.scss';
 import './common.scss';
 
 class ProductDetail extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      data: [],
+    };
+  }
+
+  componentDidMount() {
+    const data = ProductData;
+    this.setState({
+      data: data,
+    });
   }
 
   render() {
+    const { data } = this.state;
     return (
       <div className="Detail">
         <div className="total">
@@ -22,7 +33,7 @@ class ProductDetail extends Component {
           </header>
           <section className="product">
             <div className="main">
-              <ProductPhoto />
+              <ProductPhoto mainData={data} />
               <ProductDescription />
             </div>
             <article className="content">
