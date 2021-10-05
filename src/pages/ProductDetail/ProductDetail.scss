@@ -1,6 +1,6 @@
 @import './mixin.scss';
 
-#Detail {
+.Detail {
   @include flexStyle(none, center);
   .total {
     @include flexStyle(none, none, column);

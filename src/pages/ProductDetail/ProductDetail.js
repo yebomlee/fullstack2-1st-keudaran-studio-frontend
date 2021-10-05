@@ -7,9 +7,14 @@ import './ProductDetail.scss';
 import './common.scss';
 
 class ProductDetail extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
   render() {
     return (
-      <div id="Detail">
+      <div className="Detail">
         <div className="total">
           <header className="header">
             <header className="navbar">상단 top</header>

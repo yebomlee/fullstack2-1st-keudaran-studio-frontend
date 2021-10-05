@@ -10,10 +10,10 @@ import {
 class ProductDescription extends Component {
   render() {
     return (
-      <section id="ProductDescription">
-        <h3>조구만 스튜디오 샤프 </h3>
+      <section className="ProductDescription">
+        <h3>크리스마스 포스트카드 </h3>
         <p className="price">
-          4,000 <em>원</em>
+          10,000 <em>원</em>
         </p>
         <article className="info">
           <table className="table">
@@ -45,9 +45,10 @@ class ProductDescription extends Component {
             <dd>
               <select className="optionBox">
                 <option value>옵션 선택</option>
-                <option value="0">asd</option>
-                <option value="1">asd</option>
-                <option value="2">asd</option>
+                <option value="0">안경잡이 루돌프 (10)</option>
+                <option value="1">달나라로 여행가는 산타 (5)</option>
+                <option value="2">일광욕 즐기는 산타 (1)</option>
+                <option value="2">루돌프 선물 훔치는 산타 (13)</option>
               </select>
             </dd>
           </dl>
@@ -71,11 +72,11 @@ class ProductDescription extends Component {
             </span>
           </div>
         </article>
-        <footer className="footerButton">
+        <div className="activeButton">
           <p className="buyButton commonButton">구매하기</p>
-          <p className="bargetButton commonButton">장바구니</p>
+          <p className="basketButton commonButton">장바구니</p>
           <FontAwesomeIcon className="likeButton" icon={faHeart} />
-        </footer>
+        </div>
       </section>
     );
   }

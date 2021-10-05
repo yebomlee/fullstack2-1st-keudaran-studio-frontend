@@ -1,6 +1,6 @@
 @import '../mixin.scss';
 
-#ProductDescription {
+.ProductDescription {
   h3 {
     @include fontSizeWight(25px, bold, none);
     @include fontFamily('Anton', sans-serif);
@@ -51,6 +51,10 @@
         padding: 0 0 0 10px;
         border: 1px solid #e2e2e2;
         border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.05);
+        }
       }
     }
 
@@ -86,10 +90,9 @@
             margin: 0 0 0 5px;
             border: 1px solid #e2e2e2;
             cursor: pointer;
-
             &:hover {
-              @include fontSizeWight(none, none, black);
-              border: 2px solid black;
+              border: 1px solid #000;
+              transform: scale(1.2);
             }
           }
         }
@@ -125,13 +128,17 @@
     }
   }
 
-  .footerButton {
+  .activeButton {
     @include flexStyle(none, space-between);
 
     .commonButton {
       @include flexStyle(center, center);
       @include widthHeight(none, 58px);
       margin: 0 7px 0 0;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.05);
+      }
     }
 
     .buyButton {
@@ -141,7 +148,7 @@
       background-color: #2e2e2e;
     }
 
-    .bargetButton {
+    .basketButton {
       @include widthHeight(200px);
       @include fontSizeWight(none, none, #000000);
       border: 1px solid #000000;
@@ -151,6 +158,10 @@
       @include fontSizeWight(58px, none, #1c1c1c);
       padding: 17px;
       border: 1px solid #000000;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.05);
+      }
     }
   }
 }
