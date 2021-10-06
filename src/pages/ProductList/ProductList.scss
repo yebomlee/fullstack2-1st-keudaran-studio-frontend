@@ -1,6 +1,6 @@
 .ProductList {
   margin: 0 auto;
-  width: 80%;
+  width: 1200px;
 
   .stationeryWrap {
     display: flex;
@@ -28,6 +28,10 @@
       }
 
       .clickedSub {
+        padding: 5px 15px 5px 15px;
+        color: #333333;
+        font-size: 12px;
+        cursor: pointer;
         font-weight: 700;
       }
     }

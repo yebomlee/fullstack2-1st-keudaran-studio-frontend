@@ -4,6 +4,7 @@ import './ProductCard.scss';
 class ProductCard extends React.Component {
   goToDetail = () => {
     console.log('click');
+    this.props.history.push('/product/:id');
   };
 
   render() {
@@ -11,12 +12,13 @@ class ProductCard extends React.Component {
       <li className="product">
         <img
           onClick={this.goToDetail}
-          src="https://www.jogumanstore.com/shopimages/playwin/0050010000012.jpg?1604394671"
-          alt="airpadsCase"
+          key={this.props.id}
+          src={this.props.imgUrl}
+          alt={this.props.name}
         />
-        <span className="productName">UBHC 에어팟 하드케이스</span>
+        <span className="productName">{this.props.name}</span>
         <div className="productPrice">
-          <span>14,000</span>
+          <span>{this.props.price}</span>
           <span>원</span>
         </div>
       </li>

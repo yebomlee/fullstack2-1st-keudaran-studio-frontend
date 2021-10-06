@@ -1,15 +1,19 @@
 import React from 'react';
 import ProductCard from '../../components/List/ProductCard';
 import './ProductList.scss';
+import { SUB_MOCK } from './subCategory';
 
 class ProductList extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      subid: [],
+      subCategory: false,
+    };
   }
 
-  fiteredSub = () => {
-    console.log('filter');
+  fiteredSub = id => {
+    document.getElementsByName(id)[0].classList.toggle('clickedSub');
   };
 
   render() {
@@ -18,36 +22,18 @@ class ProductList extends React.Component {
         <div className="stationeryWrap">
           <div className="caterogyTitle">Stationery</div>
           <ul className="stationeryCategory">
-            <li className="stnList" onClick={this.fiteredSub}>
-              Postcard
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Notebook
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Memo Pad
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Poster Tape
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Tattoo
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Sticker
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Sticker
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Diary
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Calendar
-            </li>
-            <li className="stnList" onClick={this.fiteredSub}>
-              Etc
-            </li>
+            {SUB_MOCK.map(subName => (
+              <li key={subName.id}>
+                <a
+                  name={subName.id}
+                  href="#"
+                  className={this.state.subCategory ? 'clickedSub' : 'stnList'}
+                  onClick={() => this.fiteredSub(subName.id)}
+                >
+                  {subName.name}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -64,7 +50,13 @@ class ProductList extends React.Component {
           </select>
         </div>
         <ul className="productCard">
-          <ProductCard />
+          <ProductCard
+            name={'UBHC 에어팟 하드케이스'}
+            imgUrl={
+              'https://www.jogumanstore.com/shopimages/playwin/0050010000012.jpg?1604394671'
+            }
+            price={'14,000'}
+          />
           <ProductCard />
           <ProductCard />
           <ProductCard />
