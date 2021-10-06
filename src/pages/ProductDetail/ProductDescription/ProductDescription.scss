@@ -59,59 +59,10 @@
       }
     }
 
-    .productCount {
-      @include flexStyle(center, space-between);
-      padding: 30px 10px 30px 0;
-      border-bottom: #3d3d3d solid 1px;
-
-      .productText {
-        @include fontSizeWight(14px, none, #3d3d3d);
-        margin: 0 150px 0 0;
-      }
-
-      .countBox {
-        @include flexStyle(center);
-
-        .countInput {
-          @include widthHeight(35px, 30px);
-          @include fontSizeWight(12px, none, #696969);
-          @include fontFamily('Nunito', sans-serif);
-          padding: 0;
-          border: 1px solid #e2e2e2;
-          vertical-align: middle;
-          text-align: center;
-        }
-
-        .countButton {
-          @include flexStyle(none, none, column);
-
-          .arrowButton {
-            @include widthHeight(none, 15px);
-            @include fontSizeWight(none, none, #696969);
-            margin: 0 0 0 5px;
-            border: 1px solid #e2e2e2;
-            cursor: pointer;
-            &:hover {
-              border: 1px solid #000;
-              transform: scale(1.2);
-            }
-          }
-        }
-      }
-
-      .changePrice {
-        @include fontSizeWight(17px, none);
-        @include fontFamily('Nunito', sans-serif);
-
-        em {
-          @include fontSizeWight(12px, 400px);
-        }
-      }
-    }
-
     .totalPrice {
       @include flexStyle(none, space-between);
       padding: 30px 10px 20px 0;
+      border-top: #3d3d3d solid 1px;
 
       strong {
         @include fontSizeWight(22px, bold);

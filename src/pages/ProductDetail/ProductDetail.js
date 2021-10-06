@@ -3,7 +3,8 @@ import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
 import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
 import ProductContents from './ProductContents/ProductContents';
-import ProductData from './data.json';
+import fetchData from './fetchData.json';
+import mokData from './mokData.json';
 import './ProductDetail.scss';
 
 class ProductDetail extends Component {
@@ -12,19 +13,38 @@ class ProductDetail extends Component {
     this.state = {
       id: 0,
       name: '',
-      productImg: [],
+      point: '',
+      price: 0,
       thumbailURL: '',
+      origin: '',
+      brand: '',
+      shippingFee: '',
+      productImg: [],
+      option: [],
       imgNum: 1,
+      userCount: 0,
+      choiceOption: [],
+      totalPrice: 0,
     };
+    this.incrementCounter = this.incrementCounter.bind(this);
+    this.decrementCounter = this.decrementCounter.bind(this);
   }
 
   componentDidMount() {
-    const { id, name, productImg, thumbailURL } = ProductData;
+    const { id, name, price, point, productImg, thumbailURL, option } =
+      fetchData;
+    const { origin, brand, shippingFee } = mokData;
     this.setState({
       id,
       name,
-      productImg,
+      point,
+      price,
       thumbailURL,
+      origin,
+      brand,
+      shippingFee,
+      productImg,
+      option,
     });
     setInterval(this.imgChangeLeft, 5000);
   }
@@ -57,8 +77,52 @@ class ProductDetail extends Component {
     });
   };
 
+  incrementCounter() {
+    let { userCount, choiceOption } = this.state;
+    if (userCount >= choiceOption.quantity) {
+      alert('제고량을 다시 확인하세요');
+      return;
+    }
+    this.setState({
+      userCount: userCount + 1,
+    });
+  }
+
+  decrementCounter() {
+    let { userCount } = this.state;
+    if (userCount < 1) {
+      alert('1개 이상 선택해야됩니다');
+      return;
+    }
+    this.setState({
+      userCount: userCount - 1,
+    });
+  }
+
+  selectBoxChange = e => {
+    const choiceOption = this.state.option.find(el => {
+      return String(el.id) === e.target.value;
+    });
+    this.setState({
+      choiceOption,
+    });
+  };
+
   render() {
-    const { thumbailURL, id, name, productImg } = this.state;
+    const {
+      id,
+      name,
+      userCount,
+      price,
+      point,
+      thumbailURL,
+      origin,
+      brand,
+      shippingFee,
+      productImg,
+      option,
+      choiceOption,
+    } = this.state;
     return (
       <div className="Detail">
         <div className="total">
@@ -77,7 +141,21 @@ class ProductDetail extends Component {
                 imgChangeLeft={this.imgChangeLeft}
                 imgChangeRight={this.imgChangeRight}
               />
-              <ProductDescription />
+              <ProductDescription
+                productId={id}
+                name={name}
+                userCount={userCount}
+                price={price}
+                point={point}
+                origin={origin}
+                brand={brand}
+                shippingFee={shippingFee}
+                option={option}
+                choiceOption={choiceOption}
+                incrementCounter={this.incrementCounter}
+                decrementCounter={this.decrementCounter}
+                selectBoxChange={this.selectBoxChange}
+              />
             </div>
             <article className="content">
               <ProductMiddleNav />
