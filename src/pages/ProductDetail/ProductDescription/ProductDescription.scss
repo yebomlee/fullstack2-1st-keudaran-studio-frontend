@@ -38,6 +38,7 @@
 
     .option {
       @include flexStyle(center, space-between);
+      margin: 0 0 30px 0;
       padding: 30px 10px 30px 0;
       border-top: #3d3d3d solid 1px;
       border-bottom: #3d3d3d solid 1px;
@@ -61,7 +62,9 @@
 
     .totalPrice {
       @include flexStyle(none, space-between);
+      margin: 30px 0 0 0;
       padding: 30px 10px 20px 0;
+      border-top: #3d3d3d solid 1px;
 
       strong {
         @include fontSizeWight(22px, bold);
@@ -104,15 +107,10 @@
       @include fontSizeWight(none, none, #000000);
       border: 1px solid #000000;
     }
-
-    .likeButton {
-      @include fontSizeWight(60px, none, #1c1c1c);
+    .ChangeHeart {
+      @include fontSizeWight(26px, none, #1c1c1c);
       padding: 15px;
       border: 1px solid #000000;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.05);
-      }
     }
   }
 }

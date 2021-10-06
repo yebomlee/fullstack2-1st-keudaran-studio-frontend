@@ -8,36 +8,30 @@ import {
 
 class ProductPhoto extends Component {
   render() {
-    const {
-      productId,
-      name,
-      mainImg,
-      subImg,
-      clickImgChang,
-      imgChangeLeft,
-      imgChangeRight,
-    } = this.props;
+    const { id, name, mainImg, subImgs } = this.props;
+    const { clickChangeImg, clickLeftChangeImg, clickRightChangeImg } =
+      this.props;
     return (
       <div className="ProductPhoto">
         <main className="mainPhoto">
-          <img className="mainImage" alt={name} src={mainImg} key={productId} />
+          <img className="mainImage" alt={name} src={mainImg} key={id} />
           <FontAwesomeIcon
             className="leftButton photoButton"
             icon={faChevronLeft}
-            onClick={imgChangeRight}
+            onClick={clickRightChangeImg}
           />
           <FontAwesomeIcon
             className="rightButton photoButton"
             icon={faChevronRight}
-            onClick={imgChangeLeft}
+            onClick={clickLeftChangeImg}
           />
         </main>
         <ul className="subPhotos">
-          {subImg &&
-            subImg.map(el => {
+          {subImgs &&
+            subImgs.map(el => {
               return (
                 <li className="subImage" key={el.id}>
-                  <img alt={name} src={el.imagURL} onClick={clickImgChang} />
+                  <img alt={name} src={el.imagURL} onClick={clickChangeImg} />
                 </li>
               );
             })}

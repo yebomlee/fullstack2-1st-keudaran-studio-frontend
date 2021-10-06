@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
 import ChoiceOption from './ChoiceOption';
+import LikeButton from './LikeButton';
 import './ProductDescription.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 class ProductDescription extends Component {
   render() {
+    const { id, name, price, point, options } = this.props;
+    const { origin, brand, shippingFee } = this.props;
+    const { choiceCount, isLikedProduct, choiceOptionArray } = this.props;
     const {
-      id,
-      name,
-      price,
-      point,
-      origin,
-      brand,
-      shippingFree,
-      option,
-      userCount,
-      choiceOption,
-      incrementCounter,
-      decrementCounter,
-      selectBoxChange,
-      changePage,
+      increaseCounter,
+      decreaseCounter,
+      choiceOptionChange,
+      clickLikedProduct,
     } = this.props;
-    const totalPrice = userCount * price;
+    const totalPrice = choiceCount * price;
     return (
       <section className="ProductDescription" key={id}>
         <h3>{name} </h3>
@@ -45,7 +37,7 @@ class ProductDescription extends Component {
               <tr className="tableCol">
                 <td>배송비</td>
                 <th>
-                  배송비 주문금액에 상관없이 배송비가 {shippingFree}원
+                  배송비 주문금액에 상관없이 배송비가 {shippingFee}원
                   청구됩니다.
                 </th>
               </tr>
@@ -62,29 +54,33 @@ class ProductDescription extends Component {
           <dl className="option">
             <dt className="optionText">옵션</dt>
             <dd>
-              <select className="optionBox" onChange={selectBoxChange}>
+              <select className="optionBox" onChange={choiceOptionChange}>
                 <option value={[]}>옵션 선택</option>
-                {option.map(el => {
+                {options?.map(option => {
+                  const { id, name, quantity } = option;
                   return (
-                    <option value={el.id} key={el.id}>
-                      {el.name} ({el.quantity})
+                    <option value={name} key={id}>
+                      {name} ({quantity})
                     </option>
                   );
                 })}
               </select>
             </dd>
           </dl>
-          {choiceOption ? (
-            <ChoiceOption
-              userCount={userCount}
-              totalPrice={totalPrice}
-              choiceOption={choiceOption}
-              incrementCounter={incrementCounter}
-              decrementCounter={decrementCounter}
-            />
-          ) : (
-            <p></p>
-          )}
+          {choiceOptionArray.map(option => {
+            return (
+              <ChoiceOption
+                key={option.id}
+                {...{
+                  choiceCount,
+                  totalPrice,
+                  option,
+                  increaseCounter,
+                  decreaseCounter,
+                }}
+              />
+            );
+          })}
           <div className="totalPrice">
             <strong>총 상품 금액</strong>
             <span className="resultPrice">
@@ -94,16 +90,25 @@ class ProductDescription extends Component {
           </div>
         </article>
         <div className="activeButton">
-          <p className="buyButton commonButton" onClick={changePage}>
+          <p
+            className="buyButton commonButton"
+            onClick={() => {
+              alert('준비중입니다');
+            }}
+          >
             구매하기
           </p>
-          <p className="basketButton commonButton" onClick={changePage}>
+          <p
+            className="basketButton commonButton"
+            onClick={() => {
+              alert('준비중입니다');
+            }}
+          >
             장바구니
           </p>
-          <FontAwesomeIcon
-            className="likeButton"
-            icon={faHeart}
-            onClick={changePage}
+          <LikeButton
+            className="ChangeHeart"
+            {...{ isLikedProduct, clickLikedProduct }}
           />
         </div>
       </section>

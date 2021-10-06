@@ -5,23 +5,18 @@ import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 class ChoiceOption extends Component {
   render() {
-    const {
-      userCount,
-      totalPrice,
-      choiceOption,
-      incrementCounter,
-      decrementCounter,
-    } = this.props;
+    const { choiceCount, totalPrice, option } = this.props;
+    const { increaseCounter, decreaseCounter } = this.props;
     return (
       <div className="ChoiceOption">
         <span className="choiceText">
-          {choiceOption?.name}({choiceOption?.quantity})
+          {option?.name}({option?.quantity})
         </span>
         <div className="countBox">
           <input
             className="countInput"
             type="text"
-            value={userCount}
+            value={choiceCount}
             readOnly
           />
           <span className="countButton">
@@ -29,13 +24,13 @@ class ChoiceOption extends Component {
               className="arrowButton"
               name="increament"
               icon={faCaretUp}
-              onClick={incrementCounter}
+              onClick={() => increaseCounter(option)}
             />
             <FontAwesomeIcon
               className="arrowButton"
               name="decreament"
               icon={faCaretDown}
-              onClick={decrementCounter}
+              onClick={decreaseCounter}
             />
           </span>
         </div>

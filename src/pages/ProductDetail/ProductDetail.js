@@ -3,135 +3,127 @@ import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
 import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
 import ProductContents from './ProductContents/ProductContents';
-import fetchData from './fetchData.json';
-import mokData from './mokData.json';
+import serverData from './serverData.json';
+import mokeData from './mokeData.json';
 import './ProductDetail.scss';
 
 class ProductDetail extends Component {
   constructor() {
     super();
     this.state = {
-      id: 0,
-      name: '',
-      point: '',
-      price: 0,
-      thumbailURL: '',
-      origin: '',
-      brand: '',
-      shippingFee: '',
-      productImg: [],
-      option: [],
+      serverData: [],
+      mokeData: [],
       imgNum: 1,
-      userCount: 0,
-      choiceOption: undefined,
-      totalPrice: 0,
+      choiceCount: 0,
+      changeMainImg: '',
+      isLikedProduct: 0,
+      choiceOptionArray: [],
     };
-    this.incrementCounter = this.incrementCounter.bind(this);
-    this.decrementCounter = this.decrementCounter.bind(this);
-    this.imgChangeLeft = this.imgChangeLeft.bind(this);
-    this.imgChangeRight = this.imgChangeRight.bind(this);
-    this.selectBoxChange = this.selectBoxChange.bind(this);
   }
 
   componentDidMount() {
-    const { id, name, price, point, productImg, thumbailURL, option } =
-      fetchData;
-    const { origin, brand, shippingFee } = mokData;
+    const CHANGE_IMG_INTERVER = 5000;
     this.setState({
-      id,
-      name,
-      point,
-      price,
-      thumbailURL,
-      origin,
-      brand,
-      shippingFee,
-      productImg,
-      option,
+      serverData,
+      mokeData,
+      changeMainImg: serverData.thumbailURL,
     });
-    setInterval(this.imgChangeLeft, 5000);
+    setInterval(this.clickLeftChangeImg, CHANGE_IMG_INTERVER);
   }
 
-  clickImgChang = e => {
+  clickChangeImg = e => {
     this.setState({
-      thumbailURL: e.target.currentSrc,
+      changeMainImg: e.target.currentSrc,
     });
   };
 
-  imgChangeLeft = () => {
+  clickLeftChangeImg = () => {
+    const MAX_LIMIT_IMG_NUM = 3;
+    const CHANGE_IMG_NUM = 1;
     const { imgNum } = this.state;
     let imgId = 0;
-    imgId = imgNum > 3 ? 1 : imgNum + 1;
-    this.findSameImge(imgId);
+    imgId = imgNum > MAX_LIMIT_IMG_NUM ? CHANGE_IMG_NUM : imgNum + 1;
+    this.findSameImg(imgId);
   };
 
-  imgChangeRight = () => {
+  clickRightChangeImg = () => {
+    const MIN_LIMIT_IMG_NUM = 1;
+    const CHANGE_IMG_NUM = 4;
     const { imgNum } = this.state;
     let imgId = 0;
-    imgId = imgNum <= 1 ? 4 : imgNum - 1;
-    this.findSameImge(imgId);
+    imgId = imgNum <= MIN_LIMIT_IMG_NUM ? CHANGE_IMG_NUM : imgNum - 1;
+    this.findSameImg(imgId);
   };
 
-  findSameImge = num => {
-    const cmntList = this.state.productImg.find(el => el.id === num);
+  findSameImg = num => {
+    const changeMainImg = this.state.serverData.productImgs.find(
+      productImg => productImg.id === num
+    );
     this.setState({
       imgNum: num,
-      thumbailURL: cmntList.imagURL,
+      changeMainImg: changeMainImg.imagURL,
     });
   };
 
-  incrementCounter = () => {
-    let { userCount, choiceOption } = this.state;
-    if (userCount >= choiceOption.quantity) {
+  increaseCounter = option => {
+    const { choiceCount } = this.state;
+    if (choiceCount >= option.quantity) {
       alert('제고량을 다시 확인하세요');
       return;
     }
     this.setState({
-      userCount: userCount + 1,
+      choiceCount: choiceCount + 1,
     });
   };
 
-  decrementCounter = () => {
-    let { userCount } = this.state;
-    if (userCount < 1) {
+  decreaseCounter = () => {
+    const { choiceCount } = this.state;
+    const MIN_LIMIT_OPTION_NUM = 1;
+    if (choiceCount < MIN_LIMIT_OPTION_NUM) {
       alert('1개 이상 선택해야됩니다');
       return;
     }
     this.setState({
-      userCount: userCount - 1,
+      choiceCount: choiceCount - 1,
     });
   };
 
-  selectBoxChange = e => {
-    const choiceOption = this.state.option.find(el => {
-      return String(el.id) === e.target.value;
+  choiceOptionChange = e => {
+    const { choiceOptionArray, choiceCount, serverData } = this.state;
+    const choiceOption = serverData.options?.find(el => {
+      return el.name === e.target.value;
     });
+    if (!choiceOption) return;
+    const { id, name, quantity } = choiceOption;
+    const isExist = choiceOptionArray.some(el => el.name === name);
+    if (isExist) return;
     this.setState({
-      choiceOption,
-      userCount: 0,
-      totalPrice: 0,
+      choiceCount: 0,
+      choiceOptionArray: [
+        ...choiceOptionArray,
+        {
+          id,
+          name,
+          quantity,
+          choiceCount,
+        },
+      ],
     });
   };
 
-  changePage = () => {
-    alert('준비중입니다');
+  clickLikedProduct = () => {
+    const { isLikedProduct } = this.state;
+    this.setState({
+      isLikedProduct: !isLikedProduct,
+    });
   };
 
   render() {
-    const {
-      id,
-      name,
-      userCount,
-      price,
-      point,
-      thumbailURL,
-      origin,
-      brand,
-      shippingFee,
-      productImg,
-      option,
-      choiceOption,
-    } = this.state;
+    const { id, name, price, point, productImgs, options } =
+      this.state.serverData;
+    const { origin, brand, shippingFee } = this.state.mokeData;
+    const { choiceCount, changeMainImg, isLikedProduct, choiceOptionArray } =
+      this.state;
     return (
       <div className="Detail">
         <div className="total">
@@ -142,29 +134,19 @@ class ProductDetail extends Component {
           <section className="product">
             <div className="main">
               <ProductPhoto
-                productId={id}
-                name={name}
-                mainImg={thumbailURL}
-                subImg={productImg}
-                clickImgChang={this.clickImgChang}
-                imgChangeLeft={this.imgChangeLeft}
-                imgChangeRight={this.imgChangeRight}
+                {...{ id, name, mainImg: changeMainImg, subImgs: productImgs }}
+                clickChangeImg={this.clickChangeImg}
+                clickLeftChangeImg={this.clickLeftChangeImg}
+                clickRightChangeImg={this.clickRightChangeImg}
               />
               <ProductDescription
-                productId={id}
-                name={name}
-                userCount={userCount}
-                price={price}
-                point={point}
-                origin={origin}
-                brand={brand}
-                shippingFee={shippingFee}
-                option={option}
-                choiceOption={choiceOption}
-                incrementCounter={this.incrementCounter}
-                decrementCounter={this.decrementCounter}
-                selectBoxChange={this.selectBoxChange}
-                changePage={this.changePage}
+                {...{ id, name, price, point, options }}
+                {...{ origin, brand, shippingFee }}
+                {...{ choiceCount, isLikedProduct, choiceOptionArray }}
+                increaseCounter={this.increaseCounter}
+                decreaseCounter={this.decreaseCounter}
+                choiceOptionChange={this.choiceOptionChange}
+                clickLikedProduct={this.clickLikedProduct}
               />
             </div>
             <article className="content">

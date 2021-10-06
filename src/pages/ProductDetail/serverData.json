@@ -4,7 +4,7 @@
   "point": 3,
   "price": 10000,
   "thumbailURL": "https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg",
-  "productImg": [
+  "productImgs": [
     {
       "id": 1,
       "imagURL": "https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
@@ -22,7 +22,7 @@
       "imagURL": "https://image.freepik.com/free-vector/santa-claus-reindeers-with-christmas-tree_197582-107.jpg"
     }
   ],
-  "option": [
+  "options": [
     {
       "id": 1,
       "name": "안경잡이 루돌프",
