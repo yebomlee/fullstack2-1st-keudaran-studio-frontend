@@ -16,22 +16,32 @@ class Carousel extends Component {
     };
   }
 
-  // 구현중
   componentDidMount() {
-    const { currentImg, imgData } = this.state;
+    this.carouselIntervalId();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.carouselIntervalId);
+  }
+
+  carouselIntervalId = () => {
+    const { imgData } = this.state;
     setInterval(() => {
-      console.log(this.state.currentImg, imgData.length);
-      if (currentImg >= imgData.length - 1) {
-        this.setState(state => {
-          return { currentImg: 0 };
+      if (this.state.currentImg === imgData.length - 1) {
+        this.setState({ currentImg: 0 }, () => {
+          document.querySelector(
+            '.container'
+          ).style.transform = `translateX(-${this.state.currentImg}00vw)`;
         });
       } else {
-        this.setState(state => {
-          return { currentImg: state.currentImg + 1 };
+        this.setState({ currentImg: this.state.currentImg + 1 }, () => {
+          document.querySelector(
+            '.container'
+          ).style.transform = `translateX(-${this.state.currentImg}00vw)`;
         });
       }
-    }, 2000);
-  }
+    }, 3000);
+  };
 
   slideToN = e => {
     const { className } = e.target;
@@ -70,6 +80,14 @@ class Carousel extends Component {
           {this.state.imgData.map(data => {
             return <SlideImage key={data.id} url={data.imgUrl} />;
           })}
+          {/* <div className="SlideImage">
+            <div className="inner">
+              <img
+                src={this.state.imgData[0].imgUrl}
+                alt={this.state.imgData[0].name}
+              />
+            </div>
+          </div> */}
         </div>
         <div className="dotBtnWraper">
           {this.state.imgData.map(data => {

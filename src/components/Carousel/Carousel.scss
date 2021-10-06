@@ -1,14 +1,28 @@
 .Carousel {
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: center;
-  // align-items: flex-end;
   position: relative;
   overflow: hidden;
 
   .container {
+    display: flex;
+    flex-direction: row;
     width: 400vw;
-    transition: transform 0.6s;
+    transition: transform 1s;
+
+    .inner {
+      width: 100vw;
+      float: left;
+      z-index: 1;
+
+      img {
+        width: 100vw;
+        height: 30vw;
+        object-fit: contain;
+      }
+    }
+
+    &:hover {
+      animation-play-state: paused;
+    }
   }
 }
 

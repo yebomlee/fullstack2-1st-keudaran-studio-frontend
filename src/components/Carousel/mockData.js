@@ -23,6 +23,18 @@ const carouselImgs = [
     imgUrl:
       'https://images.unsplash.com/photo-1624565698535-b0be89187ff4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1986&q=80',
   },
+  {
+    id: 4,
+    name: '화성',
+    imgUrl:
+      'https://images.unsplash.com/photo-1630693912525-7a833b62c81f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2030&q=80',
+  },
+  {
+    id: 5,
+    name: '보라',
+    imgUrl:
+      'https://images.unsplash.com/photo-1624565698535-b0be89187ff4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1986&q=80',
+  },
 ];
 
 export default carouselImgs;
