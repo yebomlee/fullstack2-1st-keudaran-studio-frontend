@@ -1,0 +1,25 @@
+@import '/src/styles/mixin';
+
+.ProductMiddleNav {
+  @include flexStyle(none, space-around);
+
+  li {
+    @include flexStyle(center, center);
+    @include widthHeight(600px, 60px);
+    @include fontSizeWight(16px, none, none);
+    border-bottom: 1px solid #000;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .menuDetail {
+    background-color: #333;
+    @include fontSizeWight(none, none, #fff);
+  }
+
+  .menuReview {
+    @include fontSizeWight(none, none, #8b8b8b);
+  }
+}
