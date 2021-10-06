@@ -16,35 +16,51 @@ class Carousel extends Component {
     };
   }
 
+  // 구현중
+  componentDidMount() {
+    const { currentImg, imgData } = this.state;
+    setInterval(() => {
+      console.log(this.state.currentImg, imgData.length);
+      if (currentImg >= imgData.length - 1) {
+        this.setState(state => {
+          return { currentImg: 0 };
+        });
+      } else {
+        this.setState(state => {
+          return { currentImg: state.currentImg + 1 };
+        });
+      }
+    }, 2000);
+  }
+
   slideToN = e => {
-    document.querySelector(
-      '.container'
-    ).style.transform = `translateX(-${e.target.className.charAt(3)}00vw)`;
-    this.setState({ currentImg: +e.target.className.charAt(3) }, () => {});
+    const { className } = e.target;
+    const { currentImg } = this.state;
+    this.setState({ currentImg: parseInt(className.charAt(3)) }, () => {
+      document.querySelector(
+        '.container'
+      ).style.transform = `translateX(-${currentImg}00vw)`;
+    });
   };
 
-  slideRight = e => {
-    if (this.state.currentImg >= this.state.imgData.length - 1) return;
-    let ImgIdx = this.state.currentImg + 1;
-    document.querySelector('.container').style.transform = `translateX(${-(
-      ImgIdx +
-      '' +
-      '00'
-    )}vw)`;
-
-    this.setState({ currentImg: ImgIdx }, () => {});
+  slideRight = () => {
+    const { currentImg, imgData } = this.state;
+    if (currentImg >= imgData.length - 1) return;
+    this.setState({ currentImg: currentImg + 1 }, () => {
+      document.querySelector('.container').style.transform = `translateX(${
+        -this.state.currentImg * 100
+      }vw)`;
+    });
   };
 
-  slideLeft = e => {
-    if (this.state.currentImg <= 0) return;
-    let ImgIdx = this.state.currentImg - 1;
-    document.querySelector('.container').style.transform = `translateX(${-(
-      ImgIdx +
-      '' +
-      '00'
-    )}vw)`;
-
-    this.setState({ currentImg: ImgIdx }, () => {});
+  slideLeft = () => {
+    const { currentImg } = this.state;
+    if (currentImg <= 0) return;
+    this.setState({ currentImg: currentImg - 1 }, () => {
+      document.querySelector('.container').style.transform = `translateX(${
+        -this.state.currentImg * 100
+      }vw)`;
+    });
   };
 
   render() {
