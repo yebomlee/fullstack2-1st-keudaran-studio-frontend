@@ -55,6 +55,9 @@ class ProductList extends React.Component {
             imgUrl={
               'https://www.jogumanstore.com/shopimages/playwin/0050010000012.jpg?1604394671'
             }
+            hoverUrl={
+              'http://www.jogumanstore.com/shopimages/playwin/0050020000012.jpg?1603445199'
+            }
             price={'14,000'}
           />
           <ProductCard />
