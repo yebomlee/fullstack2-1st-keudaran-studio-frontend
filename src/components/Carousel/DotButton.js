@@ -3,13 +3,12 @@ import './DotButton.scss';
 
 class DotButton extends Component {
   render() {
+    const { id, currentImg, slideToClickedImg } = this.props;
     return (
       <div className="DotButton">
         <button
-          className={`btn${this.props.id} dotBtn ${
-            this.props.id === this.props.currentImg ? 'selected' : null
-          }`}
-          onMouseUp={this.props.slideToN}
+          className={`btn${id} dotBtn ${id === currentImg ? 'selected' : ''}`}
+          onClick={slideToClickedImg}
         />
       </div>
     );

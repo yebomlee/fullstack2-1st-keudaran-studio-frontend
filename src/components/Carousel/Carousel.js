@@ -3,107 +3,96 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import SlideImage from './SlideImage';
-import DATA from './mockData';
-import './Carousel.scss';
 import DotButton from './DotButton';
+import slideImgs from './mockData';
+import './Carousel.scss';
 
 class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgData: DATA,
+      slideImgs: slideImgs,
       currentImg: 0,
+      isTransformTimeOn: true,
     };
   }
 
   componentDidMount() {
-    this.carouselIntervalId();
+    this.startAutoSlide();
   }
 
   componentWillUnmount() {
-    clearInterval(this.carouselIntervalId);
+    this.stopAutoSlide();
   }
 
-  carouselIntervalId = () => {
-    setInterval(() => {
-      const { imgData } = this.state;
-      document.querySelector('.container').style.transition = '1s';
-      if (this.state.currentImg === imgData.length - 1) {
-        document.querySelector(
-          '.container'
-        ).style.transform = `translateX(-${imgData.length}00vw)`;
+  startAutoSlide = () => {
+    const INTERVAL_TIME_MS = 3000;
+    const LAST_IMG_WAITING_TIME_MS = 900;
+    if (this.autoSlideId) return;
 
-        setTimeout(() => {
-          this.setState({ currentImg: 0 }, () => {
-            document.querySelector('.container').style.transition = '0s';
-            document.querySelector(
-              '.container'
-            ).style.transform = `translateX(-${this.state.currentImg}00vw)`;
-          });
-        }, 950);
-      } else {
-        this.setState({ currentImg: this.state.currentImg + 1 }, () => {
-          document.querySelector(
-            '.container'
-          ).style.transform = `translateX(-${this.state.currentImg}00vw)`;
+    this.autoSlideId = setInterval(() => {
+      if (this.state.currentImg === this.state.slideImgs.length - 1) {
+        this.setState({
+          currentImg: this.state.slideImgs.length,
         });
+        setTimeout(() => {
+          this.setState({ isTransformTimeOn: false });
+          this.setState({ currentImg: 0 });
+        }, LAST_IMG_WAITING_TIME_MS);
+      } else {
+        this.setState({ isTransformTimeOn: true });
+        this.setState({ currentImg: this.state.currentImg + 1 });
       }
-    }, 3000);
+    }, INTERVAL_TIME_MS);
   };
 
-  slideToN = e => {
-    const { className } = e.target;
-    this.setState({ currentImg: parseInt(className.charAt(3)) }, () => {
-      document.querySelector(
-        '.container'
-      ).style.transform = `translateX(-${this.state.currentImg}00vw)`;
-    });
+  stopAutoSlide = () => {
+    clearInterval(this.autoSlideId);
+  };
+
+  slideToClickedImg = e => {
+    if (this.state.currentImg === 0) this.setState({ isTransformTimeOn: true });
+    this.setState({ currentImg: +e.target.className.charAt(3) });
   };
 
   slideToRight = () => {
-    const { currentImg, imgData } = this.state;
-    if (currentImg === imgData.length - 1) return;
-    this.setState({ currentImg: currentImg + 1 }, () => {
-      document.querySelector('.container').style.transform = `translateX(${
-        -this.state.currentImg * 100
-      }vw)`;
-    });
+    const { currentImg, slideImgs } = this.state;
+    if (currentImg === 0) this.setState({ isTransformTimeOn: true });
+    if (currentImg === slideImgs.length - 1) return;
+    this.setState({ currentImg: currentImg + 1 });
   };
 
   slideToLeft = () => {
     const { currentImg } = this.state;
     if (currentImg === 0) return;
-    this.setState({ currentImg: currentImg - 1 }, () => {
-      document.querySelector('.container').style.transform = `translateX(${
-        -this.state.currentImg * 100
-      }vw)`;
-    });
+    this.setState({ currentImg: currentImg - 1 });
   };
 
   render() {
+    const { currentImg, slideImgs, isTransformTimeOn } = this.state;
     return (
       <div className="Carousel">
-        <div className="container">
-          {this.state.imgData.map(data => {
-            return <SlideImage key={data.id} url={data.imgUrl} />;
+        <div
+          className={`container ${isTransformTimeOn ? 'transformTimeOn' : ''}`}
+          style={{ transform: `translateX(${-currentImg * 100}vw)` }}
+        >
+          {slideImgs.map(imgData => {
+            return <SlideImage key={imgData.id} url={imgData.imgUrl} />;
           })}
           <div className="SlideImage">
             <div className="inner">
-              <img
-                src={this.state.imgData[0].imgUrl}
-                alt={this.state.imgData[0].name}
-              />
+              <img src={slideImgs[0].imgUrl} alt={slideImgs[0].name} />
             </div>
           </div>
         </div>
         <div className="dotBtnWraper">
-          {this.state.imgData.map(data => {
+          {slideImgs.map(imgData => {
             return (
               <DotButton
-                key={data.id}
-                id={data.id}
-                currentImg={this.state.currentImg}
-                slideToN={this.slideToN}
+                key={imgData.id}
+                id={imgData.id}
+                currentImg={currentImg}
+                slideToClickedImg={this.slideToClickedImg}
               />
             );
           })}

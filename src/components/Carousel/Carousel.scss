@@ -1,22 +1,20 @@
 .Carousel {
+  display: block;
   position: relative;
+  width: 1200px;
+  margin: 0 auto;
   overflow: hidden;
 
   .container {
     display: flex;
     flex-direction: row;
-    width: 400vw;
-    transition: transform 1s;
 
     .inner {
-      width: 100vw;
       float: left;
-      z-index: 1;
 
       img {
-        width: 100vw;
-        height: 30vw;
-        object-fit: contain;
+        height: 450px;
+        object-fit: cover;
       }
     }
 
@@ -24,21 +22,25 @@
       animation-play-state: paused;
     }
   }
+
+  .transformTimeOn {
+    transition: transform 1s;
+  }
 }
 
 .dotBtnWraper {
   display: flex;
   flex-direction: row;
-  position: absolute;
-  bottom: 10px;
-  left: 45vw;
+  position: relative;
+  bottom: 30px;
+  left: 45%;
 }
 
 .leftBtn {
   position: absolute;
-  top: 13vw;
-  left: 25vw;
-  font-size: 3vw;
+  top: 45%;
+  left: 5%;
+  font-size: 50px;
   color: grey;
   &:hover {
     opacity: 0.6;
@@ -50,9 +52,9 @@
 
 .rightBtn {
   position: absolute;
-  top: 13vw;
-  right: 25vw;
-  font-size: 3vw;
+  top: 45%;
+  right: 5%;
+  font-size: 50px;
   color: grey;
   &:hover {
     opacity: 0.6;
