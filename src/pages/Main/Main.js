@@ -6,6 +6,16 @@ class Main extends React.Component {
     return (
       <div>
         <Nav />
+        {/* <Nav />
+        <Nav />
+        <Nav />
+        <Nav />
+        <Nav />
+        <Nav />
+        <Nav />
+        <Nav />
+        <Nav />
+        <Nav /> */}
       </div>
     );
   }

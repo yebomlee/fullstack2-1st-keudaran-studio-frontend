@@ -6,17 +6,31 @@ import {
   faShoppingCart,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
+import category from './NavData';
+import { Link } from 'react-router-dom';
 
 class Nav extends Component {
+  constructor() {
+    super();
+  }
+
+  // 함수 = e => {
+  //   alert(1);
+  //   console.log(e);
+  // };
+
   render() {
     return (
       <div className="Nav">
         <header className="headerMenu">
           <h1 className="logo">
             <img
+              // onClick={e => {
+              //   this.함수(e);
+              // }}
               className="logoImg"
               alt="크다란 스토어"
-              src={process.env.PUBLIC_URL + '/images/kedaran2.svg'}
+              src={process.env.PUBLIC_URL + '/images/kedaran.svg'}
             />
           </h1>
           <ul>
@@ -42,81 +56,28 @@ class Nav extends Component {
             </li>
           </ul>
         </header>
-
         <div className="navBar">
           <div className="dropdownMenu">
-            <div className="dropdown">
-              <button className="dropBtn">All</button>
-              <div className="dropdownContent">
-                <i>●</i>
-                <a href="/">All</a>
-                <a href="/">New</a>
-                <a href="/">Best</a>
-              </div>
-            </div>
-
-            <div className="dropdown">
-              <button className="dropBtn">Stationery</button>
-              <div className="dropdownContent">
-                <i>●</i>
-                <a href="/">Postcard</a>
-                <a href="/">Notebook</a>
-                <a href="/">Memopad</a>
-                <a href="/">Poster</a>
-                <a href="/">Tape</a>
-                <a href="/">Tattoo sticker</a>
-                <a href="/">Sticker</a>
-                <a href="/">Diary</a>
-                <a href="/">Calendar</a>
-                <a href="/">Etc</a>
-              </div>
-            </div>
-
-            <div className="dropdown">
-              <button className="dropBtn">Digital</button>
-              <div className="dropdownContent">
-                <i>●</i>
-                <a href="/">AirPods Case</a>
-                <a href="/">AirPods Pro Case</a>
-                <a href="/">Griptok</a>
-                <a href="/">Phone Case</a>
-                <a href="/">Etc</a>
-                <a href="/">Case/Pouch</a>
-                <a href="/">BudsCase</a>
-              </div>
-            </div>
-
-            <div className="dropdown">
-              <button className="dropBtn">Fabric & Living</button>
-              <div className="dropdownContent">
-                <i>●</i>
-                <a href="/">Cup</a>
-                <a href="/">Fabric</a>
-                <a href="/">Pouch</a>
-                <a href="/">Bag</a>
-                <a href="/">Fashion</a>
-                <a href="/">Pet</a>
-              </div>
-            </div>
-
-            <div className="dropdown">
-              <button className="dropBtn">ACC</button>
-              <div className="dropdownContent">
-                <i>●</i>
-                <a href="/">Key Ring</a>
-                <a href="/">Pin Button</a>
-              </div>
-            </div>
-
-            <div className="dropdown">
-              <button className="dropBtn">EVENT</button>
-              <div className="dropdownContent">
-                <i>●</i>
-                <a href="/">All</a>
-              </div>
-            </div>
+            {category.map(data => {
+              return (
+                <div className="dropdown">
+                  <button className="dropBtn">
+                    {data.name}
+                    <div className="dropIcon">●</div>
+                  </button>
+                  <div className="dropdownContent">
+                    {data.subCategory.map(data => {
+                      return (
+                        <Link to="" className="categoryLink">
+                          {data}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
-
           <div className="rightBar">
             <div className="inputDiv">
               <input
@@ -131,7 +92,6 @@ class Nav extends Component {
           </div>
         </div>
       </div>
-      // </div>
     );
   }
 }
