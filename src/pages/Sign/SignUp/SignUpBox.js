@@ -139,10 +139,16 @@ class SignUpBox extends React.Component {
                 주소를 포함), 전화번호·모사전송번호·전자우편주소,
               </textarea>
             </div>
-            <div className="usePrivacyBox">
-              <h3>개인정보 수집·이용</h3>
-              <table>
-                <thead>
+            <div className="usePrivacyBox ">
+              <h3 className="policyTitle">개인정보 수집·이용</h3>
+              <table className="privacyTable">
+                <colgroup>
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                </colgroup>
+                <thead className="privacyTableHead">
                   <tr>
                     <th>구분</th>
                     <th>목적</th>

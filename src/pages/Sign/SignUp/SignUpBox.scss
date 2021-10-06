@@ -1,0 +1,180 @@
+.SignUpBox {
+  font-size: 12px;
+  max-width: 1200px;
+  width: 100%;
+
+  .signUpTitle {
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .signUpBoxInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #000;
+
+    .signUpForm {
+      max-width: 680px;
+      width: 100%;
+      padding-top: 40px;
+      border-bottom: 1px solid #dadada;
+
+      .userInfoInput {
+        width: 100%;
+        height: 50px;
+        padding: 0 23px;
+        border: 1px solid #dadada;
+        border-bottom: 0;
+        line-height: 50px;
+        &:focus {
+          outline: none;
+        }
+        &::placeholder {
+          font-weight: 600;
+          font-size: 15px;
+        }
+      }
+      .phoneInput {
+        border-bottom: 1px solid #dadada;
+      }
+
+      .joinMsg {
+        margin: 10px 0 5px 0;
+
+        .mustCheckLabel {
+          color: #0549bb;
+          font-size: 14px;
+          font-weight: 800;
+        }
+
+        .joinDescription {
+          margin: 10px 0 5px 0;
+          color: #999;
+          font-size: 12px;
+        }
+      }
+
+      .agreeBox {
+        border: 1px solid #dadada;
+
+        .allCheck {
+          height: 45px;
+          padding-left: 20px;
+          border-bottom: 1px solid #dadada;
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 45px;
+        }
+
+        .detailCheck {
+          padding: 10px;
+
+          .legalCheck {
+            height: 45px;
+            margin: 10px;
+            border-bottom: 1px dashed #adadad;
+            font-weight: 600;
+            line-height: 30px;
+
+            .littleGreyBtn {
+              margin: 0 40px 0 5px;
+              padding: 5px 5px 3px 5px;
+              border-radius: 5px;
+              background-color: #eee;
+              border: 1px solid #adadad;
+              font-size: 10px;
+            }
+          }
+
+          .marketingCheck {
+            margin: 10px;
+            .checkBox {
+              font-weight: 600;
+              margin-bottom: 10px;
+            }
+            .marketingParagraph {
+              font-size: 12px;
+              line-height: 18px;
+              b {
+                font-weight: 700;
+              }
+            }
+          }
+        }
+      }
+
+      .signUpBtn {
+        display: block;
+        width: 234px;
+        height: 64px;
+        margin: 25px auto;
+        line-height: 64px;
+        font-size: 22px;
+        color: #fff;
+        background-color: #0549bb;
+        border: 1px solid #053688;
+      }
+    }
+
+    .policyWrap {
+      max-width: 680px;
+
+      .policyTitle {
+        margin: 50px 0 10px 0;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .policyText {
+        width: 100%;
+        height: 165px;
+        border: 1px solid #ccc;
+        line-height: 20px;
+        overflow: auto;
+        resize: none;
+      }
+
+      .privacyTable {
+        width: 100%;
+
+        col:nth-child(1) {
+          width: 15%;
+        }
+        col:nth-child(2) {
+          width: 20%;
+        }
+        col:nth-child(3) {
+          width: 20%;
+        }
+        col:nth-child(4) {
+          width: 20%;
+        }
+
+        .privacyTableHead {
+          font-weight: 700;
+          background-color: #fcfcfc;
+        }
+
+        th {
+          background-color: #fcfcfc;
+        }
+
+        th,
+        tr,
+        td {
+          padding: 15px 10px;
+          border: 1px solid #dadada;
+          text-align: center;
+          vertical-align: middle;
+        }
+      }
+
+      .privacyNotice {
+        margin: 50px 0;
+        font-weight: 700;
+        line-height: 15px;
+      }
+    }
+  }
+}
