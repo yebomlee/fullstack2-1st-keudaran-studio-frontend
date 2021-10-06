@@ -1,0 +1,25 @@
+@mixin flexStyle($align: flex-start, $justify: flex-start, $direction: row) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+@mixin fontSizeWight($size, $weight: normal, $color: none) {
+  color: $color;
+  font: {
+    size: $size;
+    weight: $weight;
+  }
+}
+
+@mixin fontFamily($familyA, $familyB) {
+  font: {
+    family: $familyA, $familyB;
+  }
+}
+
+@mixin widthHeight($width, $height: none) {
+  width: $width;
+  height: $height;
+}
