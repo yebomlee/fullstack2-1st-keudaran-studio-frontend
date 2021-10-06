@@ -8,46 +8,39 @@ import {
 
 class ProductPhoto extends Component {
   render() {
-    const { id, name, thumbailURL, productImg } = this.props.mainData;
-    console.log(productImg);
+    const {
+      productId,
+      name,
+      mainImg,
+      subImg,
+      clickImgChang,
+      imgChangeLeft,
+      imgChangeRight,
+    } = this.props;
     return (
       <div className="ProductPhoto">
         <main className="mainPhoto">
-          <img className="mainImage" alt={name} src={thumbailURL} key={id} />
+          <img className="mainImage" alt={name} src={mainImg} key={productId} />
           <FontAwesomeIcon
             className="leftButton photoButton"
             icon={faChevronLeft}
+            onClick={imgChangeRight}
           />
           <FontAwesomeIcon
             className="rightButton photoButton"
             icon={faChevronRight}
+            onClick={imgChangeLeft}
           />
         </main>
         <ul className="subPhotos">
-          <li className="subImage">
-            <img
-              alt={name}
-              src="https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
-            />
-          </li>
-          <li className="subImage">
-            <img
-              alt={name}
-              src="https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
-            />
-          </li>
-          <li className="subImage">
-            <img
-              alt={name}
-              src="https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
-            />
-          </li>
-          <li className="subImage">
-            <img
-              alt={name}
-              src="https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
-            />
-          </li>
+          {subImg &&
+            subImg.map(el => {
+              return (
+                <li className="subImage" key={el.id}>
+                  <img alt={name} src={el.imagURL} onClick={clickImgChang} />
+                </li>
+              );
+            })}
         </ul>
       </div>
     );
