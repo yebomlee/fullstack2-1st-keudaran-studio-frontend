@@ -20,6 +20,7 @@ class ProductDescription extends Component {
       incrementCounter,
       decrementCounter,
       selectBoxChange,
+      changePage,
     } = this.props;
     const totalPrice = userCount * price;
     return (
@@ -73,13 +74,17 @@ class ProductDescription extends Component {
               </select>
             </dd>
           </dl>
-          <ChoiceOption
-            userCount={userCount}
-            totalPrice={totalPrice}
-            choiceOption={choiceOption}
-            incrementCounter={incrementCounter}
-            decrementCounter={decrementCounter}
-          />
+          {choiceOption ? (
+            <ChoiceOption
+              userCount={userCount}
+              totalPrice={totalPrice}
+              choiceOption={choiceOption}
+              incrementCounter={incrementCounter}
+              decrementCounter={decrementCounter}
+            />
+          ) : (
+            <p></p>
+          )}
           <div className="totalPrice">
             <strong>총 상품 금액</strong>
             <span className="resultPrice">
@@ -89,9 +94,17 @@ class ProductDescription extends Component {
           </div>
         </article>
         <div className="activeButton">
-          <p className="buyButton commonButton">구매하기</p>
-          <p className="basketButton commonButton">장바구니</p>
-          <FontAwesomeIcon className="likeButton" icon={faHeart} />
+          <p className="buyButton commonButton" onClick={changePage}>
+            구매하기
+          </p>
+          <p className="basketButton commonButton" onClick={changePage}>
+            장바구니
+          </p>
+          <FontAwesomeIcon
+            className="likeButton"
+            icon={faHeart}
+            onClick={changePage}
+          />
         </div>
       </section>
     );

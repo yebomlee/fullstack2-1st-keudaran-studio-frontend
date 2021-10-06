@@ -62,7 +62,6 @@
     .totalPrice {
       @include flexStyle(none, space-between);
       padding: 30px 10px 20px 0;
-      border-top: #3d3d3d solid 1px;
 
       strong {
         @include fontSizeWight(22px, bold);

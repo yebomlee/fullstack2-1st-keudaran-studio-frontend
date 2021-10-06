@@ -23,11 +23,14 @@ class ProductDetail extends Component {
       option: [],
       imgNum: 1,
       userCount: 0,
-      choiceOption: [],
+      choiceOption: undefined,
       totalPrice: 0,
     };
     this.incrementCounter = this.incrementCounter.bind(this);
     this.decrementCounter = this.decrementCounter.bind(this);
+    this.imgChangeLeft = this.imgChangeLeft.bind(this);
+    this.imgChangeRight = this.imgChangeRight.bind(this);
+    this.selectBoxChange = this.selectBoxChange.bind(this);
   }
 
   componentDidMount() {
@@ -77,7 +80,7 @@ class ProductDetail extends Component {
     });
   };
 
-  incrementCounter() {
+  incrementCounter = () => {
     let { userCount, choiceOption } = this.state;
     if (userCount >= choiceOption.quantity) {
       alert('제고량을 다시 확인하세요');
@@ -86,9 +89,9 @@ class ProductDetail extends Component {
     this.setState({
       userCount: userCount + 1,
     });
-  }
+  };
 
-  decrementCounter() {
+  decrementCounter = () => {
     let { userCount } = this.state;
     if (userCount < 1) {
       alert('1개 이상 선택해야됩니다');
@@ -97,7 +100,7 @@ class ProductDetail extends Component {
     this.setState({
       userCount: userCount - 1,
     });
-  }
+  };
 
   selectBoxChange = e => {
     const choiceOption = this.state.option.find(el => {
@@ -105,7 +108,13 @@ class ProductDetail extends Component {
     });
     this.setState({
       choiceOption,
+      userCount: 0,
+      totalPrice: 0,
     });
+  };
+
+  changePage = () => {
+    alert('준비중입니다');
   };
 
   render() {
@@ -155,6 +164,7 @@ class ProductDetail extends Component {
                 incrementCounter={this.incrementCounter}
                 decrementCounter={this.decrementCounter}
                 selectBoxChange={this.selectBoxChange}
+                changePage={this.changePage}
               />
             </div>
             <article className="content">
