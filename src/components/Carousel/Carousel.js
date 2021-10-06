@@ -25,14 +25,22 @@ class Carousel extends Component {
   }
 
   carouselIntervalId = () => {
-    const { imgData } = this.state;
     setInterval(() => {
+      const { imgData } = this.state;
+      document.querySelector('.container').style.transition = '1s';
       if (this.state.currentImg === imgData.length - 1) {
-        this.setState({ currentImg: 0 }, () => {
-          document.querySelector(
-            '.container'
-          ).style.transform = `translateX(-${this.state.currentImg}00vw)`;
-        });
+        document.querySelector(
+          '.container'
+        ).style.transform = `translateX(-${imgData.length}00vw)`;
+
+        setTimeout(() => {
+          this.setState({ currentImg: 0 }, () => {
+            document.querySelector('.container').style.transition = '0s';
+            document.querySelector(
+              '.container'
+            ).style.transform = `translateX(-${this.state.currentImg}00vw)`;
+          });
+        }, 950);
       } else {
         this.setState({ currentImg: this.state.currentImg + 1 }, () => {
           document.querySelector(
@@ -45,17 +53,16 @@ class Carousel extends Component {
 
   slideToN = e => {
     const { className } = e.target;
-    const { currentImg } = this.state;
     this.setState({ currentImg: parseInt(className.charAt(3)) }, () => {
       document.querySelector(
         '.container'
-      ).style.transform = `translateX(-${currentImg}00vw)`;
+      ).style.transform = `translateX(-${this.state.currentImg}00vw)`;
     });
   };
 
-  slideRight = () => {
+  slideToRight = () => {
     const { currentImg, imgData } = this.state;
-    if (currentImg >= imgData.length - 1) return;
+    if (currentImg === imgData.length - 1) return;
     this.setState({ currentImg: currentImg + 1 }, () => {
       document.querySelector('.container').style.transform = `translateX(${
         -this.state.currentImg * 100
@@ -63,9 +70,9 @@ class Carousel extends Component {
     });
   };
 
-  slideLeft = () => {
+  slideToLeft = () => {
     const { currentImg } = this.state;
-    if (currentImg <= 0) return;
+    if (currentImg === 0) return;
     this.setState({ currentImg: currentImg - 1 }, () => {
       document.querySelector('.container').style.transform = `translateX(${
         -this.state.currentImg * 100
@@ -80,14 +87,14 @@ class Carousel extends Component {
           {this.state.imgData.map(data => {
             return <SlideImage key={data.id} url={data.imgUrl} />;
           })}
-          {/* <div className="SlideImage">
+          <div className="SlideImage">
             <div className="inner">
               <img
                 src={this.state.imgData[0].imgUrl}
                 alt={this.state.imgData[0].name}
               />
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="dotBtnWraper">
           {this.state.imgData.map(data => {
@@ -104,12 +111,12 @@ class Carousel extends Component {
         <FontAwesomeIcon
           icon={faAngleLeft}
           className="leftBtn"
-          onClick={this.slideLeft}
+          onClick={this.slideToLeft}
         />
         <FontAwesomeIcon
           icon={faAngleRight}
           className="rightBtn"
-          onClick={this.slideRight}
+          onClick={this.slideToRight}
         />
       </div>
     );
