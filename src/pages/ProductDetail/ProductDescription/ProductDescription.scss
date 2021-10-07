@@ -96,19 +96,20 @@
       cursor: pointer;
       &:hover {
         transform: scale(1.05);
+        font-weight: bold;
       }
     }
 
     .buyButton {
       @include widthHeight(250px);
-      @include fontSizeWight(none, none, #fff);
+      @include fontSizeWight(20px, none, #fff);
       border: 1px solid #2e2e2e;
       background-color: #2e2e2e;
     }
 
     .basketButton {
       @include widthHeight(250px);
-      @include fontSizeWight(none, none, #000000);
+      @include fontSizeWight(20px, none, #000000);
       border: 1px solid #000000;
     }
 

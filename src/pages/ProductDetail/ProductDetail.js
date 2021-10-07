@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
-import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
-import ProductContents from './ProductContents/ProductContents';
+import ProductInfo from './ProductInfo/ProductInfo';
 import productData from './productData.json';
 import descriptionData from './descriptionData.json';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHamburger } from '@fortawesome/free-solid-svg-icons';
 import './ProductDetail.scss';
 
 class ProductDetail extends Component {
@@ -18,6 +19,8 @@ class ProductDetail extends Component {
       changeMainImg: '',
       isLikedProduct: 0,
       choiceOptionArray: [],
+      isPageMenu: false,
+      clickMenu: '',
     };
   }
 
@@ -126,11 +129,35 @@ class ProductDetail extends Component {
     this.setState({ choiceOptionArray });
   };
 
+  changePositionScroll = whatButton => {
+    const MOVE_PHOTO_POSITION = 0;
+    const MOVE_INFO_POSITION = 1150;
+    const MOVE_REVIEW_POSITION = 3100;
+    const moveSroll = movePosition => {
+      const position = { top: movePosition, left: 0, behavior: 'smooth' };
+      window.scrollTo(position);
+    };
+    this.setState({
+      clickMenu: whatButton,
+    });
+    if (whatButton === 'info') moveSroll(MOVE_INFO_POSITION);
+    else if (whatButton === 'review') moveSroll(MOVE_REVIEW_POSITION);
+    else moveSroll(MOVE_PHOTO_POSITION);
+  };
+
+  showMyPageMenu = () => {
+    const { isPageMenu } = this.state;
+    this.setState({
+      isPageMenu: !isPageMenu,
+    });
+  };
+
   render() {
     const { id, name, price, point, productImgs, options } =
       this.state.productData;
     const { origin, brand, shippingFee } = this.state.descriptionData;
-    const { changeMainImg, isLikedProduct, choiceOptionArray } = this.state;
+    const { changeMainImg, isLikedProduct, choiceOptionArray, isPageMenu } =
+      this.state;
     return (
       <div className="Detail">
         <div className="total">
@@ -160,10 +187,36 @@ class ProductDetail extends Component {
               />
             </div>
             <article className="content">
-              <ProductMiddleNav />
-              <ProductContents />
+              <ProductInfo changePositionScroll={this.changePositionScroll} />
             </article>
           </section>
+          <FontAwesomeIcon
+            className="hambergerIcon"
+            icon={faHamburger}
+            onClick={this.showMyPageMenu}
+          />
+          {isPageMenu && (
+            <ul className="hambergerMenuButton">
+              <li
+                className="menuButton"
+                onClick={() => this.changePositionScroll('photo')}
+              >
+                제품정보
+              </li>
+              <li
+                className="menuButton"
+                onClick={() => this.changePositionScroll('info')}
+              >
+                상품 상세
+              </li>
+              <li
+                className="menuButton"
+                onClick={() => this.changePositionScroll('review')}
+              >
+                후기
+              </li>
+            </ul>
+          )}
           <footer className="footer">하단 footer</footer>
         </div>
       </div>

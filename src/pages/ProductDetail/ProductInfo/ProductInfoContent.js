@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './ProductContents.scss';
+import './ProductInfoContent.scss';
 
-class ProductContents extends Component {
+class ProductInfoContent extends Component {
   render() {
     return (
-      <div className="ProductContents">
+      <div className="ProductInfoContent">
         <img
           alt="대체 사진"
           src="https://www.jogumanstore.com/shopimages/playwin/0060060000012.jpg?1625563215"
@@ -14,4 +14,4 @@ class ProductContents extends Component {
   }
 }
 
-export default ProductContents;
+export default ProductInfoContent;
