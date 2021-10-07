@@ -1,62 +1,68 @@
 import React, { Component } from 'react';
-import './Nav.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import {
   faSearch,
   faShoppingCart,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
 import category from './NavData';
-import { Link } from 'react-router-dom';
+import './Nav.scss';
 
 class Nav extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMenuListDown: false,
+    };
   }
 
-  // 함수 = e => {
-  //   alert(1);
-  //   console.log(e);
-  // };
+  scrollDownMenuList = () => {
+    this.setState({ isMenuListDown: !this.state.isMenuListDown });
+  };
 
   render() {
     return (
       <div className="Nav">
+        <div
+          className={
+            this.state.isMenuListDown ? 'modalMenu menuDown' : 'modalMenu'
+          }
+        ></div>
         <header className="headerMenu">
           <h1 className="logo">
-            <img
-              // onClick={e => {
-              //   this.함수(e);
-              // }}
-              className="logoImg"
-              alt="크다란 스토어"
-              src={process.env.PUBLIC_URL + '/images/kedaran.svg'}
-            />
+            <Link to="/">
+              <img
+                className="logoImg"
+                alt="크다란 스토어"
+                src={process.env.PUBLIC_URL + '/images/kedaran.svg'}
+              />
+            </Link>
           </h1>
-          <ul>
-            <li>
-              <a className="headerLink" href="/">
+          <ul className="headerListWrapper">
+            <li className="headerList">
+              <Link to="/signin" className="headerLink">
                 JOIN US
-              </a>
+              </Link>
             </li>
-            <li>
-              <a className="headerLink" href="/">
+            <li className="headerList">
+              <Link to="/signup" className="headerLink">
                 LOGIN
-              </a>
+              </Link>
             </li>
-            <li>
-              <a className="headerLink" href="/">
+            <li className="headerList">
+              <Link to="" className="headerLink">
                 ORDER
-              </a>
+              </Link>
             </li>
-            <li>
-              <a className="headerLink" href="/">
+            <li className="headerList">
+              <Link to="" className="headerLink">
                 MY PAGE
-              </a>
+              </Link>
             </li>
           </ul>
         </header>
-        <div className="navBar">
+        <nav className="navBar">
           <div className="dropdownMenu">
             {category.map(data => {
               return (
@@ -68,7 +74,7 @@ class Nav extends Component {
                   <div className="dropdownContent">
                     {data.subCategory.map(data => {
                       return (
-                        <Link to="" className="categoryLink">
+                        <Link to="{}" className="categoryLink">
                           {data}
                         </Link>
                       );
@@ -78,7 +84,7 @@ class Nav extends Component {
               );
             })}
           </div>
-          <div className="rightBar">
+          <div className="searchBar">
             <div className="inputDiv">
               <input
                 className="inputBox"
@@ -88,9 +94,13 @@ class Nav extends Component {
               <FontAwesomeIcon icon={faSearch} className="search" />
             </div>
             <FontAwesomeIcon icon={faShoppingCart} className="shoppingCart" />
-            <FontAwesomeIcon icon={faBars} className="bars" />
+            <FontAwesomeIcon
+              icon={faBars}
+              className="bars"
+              onClick={this.scrollDownMenuList}
+            />
           </div>
-        </div>
+        </nav>
       </div>
     );
   }

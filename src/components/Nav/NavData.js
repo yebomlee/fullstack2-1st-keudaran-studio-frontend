@@ -38,38 +38,4 @@ const category = [
   { id: 6, name: 'EVENT', subCategory: ['All'] },
 ];
 
-// {
-//   Stationery: [
-//     { id: 201, name: 'Postcard' },
-//     { id: 202, name: 'Notebook' },
-//     { id: 203, name: 'Memo Pad' },
-//     { id: 204, name: 'Poster' },
-//     { id: 205, name: 'Tape' },
-//     { id: 206, name: 'Tattoo Sticker' },
-//     { id: 207, name: 'Sticker' },
-//     { id: 208, name: 'Diary' },
-//     { id: 209, name: 'Calendar' },
-//     { id: 210, name:  },
-//   ],
-// },
-// ];
-
-//   {'Etc'
-//     id: 4,
-//     name: 'Fabric & Living',
-//   }
-//   {
-//     id: 5,
-//     name: 'ACC',
-//   }
-//   {
-//     id: 6,
-//     name: 'EVENT',
-//   }
-// ],
-
-// const dropdown = [
-//   {
-//     id:1
-//   }
 export default category;
