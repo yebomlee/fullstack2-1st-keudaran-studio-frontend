@@ -3,36 +3,41 @@
 .ChoiceOption {
   @include flexStyle(center, space-between);
   padding: 0px 10px 10px 0;
-  .choiceText {
-    @include fontSizeWight(14px, none, #3d3d3d);
-    margin: 0 150px 0 0;
-  }
 
-  .countBox {
+  .textButton {
     @include flexStyle(center);
 
-    .countInput {
-      @include widthHeight(35px, 30px);
-      @include fontSizeWight(12px, none, #696969);
-      @include fontFamily('Nunito', sans-serif);
-      padding: 0;
-      border: 1px solid #e2e2e2;
-      vertical-align: middle;
-      text-align: center;
+    .choiceText {
+      @include fontSizeWight(14px, none, #3d3d3d);
+      margin: 0 20px 0 0;
     }
 
-    .countButton {
-      @include flexStyle(none, none, column);
+    .countBox {
+      @include flexStyle(center);
 
-      .arrowButton {
-        @include widthHeight(none, 15px);
-        @include fontSizeWight(none, none, #696969);
-        margin: 0 0 0 5px;
+      .countInput {
+        @include widthHeight(35px, 30px);
+        @include fontSizeWight(12px, none, #696969);
+        @include fontFamily('Nunito', sans-serif);
+        padding: 0;
         border: 1px solid #e2e2e2;
-        cursor: pointer;
-        &:hover {
-          border: 1px solid #000;
-          transform: scale(1.2);
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      .countButton {
+        @include flexStyle(none, none, column);
+
+        .arrowButton {
+          @include widthHeight(none, 15px);
+          @include fontSizeWight(none, none, #696969);
+          margin: 0 0 0 5px;
+          border: 1px solid #e2e2e2;
+          cursor: pointer;
+          &:hover {
+            border: 1px solid #000;
+            transform: scale(1.2);
+          }
         }
       }
     }

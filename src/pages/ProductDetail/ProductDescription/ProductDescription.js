@@ -7,14 +7,18 @@ class ProductDescription extends Component {
   render() {
     const { id, name, price, point, options } = this.props;
     const { origin, brand, shippingFee } = this.props;
-    const { choiceCount, isLikedProduct, choiceOptionArray } = this.props;
+    const { isLikedProduct, choiceOptionArray } = this.props;
     const {
       increaseCounter,
       decreaseCounter,
       choiceOptionChange,
       clickLikedProduct,
     } = this.props;
-    const totalPrice = choiceCount * price;
+    let totalCount = 0;
+    choiceOptionArray.forEach(option => {
+      totalCount = totalCount + option.choiceCount;
+    });
+    const totalPrice = totalCount * price;
     return (
       <section className="ProductDescription" key={id}>
         <h3>{name} </h3>
@@ -67,14 +71,13 @@ class ProductDescription extends Component {
               </select>
             </dd>
           </dl>
-          {choiceOptionArray.map(option => {
+          {choiceOptionArray.map(choiceOption => {
             return (
               <ChoiceOption
-                key={option.id}
+                key={choiceOption.id}
                 {...{
-                  choiceCount,
-                  totalPrice,
-                  option,
+                  price,
+                  choiceOption,
                   increaseCounter,
                   decreaseCounter,
                 }}

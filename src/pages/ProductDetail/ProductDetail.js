@@ -14,7 +14,7 @@ class ProductDetail extends Component {
       serverData: [],
       mokeData: [],
       imgNum: 1,
-      choiceCount: 0,
+      howCount: 0,
       changeMainImg: '',
       isLikedProduct: 0,
       choiceOptionArray: [],
@@ -66,35 +66,37 @@ class ProductDetail extends Component {
   };
 
   increaseCounter = option => {
-    const { choiceCount } = this.state;
-    if (choiceCount >= option.quantity) {
+    const { choiceCount, quantity } = option;
+    if (choiceCount >= quantity) {
       alert('제고량을 다시 확인하세요');
       return;
     }
+    option.choiceCount = choiceCount + 1;
     this.setState({
-      choiceCount: choiceCount + 1,
+      howCount: choiceCount + 1,
     });
   };
 
-  decreaseCounter = () => {
-    const { choiceCount } = this.state;
+  decreaseCounter = option => {
+    const { choiceCount } = option;
     const MIN_LIMIT_OPTION_NUM = 1;
     if (choiceCount < MIN_LIMIT_OPTION_NUM) {
       alert('1개 이상 선택해야됩니다');
       return;
     }
+    option.choiceCount = choiceCount - 1;
     this.setState({
-      choiceCount: choiceCount - 1,
+      howCount: choiceCount - 1,
     });
   };
 
   choiceOptionChange = e => {
-    const { choiceOptionArray, choiceCount, serverData } = this.state;
-    const choiceOption = serverData.options?.find(el => {
+    const { choiceOptionArray, serverData } = this.state;
+    const resultOption = serverData.options?.find(el => {
       return el.name === e.target.value;
     });
-    if (!choiceOption) return;
-    const { id, name, quantity } = choiceOption;
+    if (!resultOption) return;
+    const { name, quantity } = resultOption;
     const isExist = choiceOptionArray.some(el => el.name === name);
     if (isExist) return;
     this.setState({
@@ -102,10 +104,12 @@ class ProductDetail extends Component {
       choiceOptionArray: [
         ...choiceOptionArray,
         {
-          id,
+          id: choiceOptionArray.length
+            ? choiceOptionArray[choiceOptionArray.length - 1].id + 1
+            : 1,
           name,
           quantity,
-          choiceCount,
+          choiceCount: 0,
         },
       ],
     });
@@ -122,8 +126,8 @@ class ProductDetail extends Component {
     const { id, name, price, point, productImgs, options } =
       this.state.serverData;
     const { origin, brand, shippingFee } = this.state.mokeData;
-    const { choiceCount, changeMainImg, isLikedProduct, choiceOptionArray } =
-      this.state;
+    const { changeMainImg, isLikedProduct, choiceOptionArray } = this.state;
+    console.log(choiceOptionArray);
     return (
       <div className="Detail">
         <div className="total">
@@ -142,7 +146,10 @@ class ProductDetail extends Component {
               <ProductDescription
                 {...{ id, name, price, point, options }}
                 {...{ origin, brand, shippingFee }}
-                {...{ choiceCount, isLikedProduct, choiceOptionArray }}
+                {...{
+                  isLikedProduct,
+                  choiceOptionArray,
+                }}
                 increaseCounter={this.increaseCounter}
                 decreaseCounter={this.decreaseCounter}
                 choiceOptionChange={this.choiceOptionChange}
