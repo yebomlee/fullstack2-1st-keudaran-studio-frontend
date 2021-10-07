@@ -1,166 +1,189 @@
 .Nav {
+  position: relative;
   margin: 0 auto;
   max-width: 1200px;
-  position: relative;
   width: 100%;
-  height: 1000px;
   font-family: 'Spoqa Han Sans Neo';
-  // overflow: hidden;
-  // background-color: white;
 
-  // .modalMenu {
-  //   // display: none;
-  //   position: relative;
-  //   top: -400px;
-  //   width: 100%;
-  //   height: 400px;
-  //   background-color: rebeccapurple;
-  //   transition: all 1s ease-in-out;
-  //   opacity: 0.2;
-
-  //   .menuDown {
-  //     top: 0;
-  //     // transform: translateY(+400px);
-  //   }
-  // }
-
-  .headerMenu {
-    display: flex;
-    justify-content: space-between;
+  .modalMenu {
     position: relative;
-    margin: 20px 0px 30px 20px;
-    // z-index: 10000;
-    background-color: white;
+    top: -440px;
+    width: 100%;
+    height: 600px;
+    transition: all 1s ease-in-out;
 
-    .logo {
-      display: flex;
-
-      .logoImg {
-        margin: 20px;
-        width: 200px;
-      }
+    &.menuDown {
+      top: 0;
     }
 
-    .headerListWrapper {
+    .modalDropDown {
       display: flex;
-      align-items: center;
-      color: #000;
-      font-weight: bold;
+      position: relative;
+      top: 160px;
 
-      .headerLink {
-        padding: 10px;
-        color: #aaa;
-        font-size: 13px;
-        font-weight: normal;
+      .modalSubCategory {
+        display: flex;
+        flex-direction: column;
+        min-width: 140px;
+        padding: 5px 0;
+        font-size: 16px;
+
+        .modalCategoryLink {
+          min-width: 140px;
+          padding: 5px;
+          color: black;
+          text-align: center;
+          font-weight: bold;
+          font-family: 'Spoqa Han Sans Neo';
+        }
+      }
+    }
+  }
+
+  .emptyBackgroundBox {
+    position: absolute;
+    top: 0;
+    width: 1200px;
+    height: 160px;
+    background-color: white;
+
+    .headerMenu {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0px 30px 20px;
+
+      .logo {
+        display: flex;
+        justify-content: space-between;
+
+        .logoImg {
+          margin: 20px;
+          width: 200px;
+        }
+      }
+
+      .headerListWrapper {
+        display: flex;
+        align-items: center;
+
+        .headerLink {
+          padding: 10px;
+          color: #aaa;
+          font-size: 13px;
+          font-weight: bold;
+        }
       }
     }
   }
 
   .navBar {
     display: flex;
-    justify-content: space-between;
-    position: relative;
-    // z-index: 9000;
-    background-color: white;
+    position: absolute;
+    top: 100px;
+    width: 1200px;
 
     .dropdownMenu {
-      display: inline-flex;
-      justify-content: space-between;
-      position: absolute;
+      display: flex;
       width: 750px;
-      left: 30px;
 
       .dropdown {
         position: relative;
-        // z-index: 9999;
-
-        &:hover .dropBtn {
-          text-decoration: #000;
-        }
 
         &:hover .dropdownContent {
           display: block;
         }
 
+        .hiddenDropdownContent {
+          display: none;
+        }
+
         .dropBtn {
-          // min-width: 150px;
+          min-width: 140px;
           border: none;
           outline: none;
           color: #000;
-          // background-color: red;
-          font-family: sans-serif;
+          background-color: white;
           font-size: 16px;
+          font-family: 'Spoqa Han Sans Neo';
           cursor: pointer;
+
+          // &:hover .dropBtn {
+          //   display: block;
+          // }
 
           &:hover .dropIcon {
             opacity: 1;
           }
 
+          // .dropBtn .ddddd {
+          //   opacity: 1;
+          // }
+
           .dropIcon {
+            font-size: 12px;
             opacity: 0;
           }
         }
-      }
 
-      .dropdownContent {
-        display: none;
-        min-width: 140px;
-        position: absolute;
-        top: 90%;
-        left: 50%;
-        padding: 5px;
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-        background-color: white;
-        font-size: 15px;
-        transform: translate(-50%);
-        // z-index: 9999;
+        .dropdownContent {
+          display: none;
+          min-width: 140px;
+          position: absolute;
+          top: 90%;
+          left: 50%;
+          padding: 5px;
+          background-color: white;
+          font-size: 15px;
+          font-family: 'Spoqa Han Sans Neo';
+          transform: translate(-50%);
+          box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
-        .categoryLink {
-          display: block;
-          padding: 5px 10px;
-          color: #666;
-          text-decoration: none;
+          .categoryLink {
+            display: block;
+            padding: 5px 10px;
+            color: #666;
+            text-decoration: none;
 
-          &:hover {
-            color: #000;
+            &:hover {
+              color: #000;
+            }
           }
         }
       }
     }
-  }
 
-  .searchBar {
-    display: flex;
-    position: absolute;
-    right: 30px;
-    padding-bottom: 15px;
-
-    .inputDiv {
-      display: inline-flex;
+    .searchBar {
+      display: flex;
       justify-content: flex-end;
-      position: relative;
+      margin-left: 140px;
+      padding-bottom: 15px;
 
-      .inputBox {
-        width: 250px;
-        border: none;
-        border-bottom: solid 2px #000;
-        outline: none;
-        padding: 3px 3px;
+      .inputDiv {
+        position: relative;
 
-        &::placeholder {
-          padding: 20px;
-          font-size: 13px;
+        .inputBox {
+          width: 220px;
+          padding: 3px 3px;
+          border: none;
+          border-bottom: solid 2px #000;
+          outline: none;
+
+          &::placeholder {
+            padding: 20px;
+            font-size: 13px;
+          }
+        }
+
+        .search {
+          position: absolute;
+          right: 10px;
+          color: #000;
         }
       }
 
-      .search {
-        position: absolute;
-        right: 10px;
-        color: #000;
+      .shoppingCart {
+        margin: 0 20px;
       }
-    }
-    .shoppingCart {
-      margin: 0 20px;
     }
   }
 }

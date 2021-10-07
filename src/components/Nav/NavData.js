@@ -1,5 +1,5 @@
 const category = [
-  { id: 1, name: 'All', subCategory: ['All', 'New', 'Best'] },
+  { id: 1, link: '/', name: 'All', subCategory: ['All', 'New', 'Best'] },
   {
     id: 2,
     name: 'Stationery',

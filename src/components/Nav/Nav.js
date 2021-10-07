@@ -28,40 +28,59 @@ class Nav extends Component {
           className={
             this.state.isMenuListDown ? 'modalMenu menuDown' : 'modalMenu'
           }
-        ></div>
-        <header className="headerMenu">
-          <h1 className="logo">
-            <Link to="/">
-              <img
-                className="logoImg"
-                alt="크다란 스토어"
-                src={process.env.PUBLIC_URL + '/images/kedaran.svg'}
-              />
-            </Link>
-          </h1>
-          <ul className="headerListWrapper">
-            <li className="headerList">
-              <Link to="/signin" className="headerLink">
-                JOIN US
+        >
+          <div className="modalDropDown">
+            {category.map(data => {
+              return (
+                <div className="modalSubCategory">
+                  {data.subCategory.map(data => {
+                    return (
+                      <Link to="{}" className="modalCategoryLink">
+                        {data}
+                      </Link>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="emptyBackgroundBox">
+          <header className="headerMenu">
+            <h1 className="logo">
+              <Link to="/">
+                <img
+                  className="logoImg"
+                  alt="크다란 스토어"
+                  src={process.env.PUBLIC_URL + '/images/kedaran.svg'}
+                />
               </Link>
-            </li>
-            <li className="headerList">
-              <Link to="/signup" className="headerLink">
-                LOGIN
-              </Link>
-            </li>
-            <li className="headerList">
-              <Link to="" className="headerLink">
-                ORDER
-              </Link>
-            </li>
-            <li className="headerList">
-              <Link to="" className="headerLink">
-                MY PAGE
-              </Link>
-            </li>
-          </ul>
-        </header>
+            </h1>
+            <ul className="headerListWrapper">
+              <li className="headerList">
+                <Link to="/signin" className="headerLink">
+                  JOIN US
+                </Link>
+              </li>
+              <li className="headerList">
+                <Link to="/signup" className="headerLink">
+                  LOGIN
+                </Link>
+              </li>
+              <li className="headerList">
+                <Link to="" className="headerLink">
+                  ORDER
+                </Link>
+              </li>
+              <li className="headerList">
+                <Link to="" className="headerLink">
+                  MY PAGE
+                </Link>
+              </li>
+            </ul>
+          </header>
+        </div>
         <nav className="navBar">
           <div className="dropdownMenu">
             {category.map(data => {
@@ -69,9 +88,23 @@ class Nav extends Component {
                 <div className="dropdown">
                   <button className="dropBtn">
                     {data.name}
-                    <div className="dropIcon">●</div>
+                    <div
+                      className="dropIcon"
+                      // {
+                      //   this.state.isMenuListDown ? 'ddddd' : 'dropIcon'
+                      // }
+                    >
+                      {/* {`dropIcon ${this.state.isMenuListDowFn ? 'gojeong' : 'move'}`} */}
+                      ●
+                    </div>
                   </button>
-                  <div className="dropdownContent">
+                  <div
+                    className={
+                      this.state.isMenuListDown
+                        ? 'hiddenDropdownContent'
+                        : 'dropdownContent'
+                    }
+                  >
                     {data.subCategory.map(data => {
                       return (
                         <Link to="{}" className="categoryLink">
@@ -84,6 +117,7 @@ class Nav extends Component {
               );
             })}
           </div>
+
           <div className="searchBar">
             <div className="inputDiv">
               <input
