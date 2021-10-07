@@ -3,6 +3,12 @@ import './SignUpBox.scss';
 
 class SignUpBox extends React.Component {
   render() {
+    const {
+      userAgreeData,
+      changeCheck,
+      changeCheckAll,
+      changeMarketingCheckAll,
+    } = this.props;
     return (
       <section className="SignUpBox">
         <h1 className="signUpTitle">회원정보 입력</h1>
@@ -69,32 +75,72 @@ class SignUpBox extends React.Component {
             </div>
             <div className="agreeBox">
               <div className="allCheck">
-                <input type="checkbox" id="allCheck" />
+                <input
+                  type="checkbox"
+                  id="allCheck"
+                  checked={
+                    userAgreeData.isAgreedCollectPrivate &&
+                    userAgreeData.isAgreedServicePolicy &&
+                    userAgreeData.isAgreedEmailMarketing &&
+                    userAgreeData.isAgreedPhoneMarketing
+                  }
+                  onChange={changeCheckAll}
+                />
                 <label htmlFor="allCheck">전체 동의</label>
               </div>
               <div className="detailCheck">
                 <div className="legalCheck">
-                  <input type="checkbox" id="usePolicyCheck" />
+                  <input
+                    type="checkbox"
+                    id="usePolicyCheck"
+                    name="isAgreedServicePolicy"
+                    checked={userAgreeData.isAgreedServicePolicy}
+                    onChange={changeCheck}
+                  />
                   <label htmlFor="usePolicyCheck">이용약관</label>
-                  <button class="littleGreyBtn">내용 보기</button>
-                  <input type="checkbox" id="usePrivacyCheck" />
+                  <button className="littleGreyBtn">내용 보기</button>
+                  <input
+                    type="checkbox"
+                    id="usePrivacyCheck"
+                    name="isAgreedCollectPrivate"
+                    checked={userAgreeData.isAgreedCollectPrivate}
+                    onChange={changeCheck}
+                  />
                   <label htmlFor="usePrivacyCheck">
                     개인정보 수집 이용 안내
                   </label>
-                  <button class="littleGreyBtn">내용 보기</button>
+                  <button className="littleGreyBtn">내용 보기</button>
                 </div>
                 <div className="marketingCheck">
-                  <div class="checkBox">
-                    <input type="checkbox" id="allMarketingCheck" />
-                    <label htmlFor="allMarketingCheck">
-                      마케팅 수신 동의(
-                      <input type="checkbox" id="emailMarketingCheck" />
-                      <label htmlFor="emailMarketingCheck">이메일</label>
-                      <input type="checkbox" id="phoneMarketingCheck" />
-                      <label htmlFor="phoneMarketingCheck">SMS</label>)
-                    </label>
+                  <div className="checkBox">
+                    <input
+                      type="checkbox"
+                      id="allMarketingCheck"
+                      checked={
+                        userAgreeData.isAgreedEmailMarketing &&
+                        userAgreeData.isAgreedPhoneMarketing
+                      }
+                      onChange={changeMarketingCheckAll}
+                    />
+                    <label htmlFor="allMarketingCheck">마케팅 수신 동의(</label>
+                    <input
+                      type="checkbox"
+                      id="emailMarketingCheck"
+                      name="isAgreedEmailMarketing"
+                      checked={userAgreeData.isAgreedEmailMarketing}
+                      onChange={changeCheck}
+                    />
+                    <label htmlFor="emailMarketingCheck">이메일</label>
+                    <input
+                      type="checkbox"
+                      id="phoneMarketingCheck"
+                      name="isAgreedPhoneMarketing"
+                      checked={userAgreeData.isAgreedPhoneMarketing}
+                      onChange={changeCheck}
+                    />
+                    <label htmlFor="phoneMarketingCheck">SMS</label>)
                   </div>
-                  <div class="marketingParagraph">
+                  <div className="marketingParagraph">
                     <p>
                       쇼핑몰에서 제공하는 신상품 소식/ 할인쿠폰을 무상으로
                       보내드립니다!
@@ -116,8 +162,10 @@ class SignUpBox extends React.Component {
           <div className="policyWrap">
             <div className="policyBox">
               <h3 className="policyTitle">이용약관</h3>
-              <textarea className="policyText">
-                인터넷 쇼핑몰 『주식회사 크다란 스튜디오 프로젝트』회원 약관
+              <textarea
+                className="policyText"
+                readOnly
+                defaultValue="인터넷 쇼핑몰 『주식회사 크다란 스튜디오 프로젝트』회원 약관
                 제1조(목적) 이 약관은 주식회사 플레이윈 회사(전자상거래
                 사업자)가 운영하는 주식회사 플레이윈 사이버 몰(이하 “몰”이라
                 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를
@@ -136,8 +184,8 @@ class SignUpBox extends React.Component {
                 제공하는 서비스를 이용하는 자를 말합니다. 제3조 (약관 등의
                 명시와 설명 및 개정) ① “몰”은 이 약관의 내용과 상호 및 대표자
                 성명, 영업소 소재지 주소(소비자의 불만을 처리할 수 있는 곳의
-                주소를 포함), 전화번호·모사전송번호·전자우편주소,
-              </textarea>
+                주소를 포함), 전화번호·모사전송번호·전자우편주소,"
+              ></textarea>
             </div>
             <div className="usePrivacyBox ">
               <h3 className="policyTitle">개인정보 수집·이용</h3>
