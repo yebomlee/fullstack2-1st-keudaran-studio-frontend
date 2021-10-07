@@ -30,9 +30,11 @@ class SignUp extends React.Component {
   };
 
   changeMarketingCheckAll = e => {
+    const { userAgreeData } = this.state;
     const { checked } = e.currentTarget;
     this.setState({
       userAgreeData: {
+        ...userAgreeData,
         isAgreedPhoneMarketing: checked,
         isAgreedEmailMarketing: checked,
       },

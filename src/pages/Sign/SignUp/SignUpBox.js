@@ -120,6 +120,10 @@ class SignUpBox extends React.Component {
                         userAgreeData.isAgreedEmailMarketing &&
                         userAgreeData.isAgreedPhoneMarketing
                       }
+                      value={
+                        userAgreeData.isAgreedEmailMarketing &&
+                        userAgreeData.isAgreedPhoneMarketing
+                      }
                       onChange={changeMarketingCheckAll}
                     />
                     <label htmlFor="allMarketingCheck">마케팅 수신 동의(</label>
@@ -128,6 +132,7 @@ class SignUpBox extends React.Component {
                       id="emailMarketingCheck"
                       name="isAgreedEmailMarketing"
                       checked={userAgreeData.isAgreedEmailMarketing}
+                      value={userAgreeData.isAgreedEmailMarketing}
                       onChange={changeCheck}
                     />
                     <label htmlFor="emailMarketingCheck">이메일</label>
@@ -136,6 +141,7 @@ class SignUpBox extends React.Component {
                       id="phoneMarketingCheck"
                       name="isAgreedPhoneMarketing"
                       checked={userAgreeData.isAgreedPhoneMarketing}
+                      value={userAgreeData.isAgreedPhoneMarketing}
                       onChange={changeCheck}
                     />
                     <label htmlFor="phoneMarketingCheck">SMS</label>)
