@@ -2,6 +2,7 @@
 
 .ProductDescription {
   width: 520px;
+
   h3 {
     @include fontSizeWight(28px, bold, none);
     @include fontFamily('Spoqa Han Sans', 'Lato');

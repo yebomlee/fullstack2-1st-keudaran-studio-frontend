@@ -5,7 +5,8 @@ import './HambergerIconMenu.scss';
 
 class HambergerIconMenu extends Component {
   render() {
-    const { isPageMenu, showMyPageMenu, changePositionScroll } = this.props;
+    const { isMovePositionMenu, showMyPageMenu, changePositionScroll } =
+      this.props;
     return (
       <div className="HambergerIconMenu">
         <FontAwesomeIcon
@@ -13,7 +14,7 @@ class HambergerIconMenu extends Component {
           icon={faHamburger}
           onClick={showMyPageMenu}
         />
-        {isPageMenu && (
+        {isMovePositionMenu && (
           <ul className="hambergerMenuButton">
             <li
               className="menuButton"

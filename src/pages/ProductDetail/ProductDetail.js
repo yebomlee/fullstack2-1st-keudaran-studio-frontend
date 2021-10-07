@@ -18,7 +18,8 @@ class ProductDetail extends Component {
       changeMainImg: '',
       isLikedProduct: 0,
       choiceOptionArray: [],
-      isPageMenu: false,
+      isPositionMenu: false,
+      isSharedLinkMenu: false,
       clickMenu: '',
     };
   }
@@ -145,9 +146,16 @@ class ProductDetail extends Component {
   };
 
   showMyPageMenu = () => {
-    const { isPageMenu } = this.state;
+    const { isMovePositionMenu } = this.state;
     this.setState({
-      isPageMenu: !isPageMenu,
+      isMovePositionMenu: !isMovePositionMenu,
+    });
+  };
+
+  showSharedLinkMenu = () => {
+    const { isSharedLinkMenu } = this.state;
+    this.setState({
+      isSharedLinkMenu: !isSharedLinkMenu,
     });
   };
 
@@ -159,7 +167,8 @@ class ProductDetail extends Component {
       changeMainImg,
       isLikedProduct,
       choiceOptionArray,
-      isPageMenu,
+      isMovePositionMenu,
+      isSharedLinkMenu,
       clickMenu,
     } = this.state;
     return (
@@ -182,12 +191,14 @@ class ProductDetail extends Component {
                 {...{
                   isLikedProduct,
                   choiceOptionArray,
+                  isSharedLinkMenu,
                 }}
                 increaseCounter={this.increaseCounter}
                 decreaseCounter={this.decreaseCounter}
                 choiceOptionChange={this.choiceOptionChange}
                 clickLikedProduct={this.clickLikedProduct}
                 deleteChoiceOption={this.deleteChoiceOption}
+                showSharedLinkMenu={this.showSharedLinkMenu}
               />
             </div>
             <article className="content">
@@ -198,7 +209,7 @@ class ProductDetail extends Component {
             </article>
           </section>
           <HambergerIcon
-            {...{ isPageMenu }}
+            {...{ isMovePositionMenu }}
             showMyPageMenu={this.showMyPageMenu}
             changePositionScroll={this.changePositionScroll}
           ></HambergerIcon>

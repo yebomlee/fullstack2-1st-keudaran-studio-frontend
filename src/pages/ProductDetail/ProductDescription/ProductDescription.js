@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import ChoiceOption from './ChoiceOption';
 import LikeButton from '../LikeButton/LikeButton';
 import ChoiceOptionBox from '../ChoiceOptionBox/ChoiceOptionBox';
+import ShareKakaoLink from '../ShareKakaoLink/ShareKakaoLink';
 import './ProductDescription.scss';
 
 class ProductDescription extends Component {
   render() {
     const { id, name, price, point, options } = this.props;
     const { origin, brand, shippingFee } = this.props;
-    const { isLikedProduct, choiceOptionArray } = this.props;
+    const { isLikedProduct, choiceOptionArray, isSharedLinkMenu } = this.props;
     const {
       increaseCounter,
       decreaseCounter,
       choiceOptionChange,
       clickLikedProduct,
       deleteChoiceOption,
+      showSharedLinkMenu,
     } = this.props;
     let totalCount = 0;
     choiceOptionArray.forEach(option => {
@@ -23,6 +25,7 @@ class ProductDescription extends Component {
     const totalPrice = totalCount * price;
     return (
       <section className="ProductDescription" key={id}>
+        <ShareKakaoLink {...{ isSharedLinkMenu, showSharedLinkMenu }} />
         <h3>{name} </h3>
         <p className="price">
           {price} <em>원</em>
