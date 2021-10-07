@@ -1,0 +1,68 @@
+@import '/src/styles/mixin';
+
+.ChoiceOption {
+  @include flexStyle(center, space-between);
+  padding: 0px 10px 10px 0;
+
+  .textButton {
+    @include flexStyle(center);
+
+    .choiceText {
+      @include fontSizeWight(14px, none, #3d3d3d);
+      @include fontFamily('Noto Sans KR', sans-serif);
+      margin: 0 20px 0 0;
+    }
+
+    .countBox {
+      @include flexStyle(center);
+
+      .countInput {
+        @include widthHeight(35px, 30px);
+        @include fontSizeWight(12px, none, #696969);
+        @include fontFamily('Noto Sans KR', sans-serif);
+        padding: 0;
+        border: 1px solid #e2e2e2;
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      .countButton {
+        @include flexStyle(none, none, column);
+
+        .arrowButton {
+          @include widthHeight(none, 15px);
+          @include fontSizeWight(none, none, #696969);
+          margin: 0 0 0 5px;
+          border: 1px solid #e2e2e2;
+          cursor: pointer;
+          &:hover {
+            border: 1px solid #000;
+            transform: scale(1.2);
+          }
+        }
+      }
+    }
+  }
+  div {
+    @include flexStyle(center);
+
+    .totalOptionPrice {
+      @include fontSizeWight(17px, none);
+      @include fontFamily('Nunito', sans-serif);
+      @include fontFamily('Noto Sans KR', sans-serif);
+      margin: 0 20px 0 0;
+
+      em {
+        @include fontSizeWight(12px, 400px);
+        @include fontFamily('Noto Sans KR', sans-serif);
+      }
+    }
+
+    .deleteOptionChoice {
+      cursor: pointer;
+      :hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
