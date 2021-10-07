@@ -2,6 +2,7 @@ import React from 'react';
 import './SignInBox.scss';
 class SignInBox extends React.Component {
   render() {
+    const { saveInputChange, checkJoinedMember, checkInputFilled } = this.props;
     return (
       <section className="SignInBox">
         <h1 className="signInTitle">로그인</h1>
@@ -13,27 +14,42 @@ class SignInBox extends React.Component {
               <br />
               비밀번호는 대소문자를 구분합니다.
             </p>
-            <form action="./" method="POST" className="signInForm">
+            <form
+              action="./"
+              method="POST"
+              className="signInForm"
+              onSubmit={checkJoinedMember}
+            >
               <input
                 type="text"
                 name="username"
                 className="signInInput"
                 placeholder="MEMBER ID"
+                onChange={saveInputChange}
               />
               <input
                 type="password"
                 name="password"
                 className="signInInput"
                 placeholder="PASSWORD"
+                onChange={saveInputChange}
               />
-              <button type="button" className="signInBtnFilledStyle">
+              <button
+                type="submit"
+                className={
+                  checkInputFilled()
+                    ? 'signInBtnFilledStyle active'
+                    : 'signInBtnFilledStyle'
+                }
+                disabled={!checkInputFilled()}
+              >
                 LOG-IN
               </button>
             </form>
           </div>
           <div className="signInFormBox">
             <h2 className="formBoxTitle">회원가입</h2>
-            <div class="buttonBox">
+            <div className="buttonBox">
               <p className="formBoxDescription">
                 아직 회원이 아니신가요?
                 <br />
@@ -43,7 +59,7 @@ class SignInBox extends React.Component {
                 JOIN-US
               </button>
             </div>
-            <div class="buttonBox">
+            <div className="buttonBox">
               <p className="formBoxDescription">
                 아이디 혹은 비밀번호를 잊으셨나요?
                 <br />
