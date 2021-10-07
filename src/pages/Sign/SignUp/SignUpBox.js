@@ -5,15 +5,17 @@ class SignUpBox extends React.Component {
   render() {
     const {
       userAgreeData,
+      saveInputChange,
       changeCheck,
       changeCheckAll,
       changeMarketingCheckAll,
+      submitUserData,
     } = this.props;
     return (
       <section className="SignUpBox">
         <h1 className="signUpTitle">회원정보 입력</h1>
         <div className="signUpBoxInner">
-          <form className="signUpForm">
+          <form className="signUpForm" onSubmit={submitUserData}>
             <ul className="userInfo">
               <li>
                 <input
@@ -21,6 +23,7 @@ class SignUpBox extends React.Component {
                   name="realName"
                   className="realNameInput userInfoInput"
                   placeholder="이름"
+                  onChange={saveInputChange}
                 />
               </li>
               <li>
@@ -29,6 +32,7 @@ class SignUpBox extends React.Component {
                   name="username"
                   className="usernameInput userInfoInput"
                   placeholder="아이디"
+                  onChange={saveInputChange}
                 />
               </li>
               <li>
@@ -37,13 +41,16 @@ class SignUpBox extends React.Component {
                   name="password"
                   className="passwordInput userInfoInput"
                   placeholder="비밀번호"
+                  onChange={saveInputChange}
                 />
               </li>
               <li>
                 <input
                   type="password"
+                  name="passwordConfirm"
                   className="passwordConfirm userInfoInput"
                   placeholder="비밀번호 확인"
+                  onChange={saveInputChange}
                 />
               </li>
               <li>
@@ -52,6 +59,7 @@ class SignUpBox extends React.Component {
                   name="email"
                   className="emailInput userInfoInput"
                   placeholder="이메일"
+                  onChange={saveInputChange}
                 />
               </li>
               <li>
@@ -60,11 +68,18 @@ class SignUpBox extends React.Component {
                   name="phoneNumber"
                   className="phoneInput userInfoInput"
                   placeholder="휴대폰 번호"
+                  onChange={saveInputChange}
                 />
               </li>
             </ul>
             <div className="joinMsg">
-              <input type="checkbox" id="olderFourteenCheck" />
+              <input
+                type="checkbox"
+                id="olderFourteenCheck"
+                name="isAgreedAge"
+                checked={userAgreeData.isAgreedAge}
+                onChange={changeCheck}
+              />
               <label htmlFor="olderFourteenCheck" className="mustCheckLabel">
                 14세 이상입니다. (필수)
               </label>
@@ -98,7 +113,9 @@ class SignUpBox extends React.Component {
                     onChange={changeCheck}
                   />
                   <label htmlFor="usePolicyCheck">이용약관</label>
-                  <button className="littleGreyBtn">내용 보기</button>
+                  <button type="button" className="littleGreyBtn">
+                    내용 보기
+                  </button>
                   <input
                     type="checkbox"
                     id="usePrivacyCheck"
@@ -109,7 +126,9 @@ class SignUpBox extends React.Component {
                   <label htmlFor="usePrivacyCheck">
                     개인정보 수집 이용 안내
                   </label>
-                  <button className="littleGreyBtn">내용 보기</button>
+                  <button type="button" className="littleGreyBtn">
+                    내용 보기
+                  </button>
                 </div>
                 <div className="marketingCheck">
                   <div className="checkBox">
@@ -161,7 +180,7 @@ class SignUpBox extends React.Component {
                 </div>
               </div>
             </div>
-            <button type="button" className="signUpBtn">
+            <button type="submit" className="signUpBtn">
               동의하고 가입완료
             </button>
           </form>
