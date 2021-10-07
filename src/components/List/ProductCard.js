@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProductCard.scss';
 
 class ProductCard extends React.Component {
@@ -9,34 +10,28 @@ class ProductCard extends React.Component {
     };
   }
 
-  setImgHover = () => {
+  toggleImgHover = () => {
     const { isHover } = this.state;
     this.setState({
       isHover: !isHover,
     });
   };
 
-  goToDetail = () => {
-    this.props.history.push('/product/:id');
-  };
-
   render() {
     const { isHover } = this.state;
+    const { name, price, hoverImgUrl, imgUrl } = this.props;
     return (
       <li
         className="product"
-        onMouseOver={this.setImgHover}
-        onMouseOut={!this.setImgHover}
+        onMouseOver={this.toggleImgHover}
+        onMouseOut={this.toggleImgHover}
       >
-        <img
-          onClick={this.goToDetail}
-          key={this.props.id}
-          src={isHover ? this.props.hoverUrl : this.props.imgUrl}
-          alt={this.props.name}
-        />
-        <span className="productName">{this.props.name}</span>
+        <Link to="/products/id">
+          <img src={isHover ? hoverImgUrl : imgUrl} alt={name} />
+        </Link>
+        <span className="productName">{name}</span>
         <div className="productPrice">
-          <span>{this.props.price}</span>
+          <span>{price}</span>
           <span>원</span>
         </div>
       </li>

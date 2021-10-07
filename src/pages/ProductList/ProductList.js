@@ -1,39 +1,49 @@
 import React from 'react';
-import ProductCard from '../../components/List/ProductCard';
+import ProductSubCategory from '../../components/List/ProductSubCategory';
+import ProductListContainer from '../../components/List/ProductListContainer';
 import './ProductList.scss';
-import { SUB_MOCK } from './subCategory';
 
 class ProductList extends React.Component {
   constructor() {
     super();
     this.state = {
-      subid: [],
-      subCategory: false,
+      subCategory: [],
+      selectedSubCategory: 0,
     };
   }
 
-  fiteredSub = id => {
-    document.getElementsByName(id)[0].classList.toggle('clickedSub');
+  selectSubCategory = id => {
+    this.setState({
+      selectedSubCategory: id,
+    });
   };
 
+  componentDidMount() {
+    fetch('/data/stationery.json')
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ subCategory: res.STATIONERY });
+      });
+  }
+
   render() {
+    const { subCategory, selectedSubCategory } = this.state;
     return (
       <div className="ProductList">
         <div className="stationeryWrap">
           <div className="caterogyTitle">Stationery</div>
           <ul className="stationeryCategory">
-            {SUB_MOCK.map(subName => (
-              <li key={subName.id}>
-                <a
-                  name={subName.id}
-                  href="#"
-                  className={this.state.subCategory ? 'clickedSub' : 'stnList'}
-                  onClick={() => this.fiteredSub(subName.id)}
-                >
-                  {subName.name}
-                </a>
-              </li>
-            ))}
+            {subCategory.map(sub => {
+              return (
+                <ProductSubCategory
+                  key={sub.id}
+                  id={sub.id}
+                  name={sub.name}
+                  selectedSubCategory={selectedSubCategory}
+                  selectSubCategory={this.selectSubCategory}
+                />
+              );
+            })}
           </ul>
         </div>
 
@@ -49,21 +59,8 @@ class ProductList extends React.Component {
             <option value="mostClicked">조회순</option>
           </select>
         </div>
-        <ul className="productCard">
-          <ProductCard
-            name={'UBHC 에어팟 하드케이스'}
-            imgUrl={
-              'https://www.jogumanstore.com/shopimages/playwin/0050010000012.jpg?1604394671'
-            }
-            hoverUrl={
-              'http://www.jogumanstore.com/shopimages/playwin/0050020000012.jpg?1603445199'
-            }
-            price={'14,000'}
-          />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </ul>
+
+        <ProductListContainer selectedSubCategory={selectedSubCategory} />
       </div>
     );
   }
