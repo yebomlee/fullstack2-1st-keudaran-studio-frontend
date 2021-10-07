@@ -37,21 +37,18 @@ class ProductDetail extends Component {
     });
   };
 
-  clickLeftChangeImg = () => {
+  clickArrowChangeImg = position => {
     const MAX_LIMIT_IMG_NUM = 3;
-    const CHANGE_IMG_NUM = 1;
-    const { imgNum } = this.state;
-    let imgId = 0;
-    imgId = imgNum > MAX_LIMIT_IMG_NUM ? CHANGE_IMG_NUM : imgNum + 1;
-    this.findSameImg(imgId);
-  };
-
-  clickRightChangeImg = () => {
+    const CHANGE_MIN_IMG_NUM = 1;
     const MIN_LIMIT_IMG_NUM = 1;
-    const CHANGE_IMG_NUM = 4;
+    const CHANGE_MAX_IMG_NUM = 4;
     const { imgNum } = this.state;
     let imgId = 0;
-    imgId = imgNum <= MIN_LIMIT_IMG_NUM ? CHANGE_IMG_NUM : imgNum - 1;
+    if (position === 'right') {
+      imgId = imgNum <= MIN_LIMIT_IMG_NUM ? CHANGE_MAX_IMG_NUM : imgNum - 1;
+    } else {
+      imgId = imgNum > MAX_LIMIT_IMG_NUM ? CHANGE_MIN_IMG_NUM : imgNum + 1;
+    }
     this.findSameImg(imgId);
   };
 
@@ -122,12 +119,18 @@ class ProductDetail extends Component {
     });
   };
 
+  deleteChoiceOption = id => {
+    const choiceOptionArray = this.state.choiceOptionArray.filter(
+      el => el.id !== id
+    );
+    this.setState({ choiceOptionArray });
+  };
+
   render() {
     const { id, name, price, point, productImgs, options } =
       this.state.serverData;
     const { origin, brand, shippingFee } = this.state.mokeData;
     const { changeMainImg, isLikedProduct, choiceOptionArray } = this.state;
-    console.log(choiceOptionArray);
     return (
       <div className="Detail">
         <div className="total">
@@ -140,8 +143,7 @@ class ProductDetail extends Component {
               <ProductPhoto
                 {...{ id, name, mainImg: changeMainImg, subImgs: productImgs }}
                 clickChangeImg={this.clickChangeImg}
-                clickLeftChangeImg={this.clickLeftChangeImg}
-                clickRightChangeImg={this.clickRightChangeImg}
+                clickArrowChangeImg={this.clickArrowChangeImg}
               />
               <ProductDescription
                 {...{ id, name, price, point, options }}
@@ -154,6 +156,7 @@ class ProductDetail extends Component {
                 decreaseCounter={this.decreaseCounter}
                 choiceOptionChange={this.choiceOptionChange}
                 clickLikedProduct={this.clickLikedProduct}
+                deleteChoiceOption={this.deleteChoiceOption}
               />
             </div>
             <article className="content">

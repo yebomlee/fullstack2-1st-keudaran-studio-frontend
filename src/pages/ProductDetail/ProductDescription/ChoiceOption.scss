@@ -42,19 +42,22 @@
       }
     }
   }
+  div {
+    @include flexStyle(center);
 
-  .totalOptionPrice {
-    @include fontSizeWight(17px, none);
-    @include fontFamily('Nunito', sans-serif);
-
-    em {
-      @include fontSizeWight(12px, 400px);
+    .totalOptionPrice {
+      @include fontSizeWight(17px, none);
+      @include fontFamily('Nunito', sans-serif);
+      margin: 0 20px 0 0;
+      em {
+        @include fontSizeWight(12px, 400px);
+      }
     }
-  }
-  .deleteOptionChoice {
-    cursor: pointer;
-    :hover {
-      transform: scale(1.2);
+    .deleteOptionChoice {
+      cursor: pointer;
+      :hover {
+        transform: scale(1.2);
+      }
     }
   }
 }

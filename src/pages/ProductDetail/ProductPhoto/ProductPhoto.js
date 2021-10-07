@@ -9,21 +9,22 @@ import {
 class ProductPhoto extends Component {
   render() {
     const { id, name, mainImg, subImgs } = this.props;
-    const { clickChangeImg, clickLeftChangeImg, clickRightChangeImg } =
-      this.props;
+    const { clickChangeImg, clickArrowChangeImg } = this.props;
     return (
       <div className="ProductPhoto">
         <main className="mainPhoto">
           <img className="mainImage" alt={name} src={mainImg} key={id} />
           <FontAwesomeIcon
-            className="leftButton photoButton"
+            id="right"
+            className="rightButton photoButton"
             icon={faChevronLeft}
-            onClick={clickRightChangeImg}
+            onClick={() => clickArrowChangeImg('right')}
           />
           <FontAwesomeIcon
-            className="rightButton photoButton"
+            id="left"
+            className="leftButton photoButton"
             icon={faChevronRight}
-            onClick={clickLeftChangeImg}
+            onClick={() => clickArrowChangeImg('left')}
           />
         </main>
         <ul className="subPhotos">

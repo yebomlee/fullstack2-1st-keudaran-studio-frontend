@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import './ChoiceOption.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { faMinusSquare } from '@fortawesome/free-regular-svg-icons';
 
 class ChoiceOption extends Component {
   render() {
     const { price, choiceOption } = this.props;
-    const { increaseCounter, decreaseCounter } = this.props;
+    const { increaseCounter, decreaseCounter, deleteChoiceOption } = this.props;
     const productTotalPrice = price * choiceOption.choiceCount;
     return (
       <div className="ChoiceOption">
@@ -37,10 +38,17 @@ class ChoiceOption extends Component {
             </span>
           </div>
         </div>
-        <p className="totalOptionPrice">
-          {productTotalPrice}
-          <em>원</em>
-        </p>
+        <div>
+          <p className="totalOptionPrice">
+            {productTotalPrice}
+            <em>원</em>
+          </p>
+          <FontAwesomeIcon
+            className="deleteOptionChoice"
+            icon={faMinusSquare}
+            onClick={() => deleteChoiceOption(choiceOption.id)}
+          />
+        </div>
       </div>
     );
   }

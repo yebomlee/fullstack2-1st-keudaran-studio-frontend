@@ -13,6 +13,7 @@ class ProductDescription extends Component {
       decreaseCounter,
       choiceOptionChange,
       clickLikedProduct,
+      deleteChoiceOption,
     } = this.props;
     let totalCount = 0;
     choiceOptionArray.forEach(option => {
@@ -80,6 +81,7 @@ class ProductDescription extends Component {
                   choiceOption,
                   increaseCounter,
                   decreaseCounter,
+                  deleteChoiceOption,
                 }}
               />
             );
