@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChoiceOption from './ChoiceOption';
-import LikeButton from './LikeButton';
+import LikeButton from '../LikeButton/LikeButton';
+import ChoiceOptionBox from '../ChoiceOptionBox/ChoiceOptionBox';
 import './ProductDescription.scss';
 
 class ProductDescription extends Component {
@@ -56,22 +57,7 @@ class ProductDescription extends Component {
               </tr>
             </tbody>
           </table>
-          <dl className="option">
-            <dt className="optionText">옵션</dt>
-            <dd>
-              <select className="optionBox" onChange={choiceOptionChange}>
-                <option value={[]}>옵션 선택</option>
-                {options?.map(option => {
-                  const { id, name, quantity } = option;
-                  return (
-                    <option value={name} key={id}>
-                      {name} ({quantity})
-                    </option>
-                  );
-                })}
-              </select>
-            </dd>
-          </dl>
+          <ChoiceOptionBox {...{ options, choiceOptionChange }} />
           {choiceOptionArray.map(choiceOption => {
             return (
               <ChoiceOption

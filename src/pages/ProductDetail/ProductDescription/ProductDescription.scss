@@ -38,32 +38,6 @@
       }
     }
 
-    .option {
-      @include flexStyle(center, space-between);
-      margin: 0 0 30px 0;
-      padding: 30px 10px 30px 0;
-      border-top: #3d3d3d solid 1px;
-      border-bottom: #3d3d3d solid 1px;
-
-      .optionText {
-        @include fontFamily('Noto Sans KR', sans-serif);
-        @include fontSizeWight(14px, none, #3d3d3d);
-      }
-
-      dd .optionBox {
-        @include widthHeight(330px, 35px);
-        @include fontSizeWight(14px, none, #696969);
-        @include fontFamily('Noto Sans KR', sans-serif);
-        padding: 0 0 0 10px;
-        border: 1px solid #e2e2e2;
-        border-radius: 5px;
-        cursor: pointer;
-        &:hover {
-          transform: scale(1.05);
-        }
-      }
-    }
-
     .totalPrice {
       @include flexStyle(none, space-between);
       margin: 30px 0 0 0;

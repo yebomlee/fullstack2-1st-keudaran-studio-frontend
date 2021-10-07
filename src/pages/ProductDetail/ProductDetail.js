@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
 import ProductInfo from './ProductInfo/ProductInfo';
+import HambergerIcon from './HambergerIconMenu/HambergerIconMenu';
 import productData from './productData.json';
 import descriptionData from './descriptionData.json';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHamburger } from '@fortawesome/free-solid-svg-icons';
 import './ProductDetail.scss';
 
 class ProductDetail extends Component {
@@ -156,8 +155,13 @@ class ProductDetail extends Component {
     const { id, name, price, point, productImgs, options } =
       this.state.productData;
     const { origin, brand, shippingFee } = this.state.descriptionData;
-    const { changeMainImg, isLikedProduct, choiceOptionArray, isPageMenu } =
-      this.state;
+    const {
+      changeMainImg,
+      isLikedProduct,
+      choiceOptionArray,
+      isPageMenu,
+      clickMenu,
+    } = this.state;
     return (
       <div className="Detail">
         <div className="total">
@@ -187,36 +191,17 @@ class ProductDetail extends Component {
               />
             </div>
             <article className="content">
-              <ProductInfo changePositionScroll={this.changePositionScroll} />
+              <ProductInfo
+                {...{ clickMenu }}
+                changePositionScroll={this.changePositionScroll}
+              />
             </article>
           </section>
-          <FontAwesomeIcon
-            className="hambergerIcon"
-            icon={faHamburger}
-            onClick={this.showMyPageMenu}
-          />
-          {isPageMenu && (
-            <ul className="hambergerMenuButton">
-              <li
-                className="menuButton"
-                onClick={() => this.changePositionScroll('photo')}
-              >
-                제품정보
-              </li>
-              <li
-                className="menuButton"
-                onClick={() => this.changePositionScroll('info')}
-              >
-                상품 상세
-              </li>
-              <li
-                className="menuButton"
-                onClick={() => this.changePositionScroll('review')}
-              >
-                후기
-              </li>
-            </ul>
-          )}
+          <HambergerIcon
+            {...{ isPageMenu }}
+            showMyPageMenu={this.showMyPageMenu}
+            changePositionScroll={this.changePositionScroll}
+          ></HambergerIcon>
           <footer className="footer">하단 footer</footer>
         </div>
       </div>
