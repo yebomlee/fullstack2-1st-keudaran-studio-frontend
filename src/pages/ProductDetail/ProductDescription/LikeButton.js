@@ -7,7 +7,7 @@ class LikeButton extends Component {
   render() {
     const { isLikedProduct, clickLikedProduct } = this.props;
     return (
-      <div className="ChangeHeart">
+      <div className="LikeButton">
         <FontAwesomeIcon
           className={isLikedProduct ? 'likeButton changeColor' : 'likeButton'}
           icon={faHeart}

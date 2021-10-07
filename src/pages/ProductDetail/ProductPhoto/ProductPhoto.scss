@@ -9,11 +9,13 @@
     .mainImage {
       @include widthHeight(520px, 520px);
     }
+
     .photoButton {
       @include fontSizeWight(50px, none, #fff);
       position: relative;
       cursor: pointer;
     }
+
     .rightButton {
       right: 500px;
       margin: 0 -80px 0 0;
@@ -22,6 +24,7 @@
         margin: 0 -86px 0 0;
       }
     }
+
     .leftButton {
       &:hover {
         font-size: 60px;

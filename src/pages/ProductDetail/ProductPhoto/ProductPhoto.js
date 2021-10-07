@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './ProductPhoto.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronRight,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import './ProductPhoto.scss';
 
 class ProductPhoto extends Component {
   render() {
@@ -32,7 +32,11 @@ class ProductPhoto extends Component {
             subImgs.map(el => {
               return (
                 <li className="subImage" key={el.id}>
-                  <img alt={name} src={el.imagURL} onClick={clickChangeImg} />
+                  <img
+                    alt={name}
+                    src={el.imagURL}
+                    onMouseOver={clickChangeImg}
+                  />
                 </li>
               );
             })}

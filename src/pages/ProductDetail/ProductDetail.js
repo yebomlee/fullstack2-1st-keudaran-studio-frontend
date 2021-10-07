@@ -3,16 +3,16 @@ import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
 import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
 import ProductContents from './ProductContents/ProductContents';
-import serverData from './serverData.json';
-import mokeData from './mokeData.json';
+import productData from './productData.json';
+import descriptionData from './descriptionData.json';
 import './ProductDetail.scss';
 
 class ProductDetail extends Component {
   constructor() {
     super();
     this.state = {
-      serverData: [],
-      mokeData: [],
+      productData: [],
+      descriptionData: [],
       imgNum: 1,
       howCount: 0,
       changeMainImg: '',
@@ -24,11 +24,11 @@ class ProductDetail extends Component {
   componentDidMount() {
     const CHANGE_IMG_INTERVER = 5000;
     this.setState({
-      serverData,
-      mokeData,
-      changeMainImg: serverData.thumbailURL,
+      productData,
+      descriptionData,
+      changeMainImg: productData.thumbailURL,
     });
-    setInterval(this.clickLeftChangeImg, CHANGE_IMG_INTERVER);
+    setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
   }
 
   clickChangeImg = e => {
@@ -53,7 +53,7 @@ class ProductDetail extends Component {
   };
 
   findSameImg = num => {
-    const changeMainImg = this.state.serverData.productImgs.find(
+    const changeMainImg = this.state.productData.productImgs.find(
       productImg => productImg.id === num
     );
     this.setState({
@@ -65,7 +65,7 @@ class ProductDetail extends Component {
   increaseCounter = option => {
     const { choiceCount, quantity } = option;
     if (choiceCount >= quantity) {
-      alert('제고량을 다시 확인하세요');
+      alert('재고량을 다시 확인하세요');
       return;
     }
     option.choiceCount = choiceCount + 1;
@@ -88,13 +88,13 @@ class ProductDetail extends Component {
   };
 
   choiceOptionChange = e => {
-    const { choiceOptionArray, serverData } = this.state;
-    const resultOption = serverData.options?.find(el => {
-      return el.name === e.target.value;
+    const { choiceOptionArray, productData } = this.state;
+    const resultOption = productData.options?.find(option => {
+      return option.name === e.target.value;
     });
     if (!resultOption) return;
     const { name, quantity } = resultOption;
-    const isExist = choiceOptionArray.some(el => el.name === name);
+    const isExist = choiceOptionArray.some(option => option.name === name);
     if (isExist) return;
     this.setState({
       choiceCount: 0,
@@ -128,8 +128,8 @@ class ProductDetail extends Component {
 
   render() {
     const { id, name, price, point, productImgs, options } =
-      this.state.serverData;
-    const { origin, brand, shippingFee } = this.state.mokeData;
+      this.state.productData;
+    const { origin, brand, shippingFee } = this.state.descriptionData;
     const { changeMainImg, isLikedProduct, choiceOptionArray } = this.state;
     return (
       <div className="Detail">

@@ -36,7 +36,7 @@ class ProductDescription extends Component {
               <tr className="tableCol">
                 <td>적립금</td>
                 <th>
-                  {point} <span>%</span>
+                  {point * 100} <span>%</span>
                 </th>
               </tr>
               <tr className="tableCol">

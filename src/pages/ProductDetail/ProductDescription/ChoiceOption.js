@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './ChoiceOption.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { faMinusSquare } from '@fortawesome/free-regular-svg-icons';
+import './ChoiceOption.scss';
 
 class ChoiceOption extends Component {
   render() {
@@ -25,13 +25,11 @@ class ChoiceOption extends Component {
             <span className="countButton">
               <FontAwesomeIcon
                 className="arrowButton"
-                name="increament"
                 icon={faCaretUp}
                 onClick={() => increaseCounter(choiceOption)}
               />
               <FontAwesomeIcon
                 className="arrowButton"
-                name="decreament"
                 icon={faCaretDown}
                 onClick={() => decreaseCounter(choiceOption)}
               />
