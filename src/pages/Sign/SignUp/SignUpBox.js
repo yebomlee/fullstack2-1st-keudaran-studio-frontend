@@ -2,6 +2,28 @@ import React from 'react';
 import './SignUpBox.scss';
 
 class SignUpBox extends React.Component {
+  constructor() {
+    super();
+    this.policyRef = React.createRef();
+    this.privacyRef = React.createRef();
+  }
+
+  scrollToUsePolicy = () => {
+    this.policyRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    });
+  };
+
+  scrollToPrivacy = () => {
+    this.privacyRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    });
+  };
+
   render() {
     const {
       userAgreeData,
@@ -113,7 +135,11 @@ class SignUpBox extends React.Component {
                     onChange={changeCheck}
                   />
                   <label htmlFor="usePolicyCheck">이용약관</label>
-                  <button type="button" className="littleGreyBtn">
+                  <button
+                    type="button"
+                    className="littleGreyBtn"
+                    onClick={this.scrollToUsePolicy}
+                  >
                     내용 보기
                   </button>
                   <input
@@ -126,7 +152,11 @@ class SignUpBox extends React.Component {
                   <label htmlFor="usePrivacyCheck">
                     개인정보 수집 이용 안내
                   </label>
-                  <button type="button" className="littleGreyBtn">
+                  <button
+                    type="button"
+                    className="littleGreyBtn"
+                    onClick={this.scrollToPrivacy}
+                  >
                     내용 보기
                   </button>
                 </div>
@@ -214,7 +244,7 @@ class SignUpBox extends React.Component {
             </div>
             <div className="usePrivacyBox ">
               <h3 className="policyTitle">개인정보 수집·이용</h3>
-              <table className="privacyTable">
+              <table className="privacyTable" ref={this.policyRef}>
                 <colgroup>
                   <col />
                   <col />
@@ -245,7 +275,7 @@ class SignUpBox extends React.Component {
                 </tbody>
               </table>
             </div>
-            <p className="privacyNotice">
+            <p className="privacyNotice" ref={this.privacyRef}>
               귀하께서는 쇼핑몰에서 위와 같이 수집하는 개인정보에 대해, 동의하지
               않거나 개인정보를 기재하지 않음으로써 거부할 수 있습니다.
               <br /> 다만, 이때 회원에게 제공되는 서비스가 제한될 수 있습니다.
