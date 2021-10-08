@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
-import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
-import ProductContents from './ProductContents/ProductContents';
+import ProductInfo from './ProductInfo/ProductInfo';
+import HambergerIcon from './HambergerIconMenu/HambergerIconMenu';
 import productData from './productData.json';
 import descriptionData from './descriptionData.json';
 import './ProductDetail.scss';
@@ -18,6 +18,15 @@ class ProductDetail extends Component {
       changeMainImg: '',
       isLikedProduct: 0,
       choiceOptionArray: [],
+      isPositionMenu: false,
+      isSharedLinkMenu: false,
+      clickMenu: '',
+    };
+
+    this.refs = {
+      info: React.createRef(),
+      review: React.createRef(),
+      photo: React.createRef(), //이거 다른 이슈로 구현예정 ref기능
     };
   }
 
@@ -112,11 +121,21 @@ class ProductDetail extends Component {
     });
   };
 
-  clickLikedProduct = () => {
-    const { isLikedProduct } = this.state;
-    this.setState({
-      isLikedProduct: !isLikedProduct,
-    });
+  changeStateEventShow = role => {
+    const { isLikedProduct, isMovePositionMenu, isSharedLinkMenu } = this.state;
+    if (role === 'like') {
+      this.setState({
+        isLikedProduct: !isLikedProduct,
+      });
+    } else if (role === 'move') {
+      this.setState({
+        isMovePositionMenu: !isMovePositionMenu,
+      });
+    } else {
+      this.setState({
+        isSharedLinkMenu: !isSharedLinkMenu,
+      });
+    }
   };
 
   deleteChoiceOption = id => {
@@ -126,11 +145,42 @@ class ProductDetail extends Component {
     this.setState({ choiceOptionArray });
   };
 
+  changePositionScroll = whatButton => {
+    // const position = this.refs[whatButton].current; //이거 구현예정 ref
+    const MOVE_PHOTO_POSITION = 0;
+    const MOVE_INFO_POSITION = 1150;
+    const MOVE_REVIEW_POSITION = 3100;
+    const moveSroll = movePosition => {
+      const position = { top: movePosition, left: 0, behavior: 'smooth' };
+      window.scrollTo(position);
+    };
+    this.setState({
+      clickMenu: whatButton,
+    });
+    if (whatButton === 'info') moveSroll(MOVE_INFO_POSITION);
+    else if (whatButton === 'review') moveSroll(MOVE_REVIEW_POSITION);
+    else moveSroll(MOVE_PHOTO_POSITION);
+  };
+
+  showSharedLinkMenu = () => {
+    const { isSharedLinkMenu } = this.state;
+    this.setState({
+      isSharedLinkMenu: !isSharedLinkMenu,
+    });
+  };
+
   render() {
     const { id, name, price, point, productImgs, options } =
       this.state.productData;
     const { origin, brand, shippingFee } = this.state.descriptionData;
-    const { changeMainImg, isLikedProduct, choiceOptionArray } = this.state;
+    const {
+      changeMainImg,
+      isLikedProduct,
+      choiceOptionArray,
+      isMovePositionMenu,
+      isSharedLinkMenu,
+      clickMenu,
+    } = this.state;
     return (
       <div className="Detail">
         <div className="total">
@@ -151,19 +201,27 @@ class ProductDetail extends Component {
                 {...{
                   isLikedProduct,
                   choiceOptionArray,
+                  isSharedLinkMenu,
                 }}
                 increaseCounter={this.increaseCounter}
                 decreaseCounter={this.decreaseCounter}
                 choiceOptionChange={this.choiceOptionChange}
-                clickLikedProduct={this.clickLikedProduct}
+                changeStateEventShow={this.changeStateEventShow}
                 deleteChoiceOption={this.deleteChoiceOption}
               />
             </div>
             <article className="content">
-              <ProductMiddleNav />
-              <ProductContents />
+              <ProductInfo
+                {...{ clickMenu }}
+                changePositionScroll={this.changePositionScroll}
+              />
             </article>
           </section>
+          <HambergerIcon
+            {...{ isMovePositionMenu }}
+            changeStateEventShow={this.changeStateEventShow}
+            changePositionScroll={this.changePositionScroll}
+          ></HambergerIcon>
           <footer className="footer">하단 footer</footer>
         </div>
       </div>
