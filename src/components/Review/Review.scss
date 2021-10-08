@@ -1,137 +1,229 @@
 @import '/src/styles/mixin';
 
 .Review {
-  @include flexStyle(none, center);
+  @include flexStyle(center, none, column);
+  max-width: 1200px;
+  // width: 100%;
+  margin: 0 auto;
+  font-family: 'Spoqa Han Sans', 'Lato', sans-serif;
 
-  .reviewTotal {
-    @include flexStyle(none, none, column);
-    // width: 600px;
+  .reviewTitle {
+    align-self: flex-start;
+    padding: 40px 0 15px 0;
+    font-family: 'Lato';
+  }
+
+  .reviewInner {
+    width: 100%;
 
     .reviewRate {
-      width: 100%;
-      border: 1px solid black;
-      border-radius: 5px;
-      margin-bottom: 10px;
+      // width: 100%;
+      height: 150px;
+      border: 1px solid #dadada;
       padding: 5px;
+      margin-bottom: 10px;
+      @include flexStyle(center, center, row);
+      // background-color: #e2e2e2;
 
-      .rateStars {
-        @include flexStyle(none, space-between);
-        width: 600px;
-        background-color: #e2e2e2;
+      .userRateWrap {
+        @include flexStyle(center, none, column);
+        margin-right: 40px;
 
         .rateTotal {
-          @include fontSizeWight(18px);
-        }
-
-        .averageRate {
-          @include flexStyle(none, flex-end);
+          margin-bottom: 5px;
         }
 
         .totalAmountReview {
-          @include fontSizeWight(12px);
+          font-size: 12px;
+        }
+      }
+      .averageRate {
+        h2 {
+          margin-top: 10px;
+          font-size: 15px;
+          text-align: center;
+        }
+        .starRating {
+          width: 304px;
+        }
+        .starRating,
+        .innerStarRating {
+          display: inline-block;
+          height: 55px;
+          overflow: hidden;
+          background: url(star.png) no-repeat;
+        }
+        .innerStarRating {
+          background-position: left bottom;
+          line-height: 0;
+          vertical-align: top;
         }
       }
     }
 
     .reviewWrite {
-      width: 600px;
-      height: 250px;
-      border: 1px solid black;
-      border-radius: 5px;
+      padding: 10px;
+      border: 1px solid #dadada;
 
-      .howManyStars {
-        width: 100%;
-        height: 40px;
-        padding: 10px;
-      }
-      .commentWrite {
-        textarea {
-          @include fontSizeWight(15px, none, grey);
+      .reviewForm {
+        display: flex;
+        flex-direction: column;
+
+        .howManyStars {
+          width: 100%;
+          height: 40px;
+          padding: 10px;
+
+          .starSelector {
+            width: 200px;
+            padding: 5px 10px;
+            border: 1px solid #dadada;
+            border-radius: 0px;
+            color: #333;
+            outline: 0;
+            font-family: inherit;
+          }
+        }
+
+        .reviewInput {
+          @include fontSizeWight(15px, none, #777);
           width: 100%;
           height: 100px;
+          padding: 20px;
+          border: 0;
+          word-break: break-all;
+          outline: none;
           resize: none;
+        }
+
+        .reviewSubmitButton {
+          position: relative;
+          top: 4px;
+          align-self: flex-end;
+          // align-self: center;
+          width: 180px;
+          height: 35px;
+          line-height: 35px;
+          border: 1px solid #333;
+          background-color: #333;
+          color: #fff;
+          opacity: 0.7;
+          text-align: center;
+          &:hover {
+            opacity: 1;
+            cursor: pointer;
+          }
         }
       }
       .privacyPolicy {
-        // @include flexStyle(none, center);
-        width: 100%;
-        height: 30%;
+        display: flex;
+        flex-direction: column;
+        width: 99.8%;
+        margin: 10px auto;
+        border: 1px solid #dadada;
 
         .privacyTitle {
-          // @include flexStyle(none, center);
-          @include fontSizeWight(13px, bold);
-          margin: 5px;
-
-          .agreeOrNot {
-            @include fontSizeWight(8px);
-
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
+          margin: 10px;
+          font-size: 13px;
+          .privacyTitleInner {
+            margin: 2.5px;
+            b {
+              font-weight: 700;
+              margin-right: 30px;
+            }
+            u {
+              cursor: pointer;
+            }
+          }
+          .privacyRadioBox {
+            margin-right: 10px;
             input {
-              width: 8px;
-              height: 8px;
+              margin: 2.5px;
             }
           }
         }
         .privacyTable {
-          @include fontSizeWight(10px);
-          margin: 10px;
+          margin: 10px 10px 0 10px;
           text-align: center;
-          border-radius: 5px;
+          font-size: 10px;
 
           .tableHead {
             th {
-              background-color: #e2e2e2;
-              border: 1px solid black;
+              padding: 10px;
+              background-color: #efefef;
+              border: 1px solid #dadada;
+              font-weight: 700;
             }
           }
 
           .tableBody {
             td {
-              border: 1px solid black;
+              padding: 10px;
+              border: 1px solid #dadada;
+              text-align: left;
             }
           }
         }
         .agreeForFillOut {
-          @include fontSizeWight(8px);
           margin: 10px;
+          font-size: 8px;
         }
       }
     }
-    .button {
-      @include fontSizeWight(10px);
-      align-self: flex-end;
-      width: 60px;
-      margin: 5px 0px;
-    }
-
+    // .button {
+    //   @include fontSizeWight(10px);
+    //   align-self: flex-end;
+    //   width: 60px;
+    //   margin: 5px 0px;
+    // }
     .reviewList {
       width: 100%;
-      height: 400px;
+      margin-top: 10px;
       padding: 10px;
-      border: 1px solid black;
-      border-radius: 5px;
+      border: 1px solid #dadada;
 
       .reviewBlock {
-        // @include flexStyle(center, none);
-
+        margin: 20px 0;
         .createdReview {
           .starsAndData {
+            display: flex;
+            justify-content: space-between;
             .stars {
-              @include flexStyle(none, flex-start);
+              // @include flexStyle(none, flex-start);
+              color: #777;
+            }
+
+            .userId {
+              margin-right: 10px;
             }
 
             .userId,
             .createdAt {
-              @include flexStyle(none, flex-end);
               @include fontSizeWight(12px, none, grey);
             }
           }
 
-          .content {
-            @include fontSizeWight(14px);
+          .reviewContent {
+            .reviewContentText {
+              width: 100%;
+              height: 100px;
+              padding: 10px;
+              margin-top: 5px;
+              border: 1px solid #dadada;
+              outline: none;
+              resize: none;
+            }
 
             .modifyAndDelete {
               @include flexStyle(none, flex-end);
               @include fontSizeWight(12px, none, grey);
+
+              .deleteReview {
+                cursor: pointer;
+              }
             }
           }
         }

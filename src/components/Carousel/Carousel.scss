@@ -1,0 +1,65 @@
+.Carousel {
+  display: block;
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+
+    .inner {
+      float: left;
+
+      img {
+        height: 450px;
+        object-fit: cover;
+      }
+    }
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  .transformTimeOn {
+    transition: transform 1s;
+  }
+}
+
+.dotBtnWraper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  bottom: 30px;
+  left: 45%;
+}
+
+.leftBtn {
+  position: absolute;
+  top: 45%;
+  left: 5%;
+  font-size: 50px;
+  color: grey;
+  &:hover {
+    opacity: 0.6;
+  }
+  &:active {
+    opacity: 0.1;
+  }
+}
+
+.rightBtn {
+  position: absolute;
+  top: 45%;
+  right: 5%;
+  font-size: 50px;
+  color: grey;
+  &:hover {
+    opacity: 0.6;
+  }
+  &:active {
+    opacity: 0.1;
+  }
+}
