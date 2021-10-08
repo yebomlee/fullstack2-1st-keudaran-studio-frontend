@@ -6,21 +6,20 @@ import './ProductInfo.scss';
 class ProductInfo extends Component {
   render() {
     const { clickMenu, changePositionScroll } = this.props;
-    const questionMenu = menu =>
+    const whatColotMenu = menu =>
       clickMenu === menu ? 'yesChangeColor' : 'notChangeColor';
 
     return (
       <div className="ProductInfo">
         <ul className="middleMenu">
           <li
-            //ref={refs['info']}
-            className={questionMenu('info')}
+            className={whatColotMenu('info')}
             onClick={() => changePositionScroll('info')}
           >
             상품상세
           </li>
           <li
-            className={questionMenu('review')}
+            className={whatColotMenu('review')}
             onClick={() => changePositionScroll('review')}
           >
             상품후기

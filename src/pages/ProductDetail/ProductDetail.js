@@ -22,12 +22,6 @@ class ProductDetail extends Component {
       isSharedLinkMenu: false,
       clickMenu: '',
     };
-
-    this.refs = {
-      info: React.createRef(),
-      review: React.createRef(),
-      photo: React.createRef(), //이거 다른 이슈로 구현예정 ref기능
-    };
   }
 
   componentDidMount() {
@@ -145,8 +139,7 @@ class ProductDetail extends Component {
     this.setState({ choiceOptionArray });
   };
 
-  changePositionScroll = whatButton => {
-    // const position = this.refs[whatButton].current; //이거 구현예정 ref
+  changePositionScroll = whereMovePosition => {
     const MOVE_PHOTO_POSITION = 0;
     const MOVE_INFO_POSITION = 1150;
     const MOVE_REVIEW_POSITION = 3100;
@@ -155,10 +148,10 @@ class ProductDetail extends Component {
       window.scrollTo(position);
     };
     this.setState({
-      clickMenu: whatButton,
+      clickMenu: whereMovePosition,
     });
-    if (whatButton === 'info') moveSroll(MOVE_INFO_POSITION);
-    else if (whatButton === 'review') moveSroll(MOVE_REVIEW_POSITION);
+    if (whereMovePosition === 'info') moveSroll(MOVE_INFO_POSITION);
+    else if (whereMovePosition === 'review') moveSroll(MOVE_REVIEW_POSITION);
     else moveSroll(MOVE_PHOTO_POSITION);
   };
 
@@ -181,6 +174,7 @@ class ProductDetail extends Component {
       isSharedLinkMenu,
       clickMenu,
     } = this.state;
+
     return (
       <div className="Detail">
         <div className="total">
@@ -212,7 +206,7 @@ class ProductDetail extends Component {
             </div>
             <article className="content">
               <ProductInfo
-                {...{ clickMenu }}
+                clickMenu={clickMenu}
                 changePositionScroll={this.changePositionScroll}
               />
             </article>
