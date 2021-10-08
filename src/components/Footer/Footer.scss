@@ -1,0 +1,57 @@
+.Footer {
+  width: 100vw;
+  border-top: solid 1px #eee;
+  font-family: 'Spoqa Han Sans Neo';
+
+  .footerWrapper {
+    display: flex;
+    position: relative;
+    max-width: 1200px;
+    margin-top: 70px;
+    margin: 0 auto;
+    color: #747474;
+    background-color: white;
+
+    .footerSubWrapper {
+      color: black;
+
+      .footerMainList {
+        display: flex;
+        padding: 30px 0;
+
+        .title {
+          margin: 0 15px;
+          font-size: 16px;
+        }
+      }
+
+      .companyInfo {
+        display: flex;
+        margin: 0 15px;
+
+        .info {
+          margin-right: 20px;
+          margin-bottom: 10px;
+          color: #888;
+          font-size: 13px;
+
+          .verticalBar {
+            margin-left: 20px;
+          }
+        }
+      }
+      .copyright {
+        margin: 20px 15px;
+        color: #aaa;
+        font-size: 13px;
+      }
+    }
+    .logoImg {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 200px;
+      margin: 60px;
+    }
+  }
+}
