@@ -4,8 +4,8 @@
   .hambergerIcon {
     align-self: flex-end;
     position: fixed;
-    top: 100px;
-    right: 100px;
+    top: 10rem;
+    right: 2rem;
     font-size: 50px;
     color: grey;
     cursor: pointer;
@@ -14,11 +14,11 @@
       color: green;
     }
   }
-  .hambergerMenuButton {
+  .hambergerMenuBox {
     @include flexStyle(none, none, column);
     position: fixed;
-    top: 190px;
-    right: 70px;
+    top: 15rem;
+    right: 1rem;
     .menuButton {
       @include flexStyle(none, center);
       @include fontSizeWight(20px, bold gray);

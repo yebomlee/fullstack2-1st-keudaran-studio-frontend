@@ -1,13 +1,13 @@
 @import '/src/styles/mixin';
 
-.ShareKakaoLink {
+.ShareLink {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  position: absolute;
-  top: 340px;
-  right: 540px;
+
   .shareLinkIcon {
+    position: absolute;
+    top: 18rem;
     font-size: 20px;
     color: gray;
     margin: 0 0 30px 0;
@@ -17,11 +17,13 @@
       color: green;
     }
   }
-  .hambergerMenuButton {
-    .menuButton {
+  .shareMenuBox {
+    .shareMenuButton {
       @include flexStyle(none, center);
       @include fontSizeWight(15px, bold gray);
       @include fontFamily('Noto Sans KR', sans-serif);
+      position: absolute;
+      top: 20rem;
       padding: 10px;
       border: 1px solid gray;
       cursor: pointer;

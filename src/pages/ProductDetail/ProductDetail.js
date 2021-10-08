@@ -115,11 +115,21 @@ class ProductDetail extends Component {
     });
   };
 
-  clickLikedProduct = () => {
-    const { isLikedProduct } = this.state;
-    this.setState({
-      isLikedProduct: !isLikedProduct,
-    });
+  changeStateEventShow = role => {
+    const { isLikedProduct, isMovePositionMenu, isSharedLinkMenu } = this.state;
+    if (role === 'like') {
+      this.setState({
+        isLikedProduct: !isLikedProduct,
+      });
+    } else if (role === 'move') {
+      this.setState({
+        isMovePositionMenu: !isMovePositionMenu,
+      });
+    } else {
+      this.setState({
+        isSharedLinkMenu: !isSharedLinkMenu,
+      });
+    }
   };
 
   deleteChoiceOption = id => {
@@ -143,13 +153,6 @@ class ProductDetail extends Component {
     if (whatButton === 'info') moveSroll(MOVE_INFO_POSITION);
     else if (whatButton === 'review') moveSroll(MOVE_REVIEW_POSITION);
     else moveSroll(MOVE_PHOTO_POSITION);
-  };
-
-  showMyPageMenu = () => {
-    const { isMovePositionMenu } = this.state;
-    this.setState({
-      isMovePositionMenu: !isMovePositionMenu,
-    });
   };
 
   showSharedLinkMenu = () => {
@@ -196,9 +199,8 @@ class ProductDetail extends Component {
                 increaseCounter={this.increaseCounter}
                 decreaseCounter={this.decreaseCounter}
                 choiceOptionChange={this.choiceOptionChange}
-                clickLikedProduct={this.clickLikedProduct}
+                changeStateEventShow={this.changeStateEventShow}
                 deleteChoiceOption={this.deleteChoiceOption}
-                showSharedLinkMenu={this.showSharedLinkMenu}
               />
             </div>
             <article className="content">
@@ -210,7 +212,7 @@ class ProductDetail extends Component {
           </section>
           <HambergerIcon
             {...{ isMovePositionMenu }}
-            showMyPageMenu={this.showMyPageMenu}
+            changeStateEventShow={this.changeStateEventShow}
             changePositionScroll={this.changePositionScroll}
           ></HambergerIcon>
           <footer className="footer">하단 footer</footer>

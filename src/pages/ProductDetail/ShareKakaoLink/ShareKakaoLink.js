@@ -5,17 +5,23 @@ import './ShareKakaoLink.scss';
 
 class ShareKakaoLink extends Component {
   render() {
-    const { isSharedLinkMenu, showSharedLinkMenu } = this.props;
+    const { isSharedLinkMenu, changeStateEventShow } = this.props;
     return (
-      <div className="ShareKakaoLink">
+      <div className="ShareLink">
         <FontAwesomeIcon
           className="shareLinkIcon"
           icon={faShareAlt}
-          onClick={showSharedLinkMenu}
+          onMouseEnter={() => changeStateEventShow('share')}
         />
         {isSharedLinkMenu && (
-          <ul className="hambergerMenuButton">
-            <li className="menuButton">카카오버튼</li>
+          <ul className="shareMenuBox">
+            <li
+              className="shareMenuButton"
+              onMouseLeave={() => changeStateEventShow('share')}
+              onClick={() => alert('준비중입니다')}
+            >
+              카카오버튼
+            </li>
           </ul>
         )}
       </div>

@@ -14,9 +14,8 @@ class ProductDescription extends Component {
       increaseCounter,
       decreaseCounter,
       choiceOptionChange,
-      clickLikedProduct,
+      changeStateEventShow,
       deleteChoiceOption,
-      showSharedLinkMenu,
     } = this.props;
     let totalCount = 0;
     choiceOptionArray.forEach(option => {
@@ -25,7 +24,7 @@ class ProductDescription extends Component {
     const totalPrice = totalCount * price;
     return (
       <section className="ProductDescription" key={id}>
-        <ShareKakaoLink {...{ isSharedLinkMenu, showSharedLinkMenu }} />
+        <ShareKakaoLink {...{ isSharedLinkMenu, changeStateEventShow }} />
         <h3>{name} </h3>
         <p className="price">
           {price} <em>원</em>
@@ -102,7 +101,7 @@ class ProductDescription extends Component {
           </p>
           <LikeButton
             className="ChangeHeart"
-            {...{ isLikedProduct, clickLikedProduct }}
+            {...{ isLikedProduct, changeStateEventShow }}
           />
         </div>
       </section>

@@ -5,17 +5,20 @@ import './HambergerIconMenu.scss';
 
 class HambergerIconMenu extends Component {
   render() {
-    const { isMovePositionMenu, showMyPageMenu, changePositionScroll } =
+    const { isMovePositionMenu, changeStateEventShow, changePositionScroll } =
       this.props;
     return (
       <div className="HambergerIconMenu">
         <FontAwesomeIcon
           className="hambergerIcon"
           icon={faHamburger}
-          onClick={showMyPageMenu}
+          onMouseEnter={() => changeStateEventShow('move')}
         />
         {isMovePositionMenu && (
-          <ul className="hambergerMenuButton">
+          <ul
+            className="hambergerMenuBox"
+            onMouseLeave={() => changeStateEventShow('move')}
+          >
             <li
               className="menuButton"
               onClick={() => changePositionScroll('photo')}
