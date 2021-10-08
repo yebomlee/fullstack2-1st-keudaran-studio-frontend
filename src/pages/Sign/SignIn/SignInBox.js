@@ -2,7 +2,7 @@ import React from 'react';
 import './SignInBox.scss';
 class SignInBox extends React.Component {
   render() {
-    const { saveInputChange, checkJoinedMember, checkInputFilled } = this.props;
+    const { saveInputChange, login, checkInputFilled } = this.props;
     return (
       <section className="SignInBox">
         <h1 className="signInTitle">로그인</h1>
@@ -18,7 +18,7 @@ class SignInBox extends React.Component {
               action="./"
               method="POST"
               className="signInForm"
-              onSubmit={checkJoinedMember}
+              onSubmit={login}
             >
               <input
                 type="text"

@@ -23,7 +23,7 @@ class SignIn extends React.Component {
     } else return false;
   };
 
-  checkJoinedMember = e => {
+  login = e => {
     e.preventDefault();
     const { tempUserData } = this.state;
     fetch('/user/login', {
@@ -55,7 +55,7 @@ class SignIn extends React.Component {
           userData={userData}
           tempUserData={tempUserData}
           saveInputChange={this.saveInputChange}
-          checkJoinedMember={this.checkJoinedMember}
+          login={this.login}
           checkInputFilled={this.checkInputFilled}
         />
       </div>
