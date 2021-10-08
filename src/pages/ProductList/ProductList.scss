@@ -1,4 +1,4 @@
-.ProductList {
+.productListWrapper {
   margin: 0 auto;
   width: 1200px;
 
@@ -13,6 +13,7 @@
       color: #333333;
       font-size: 16px;
       font-weight: 700;
+      font-family: 'Lato', sans-serif;
     }
 
     .stationeryCategory {
@@ -26,10 +27,12 @@
     display: flex;
     justify-content: flex-end;
 
-    select {
+    .selectSorting {
       padding: 10px 0;
       border: none;
       color: #a2a2a2;
+      background-color: none;
+      font-family: 'sans-serif';
     }
   }
 }

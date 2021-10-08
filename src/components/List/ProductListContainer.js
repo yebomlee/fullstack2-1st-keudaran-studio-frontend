@@ -54,7 +54,7 @@ class ProductListContainer extends React.Component {
 
     return (
       <div className="ProductListContainer">
-        <ul className="productCard">
+        <ul className="productContainer">
           {filteringProduct.map(products => {
             return (
               <ProductCard

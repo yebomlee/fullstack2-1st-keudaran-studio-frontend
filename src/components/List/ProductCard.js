@@ -22,7 +22,7 @@ class ProductCard extends React.Component {
     const { name, price, hoverImgUrl, imgUrl } = this.props;
     return (
       <li
-        className="product"
+        className="productCard"
         onMouseOver={this.toggleImgHover}
         onMouseOut={this.toggleImgHover}
       >

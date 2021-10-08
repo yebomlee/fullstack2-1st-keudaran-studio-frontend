@@ -30,37 +30,39 @@ class ProductList extends React.Component {
     const { subCategory, selectedSubCategory } = this.state;
     return (
       <div className="ProductList">
-        <div className="stationeryWrap">
-          <div className="caterogyTitle">Stationery</div>
-          <ul className="stationeryCategory">
-            {subCategory.map(sub => {
-              return (
-                <ProductSubCategory
-                  key={sub.id}
-                  id={sub.id}
-                  name={sub.name}
-                  selectedSubCategory={selectedSubCategory}
-                  selectSubCategory={this.selectSubCategory}
-                />
-              );
-            })}
-          </ul>
-        </div>
+        <div className="productListWrapper">
+          <div className="stationeryWrap">
+            <div className="caterogyTitle">Stationery</div>
+            <ul className="stationeryCategory">
+              {subCategory.map(sub => {
+                return (
+                  <ProductSubCategory
+                    key={sub.id}
+                    id={sub.id}
+                    name={sub.name}
+                    selectedSubCategory={selectedSubCategory}
+                    selectSubCategory={this.selectSubCategory}
+                  />
+                );
+              })}
+            </ul>
+          </div>
 
-        <div className="selector">
-          <select name="sort" id="sort">
-            <option value="popular" defaultValue>
-              인기상품순
-            </option>
-            <option value="new">신상품순</option>
-            <option value="named">상품명순</option>
-            <option value="cheap">낮은가격순</option>
-            <option value="expensive">높은가격순</option>
-            <option value="mostClicked">조회순</option>
-          </select>
-        </div>
+          <div className="selector">
+            <select className="selectSorting" name="sort" id="sort">
+              <option value="popular" defaultValue>
+                인기상품순
+              </option>
+              <option value="new">신상품순</option>
+              <option value="named">상품명순</option>
+              <option value="cheap">낮은가격순</option>
+              <option value="expensive">높은가격순</option>
+              <option value="mostClicked">조회순</option>
+            </select>
+          </div>
 
-        <ProductListContainer selectedSubCategory={selectedSubCategory} />
+          <ProductListContainer selectedSubCategory={selectedSubCategory} />
+        </div>
       </div>
     );
   }
