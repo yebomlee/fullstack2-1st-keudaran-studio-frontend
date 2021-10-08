@@ -8,51 +8,77 @@ class Review extends React.Component {
     };
   }
 
+  addReview = putReview => {
+    if (putReview.key === 'Enter' && putReview.target.value !== '') {
+      putReview.target.value = '';
+      this.setState({
+        reviewList: this.state.reviewList.concat(this.state.review),
+        review: '',
+      });
+    }
+  };
+
+  handleReview = event => {
+    this.setState({
+      review: event.target.value,
+    });
+  };
+
   render() {
     const { reviewList } = this.state;
     return (
-      <div className="reviewTotal">
-        <div className="reviewHeader">
-          <h3>REVIEW</h3>
-        </div>
-        <div className="reviewMail">
-          <ul clannName="rateStars">
-            <li>사용자 총 평점</li>
-            <li>
-              <b>n</b>
-              /5 점
-            </li>
-          </ul>
-        </div>
-        <div className="reviewWrite">
-          <form>
-            <textarea name="">
-              크다란스튜디오를 이용해 주셔서 감사합니다. 리뷰는 품질개선과
-              서비스향상에 도움이 됩니다.
-            </textarea>
-          </form>
-          <form>
+      <div className="Review">
+        <div className="reviewTotal">
+          <div className="reviewRate">
+            <dl clannName="rateStars">
+              <dt className="rateTotal">사용자 총 평점</dt>
+              <dd className="averageRate">
+                ⭐️⭐️⭐️⭐️⭐️
+                <b>n</b>
+                /5 점
+              </dd>
+              <em className="totalAmountReview">
+                총<b>n</b>개 리뷰 기준
+              </em>
+            </dl>
+          </div>
+          <div className="reviewWrite">
+            <div className="howManyStars">별점 평가 부분</div>
+            <div className="commentWrite">
+              <textarea
+                name="comment"
+                placeholder="
+                크다란스튜디오를 이용해 주셔서 감사합니다. 리뷰는 품질개선과
+                서비스향상에 도움이 됩니다."
+              ></textarea>
+            </div>
             <div className="privacyPolicy">
-              개인정보수집이용
-              <label>
-                <input type="round" name="agree" value="Y" checked>
-                  동의
-                </input>
-              </label>
-              <label>
-                <input type="round" name="notAgree" value="N">
-                  미동의
-                </input>
-              </label>
+              <div className="privacyTitle">
+                개인정보수집이용
+                <label className="agreeOrNot">
+                  {/* 둘중하나만체크되게 수정 */}
+                  <input type="radio" name="agree" value="Y" checked />
+                  <b>동의</b>
+                </label>
+                <label className="agreeOrNot">
+                  <input type="radio" name="notAgree" value="N" />
+                  <b>미동의</b>
+                </label>
+              </div>
               <table className="privacyTable">
-                <thead>
+                <colgroup>
+                  <col width="200"></col>
+                  <col width="250"></col>
+                  <col width="130"></col>
+                </colgroup>
+                <thead className="tableHead">
                   <tr>
                     <th scope="col">목적</th>
                     <th scope="col">항목</th>
                     <th scope="col">보유기간</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="tableBody">
                   <tr>
                     <td className="perpose">
                       <div className="privacyTxt">
@@ -68,23 +94,48 @@ class Review extends React.Component {
                       <div className="privacyTxt">게시글 삭제시까지</div>
                     </td>
                   </tr>
-                  <div className="formTxt">
-                    * 동의하셔야 서비스를 이용하실 수 있습니다.
-                  </div>
                 </tbody>
               </table>
+              <div className="agreeForFillOut">
+                * 동의하셔야 서비스를 이용하실 수 있습니다.
+              </div>
             </div>
-          </form>
-        </div>
-        <div className="reviewList">
-          {/* 닉네임 **, 날짜 추가 해야함 */}
-          {reviewList.map((id, comment, score) => {
-            return (
-              <li className="review" key={id}>
-                {(id, comment, score)}
-              </li>
-            );
-          })}
+          </div>
+          <button
+            className="button"
+            onKeyPress={this.addReview}
+            onChange={this.handleReview}
+          >
+            {/* 눌렀을때 로그인여부확인 안되어있으면 alert */}
+            작성하기
+          </button>
+          <div className="reviewList">
+            {/* 닉네임 ** 추가 해야함 */}
+            {reviewList.map((userId, content, rating, createdAt) => {
+              return (
+                <ul className="reviewBlock" key={userId}>
+                  <li className="createdReview">
+                    <div className="starsAndData">
+                      <span className="stars">{rating}⭐️⭐️⭐️⭐️⭐️</span>
+                      <li className="userId">{userId}</li>
+                      <li className="createdAt">{createdAt}</li>
+                    </div>
+                    <div className="content">
+                      {content}
+                      <div className="modifyAndDelete">
+                        <span className="modify" href="#">
+                          [수정]
+                        </span>
+                        <span className="delete" href="#">
+                          [삭제]
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
