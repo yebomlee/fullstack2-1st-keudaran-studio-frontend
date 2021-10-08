@@ -1,16 +1,14 @@
 @import '/src/styles/mixin';
 
 .ShareLink {
+  //공유하기 버튼 위치 구현잘해보기rem써도 무관
   display: flex;
   align-items: flex-end;
   flex-direction: column;
 
   .shareLinkIcon {
-    position: absolute;
-    top: 18rem;
     font-size: 20px;
     color: gray;
-    margin: 0 0 30px 0;
     cursor: pointer;
     &:hover {
       transform: scale(1.5);
@@ -23,7 +21,7 @@
       @include fontSizeWight(15px, bold gray);
       @include fontFamily('Noto Sans KR', sans-serif);
       position: absolute;
-      top: 20rem;
+      top: 350px;
       padding: 10px;
       border: 1px solid gray;
       cursor: pointer;

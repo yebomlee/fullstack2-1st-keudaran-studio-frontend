@@ -13,7 +13,7 @@ class ProductInfo extends Component {
       <div className="ProductInfo">
         <ul className="middleMenu">
           <li
-            value="asd"
+            //ref={refs['info']}
             className={questionMenu('info')}
             onClick={() => changePositionScroll('info')}
           >

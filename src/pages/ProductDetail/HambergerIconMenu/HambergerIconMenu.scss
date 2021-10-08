@@ -2,9 +2,9 @@
 
 .HambergerIconMenu {
   .hambergerIcon {
-    align-self: flex-end;
+    align-self: flex-end; //햄버거바 하위로 메뉴넣고 fixed 메뉴는 absolute로 표기해야됨
     position: fixed;
-    top: 10rem;
+    top: 30rem;
     right: 2rem;
     font-size: 50px;
     color: grey;
@@ -17,7 +17,7 @@
   .hambergerMenuBox {
     @include flexStyle(none, none, column);
     position: fixed;
-    top: 15rem;
+    top: 35rem;
     right: 1rem;
     .menuButton {
       @include flexStyle(none, center);

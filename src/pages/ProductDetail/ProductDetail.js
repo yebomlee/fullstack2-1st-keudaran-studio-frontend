@@ -22,6 +22,12 @@ class ProductDetail extends Component {
       isSharedLinkMenu: false,
       clickMenu: '',
     };
+
+    this.refs = {
+      info: React.createRef(),
+      review: React.createRef(),
+      photo: React.createRef(), //이거 다른 이슈로 구현예정 ref기능
+    };
   }
 
   componentDidMount() {
@@ -140,6 +146,7 @@ class ProductDetail extends Component {
   };
 
   changePositionScroll = whatButton => {
+    // const position = this.refs[whatButton].current; //이거 구현예정 ref
     const MOVE_PHOTO_POSITION = 0;
     const MOVE_INFO_POSITION = 1150;
     const MOVE_REVIEW_POSITION = 3100;
