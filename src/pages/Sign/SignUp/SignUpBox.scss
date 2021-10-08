@@ -1,7 +1,7 @@
 .SignUpBox {
-  font-size: 12px;
   max-width: 1200px;
   width: 100%;
+  font-size: 12px;
 
   .signUpTitle {
     margin: 20px 0;
@@ -92,8 +92,8 @@
           .marketingCheck {
             margin: 10px;
             .checkBox {
-              font-weight: 600;
               margin-bottom: 10px;
+              font-weight: 600;
             }
             .marketingParagraph {
               font-size: 12px;
@@ -111,11 +111,11 @@
         width: 234px;
         height: 64px;
         margin: 25px auto;
+        border: 1px solid #053688;
         line-height: 64px;
-        font-size: 22px;
         color: #fff;
         background-color: #0549bb;
-        border: 1px solid #053688;
+        font-size: 22px;
         cursor: pointer;
       }
     }
