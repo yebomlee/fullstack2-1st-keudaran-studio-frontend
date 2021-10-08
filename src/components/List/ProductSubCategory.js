@@ -13,6 +13,13 @@ class ProductSubCategory extends React.Component {
           className={id === selectedSubCategory ? 'clickedSub' : ''}
         >
           <Link to="#">{name}</Link>
+          <div
+            className={
+              id === selectedSubCategory ? 'subCategoryDot' : 'hiddenDot'
+            }
+          >
+            •
+          </div>
         </li>
       </div>
     );

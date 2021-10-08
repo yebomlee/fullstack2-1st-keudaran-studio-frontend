@@ -7,3 +7,15 @@ a {
 .clickedSub {
   font-weight: 700;
 }
+
+.hiddenDot {
+  display: none;
+  text-align: center;
+}
+
+.subCategoryDot {
+  position: relative;
+  top: -6px;
+  text-align: center;
+  font-size: 25px;
+}
