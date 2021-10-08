@@ -123,18 +123,27 @@
         border: 1px solid #dadada;
 
         .privacyTitle {
-          // @include flexStyle(none, center);
-          @include fontSizeWight(13px, bold);
+          display: flex;
+          justify-content: space-between;
+          flex-direction: row;
           margin: 10px;
-
-          // .agreeOrNot {
-          //   @include fontSizeWight(8px);
-
-          // input {
-          //   width: 8px;
-          //   height: 8px;
-          // }
-          // }
+          font-size: 13px;
+          .privacyTitleInner {
+            margin: 2.5px;
+            b {
+              font-weight: 700;
+              margin-right: 30px;
+            }
+            u {
+              cursor: pointer;
+            }
+          }
+          .privacyRadioBox {
+            margin-right: 10px;
+            input {
+              margin: 2.5px;
+            }
+          }
         }
         .privacyTable {
           margin: 10px 10px 0 10px;
@@ -172,22 +181,27 @@
     // }
     .reviewList {
       width: 100%;
+      margin-top: 10px;
       padding: 10px;
-      border: 1px solid black;
-      border-radius: 5px;
+      border: 1px solid #dadada;
 
       .reviewBlock {
-        // @include flexStyle(center, none);
-
+        margin: 20px 0;
         .createdReview {
           .starsAndData {
+            display: flex;
+            justify-content: space-between;
             .stars {
-              @include flexStyle(none, flex-start);
+              // @include flexStyle(none, flex-start);
+              color: #777;
+            }
+
+            .userId {
+              margin-right: 10px;
             }
 
             .userId,
             .createdAt {
-              @include flexStyle(none, flex-end);
               @include fontSizeWight(12px, none, grey);
             }
           }
@@ -196,6 +210,10 @@
             .reviewContentText {
               width: 100%;
               height: 100px;
+              padding: 10px;
+              margin-top: 5px;
+              border: 1px solid #dadada;
+              outline: none;
               resize: none;
             }
 
