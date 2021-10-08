@@ -71,8 +71,19 @@ class Review extends React.Component {
     this.setState({ reviewList: reviewArr });
   };
 
+  calculateRating = reviewList => {
+    if (reviewList.length === 0) return 0;
+    let sumOfRatings = 0;
+    for (const review of reviewList) {
+      sumOfRatings += review.rating;
+    }
+    return (sumOfRatings / reviewList.length) * 20;
+  };
+
   render() {
     const { reviewList, isPolicyDetail, agreePolicy } = this.state;
+    const averageRating = this.calculateRating(reviewList);
+    const ratingScore = averageRating / 20;
     return (
       <div className="Review">
         <div className="reviewInner">
@@ -81,7 +92,7 @@ class Review extends React.Component {
             <div className="userRateWrap">
               <p className="rateTotal">사용자 총 평점</p>
               <p className="totalAmountReview">
-                (총<b>n</b>개 리뷰 기준)
+                (총<b>{reviewList.length}</b>개 리뷰 기준)
               </p>
             </div>
             <div className="averageRate">
@@ -89,11 +100,11 @@ class Review extends React.Component {
                 <div className="starRating">
                   <span
                     className="innerStarRating"
-                    style={{ width: '30%' }}
+                    style={{ width: `${averageRating}%` }}
                   ></span>
                 </div>
                 <h2>
-                  <b>n</b>
+                  <b>{ratingScore}</b>
                   /5 점
                 </h2>
               </div>
