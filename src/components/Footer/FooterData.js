@@ -1,3 +1,10 @@
+const footerMenu = [
+  { id: 1, name: '회사소개' },
+  { id: 2, name: '이용약관' },
+  { id: 3, name: '개인정보처리방침' },
+  { id: 4, name: '이용안내' },
+];
+
 const companyInfo = [
   { id: 1, content: '상호 : 주식회사 크다란' },
   { id: 2, content: '대표 : 조구만' },
@@ -6,7 +13,7 @@ const companyInfo = [
 
 const companyInfo2 = [
   { id: 4, content: 'TEL : 00-0000-0000' },
-  { id: 5, content: 'EMAIL : kedaran@kedaran.com' },
+  { id: 5, content: 'EMAIL : keudaran@keudaran.com' },
   { id: 6, content: '입금 계좌 : [크다란] 000-0000-0000 주식회사 크다란' },
 ];
 
@@ -18,7 +25,7 @@ const companyInfo3 = [
 
 const companyInfo4 = [
   { id: 10, content: '주소 : 서울특별시 강남구 삼성동 테헤란로 427' },
-  { id: 11, content: 'www.kedaranstore.com' },
+  { id: 11, content: 'www.keudaranstore.com' },
 ];
 
-export { companyInfo, companyInfo2, companyInfo3, companyInfo4 };
+export { footerMenu, companyInfo, companyInfo2, companyInfo3, companyInfo4 };

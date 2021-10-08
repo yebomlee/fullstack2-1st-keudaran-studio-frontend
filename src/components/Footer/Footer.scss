@@ -3,16 +3,16 @@
   border-top: solid 1px #eee;
   font-family: 'Spoqa Han Sans Neo';
 
-  .footerWrap {
-    max-width: 1200px;
+  .footerWrapper {
     display: flex;
     position: relative;
+    max-width: 1200px;
     margin-top: 70px;
     margin: 0 auto;
     color: #747474;
     background-color: white;
 
-    .footerSubWrap {
+    .footerSubWrapper {
       color: black;
 
       .footerMainList {

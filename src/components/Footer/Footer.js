@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Footer.scss';
 import {
+  footerMenu,
   companyInfo,
   companyInfo2,
   companyInfo3,
@@ -11,21 +12,16 @@ class Footer extends Component {
   render() {
     return (
       <footer className="Footer">
-        <div className="footerWrap">
-          <div className="footerSubWrap">
+        <div className="footerWrapper">
+          <div className="footerSubWrapper">
             <ul className="footerMainList">
-              <li className="title">
-                <h4>회사소개</h4>
-              </li>
-              <li className="title">
-                <h4>이용약관</h4>
-              </li>
-              <li className="title">
-                <h4>개인정보처리방침</h4>
-              </li>
-              <li className="title">
-                <h4>이용안내</h4>
-              </li>
+              {footerMenu.map(data => {
+                return (
+                  <li className="title">
+                    <h4>{data.name}</h4>
+                  </li>
+                );
+              })}
             </ul>
 
             <ul className="companyInfo">
