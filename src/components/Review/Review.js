@@ -14,7 +14,7 @@ class Review extends React.Component {
 
   createNewReview = e => {
     e.preventDefault();
-    const { agreePolicy, starRating, review } = this.state;
+    const { agreePolicy, starRating, review, reviewList } = this.state;
     if (agreePolicy.notAgreePolicyRadio)
       return alert('약관에 동의가 필요합니다.');
     else if (starRating === 0) return alert('별점을 선택해주세요');
@@ -22,11 +22,19 @@ class Review extends React.Component {
     this.setState({
       reviewList: [
         ...this.state.reviewList,
-        { content: this.state.review, rating: +this.state.starRating },
+        {
+          id:
+            reviewList.length > 0
+              ? reviewList[reviewList.length - 1].id + 1
+              : 1,
+          content: this.state.review,
+          rating: +this.state.starRating,
+        },
       ],
       review: '',
     });
   };
+  // 백엔드 연결 시 id값은 백엔드에서 받아온값으로 주기
 
   handelInputChange = event => {
     const { name, value } = event.target;
@@ -58,11 +66,15 @@ class Review extends React.Component {
     });
   };
 
+  deleteReview = id => {
+    const reviewArr = [...this.state.reviewList].filter(el => el.id !== id);
+    this.setState({ reviewList: reviewArr });
+  };
+
   render() {
     const { reviewList, isPolicyDetail, agreePolicy } = this.state;
     return (
       <div className="Review">
-        {console.log(this.state.agreePolicy)}
         <div className="reviewInner">
           <h1 className="reviewTitle">REVIEW</h1>
           <div className="reviewRate">
@@ -73,8 +85,8 @@ class Review extends React.Component {
               </p>
             </div>
             <div className="averageRate">
-              <div class="wrapStar">
-                <div class="starRating">
+              <div className="wrapStar">
+                <div className="starRating">
                   <span
                     className="innerStarRating"
                     style={{ width: '30%' }}
@@ -95,9 +107,7 @@ class Review extends React.Component {
                   className="starSelector"
                   onChange={this.handelInputChange}
                 >
-                  <option value="" selected>
-                    -- 별점 선택 --
-                  </option>
+                  <option defaultValue="0">-- 별점 선택 --</option>
                   <option value="1">★️</option>
                   <option value="2">★★</option>
                   <option value="3">★★★️</option>
@@ -129,7 +139,7 @@ class Review extends React.Component {
                   <u onClick={this.showPolicyDetail}>자세히 보기</u>
                 </p>
 
-                <div class="privacyRadioBox">
+                <div className="privacyRadioBox">
                   <input
                     type="radio"
                     name="agree"
@@ -155,52 +165,49 @@ class Review extends React.Component {
                 </div>
               </div>
               {isPolicyDetail ? (
-                <>
-                  <table className="privacyTable">
-                    <colgroup>
-                      <col width="200"></col>
-                      <col width="250"></col>
-                      <col width="130"></col>
-                    </colgroup>
-                    <thead className="tableHead">
-                      <tr>
-                        <th scope="col">목적</th>
-                        <th scope="col">항목</th>
-                        <th scope="col">보유기간</th>
-                      </tr>
-                    </thead>
-                    <tbody className="tableBody">
-                      <tr>
-                        <td className="perpose">
-                          <div className="privacyTxt">
-                            게시판 서비스 제공 / 이용 고객 확인
-                          </div>
-                        </td>
-                        <td className="items">
-                          <div className="privacyTxt">
-                            이름, 비밀번호, 작성내용, IP주소
-                          </div>
-                        </td>
-                        <td className="hold">
-                          <div className="privacyTxt">게시글 삭제시까지</div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div className="agreeForFillOut">
-                    * 동의하셔야 서비스를 이용하실 수 있습니다.
-                  </div>
-                </>
+                <table className="privacyTable">
+                  <colgroup>
+                    <col width="200"></col>
+                    <col width="250"></col>
+                    <col width="130"></col>
+                  </colgroup>
+                  <thead className="tableHead">
+                    <tr>
+                      <th scope="col">목적</th>
+                      <th scope="col">항목</th>
+                      <th scope="col">보유기간</th>
+                    </tr>
+                  </thead>
+                  <tbody className="tableBody">
+                    <tr>
+                      <td className="perpose">
+                        <div className="privacyTxt">
+                          게시판 서비스 제공 / 이용 고객 확인
+                        </div>
+                      </td>
+                      <td className="items">
+                        <div className="privacyTxt">
+                          이름, 비밀번호, 작성내용, IP주소
+                        </div>
+                      </td>
+                      <td className="hold">
+                        <div className="privacyTxt">게시글 삭제시까지</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               ) : null}
+              <div className="agreeForFillOut">
+                * 동의하셔야 서비스를 이용하실 수 있습니다.
+              </div>
             </div>
           </div>
 
-          {/* 닉네임 ** 추가 해야함 */}
           <div className="reviewList">
             {reviewList.length > 0 ? (
               reviewList.map((review, index) => {
                 return (
-                  <ul className="reviewBlock" key={review.userId}>
+                  <ul className="reviewBlock" key={review.id}>
                     <li className="createdReview">
                       <div className="starsAndData">
                         <span className="stars">
@@ -222,8 +229,14 @@ class Review extends React.Component {
                           readOnly
                         ></textarea>
                         <div className="modifyAndDelete">
-                          <span className="modify">[수정]</span>
-                          <span className="delete">[삭제]</span>
+                          <span
+                            onClick={() => {
+                              this.deleteReview(review.id);
+                            }}
+                            className="deleteReview"
+                          >
+                            [삭제]
+                          </span>
                         </div>
                       </div>
                     </li>

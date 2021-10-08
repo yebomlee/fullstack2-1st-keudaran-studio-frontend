@@ -220,6 +220,10 @@
             .modifyAndDelete {
               @include flexStyle(none, flex-end);
               @include fontSizeWight(12px, none, grey);
+
+              .deleteReview {
+                cursor: pointer;
+              }
             }
           }
         }
