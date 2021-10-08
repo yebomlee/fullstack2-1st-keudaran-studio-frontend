@@ -107,7 +107,7 @@ class Review extends React.Component {
                   className="starSelector"
                   onChange={this.handelInputChange}
                 >
-                  <option defaultValue="0">-- 별점 선택 --</option>
+                  <option value="0">-- 별점 선택 --</option>
                   <option value="1">★️</option>
                   <option value="2">★★</option>
                   <option value="3">★★★️</option>
