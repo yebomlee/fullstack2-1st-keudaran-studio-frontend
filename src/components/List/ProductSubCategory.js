@@ -12,7 +12,9 @@ class ProductSubCategory extends React.Component {
           onClick={() => selectSubCategory(id)}
           className={id === selectedSubCategory ? 'clickedSub' : ''}
         >
-          <Link to="#">{name}</Link>
+          <Link className="subCategoryName" to="#">
+            {name}
+          </Link>
           <div
             className={
               id === selectedSubCategory ? 'subCategoryDot' : 'hiddenDot'
