@@ -4,6 +4,7 @@ class Review extends React.Component {
   constructor() {
     super();
     this.state = {
+      review: '',
       reviewList: [],
     };
   }
@@ -18,6 +19,14 @@ class Review extends React.Component {
     }
   };
 
+  handleClick = e => {
+    e.preventDefault();
+    this.setState({
+      reviewList: [...this.state.reviewList, { content: this.state.review }],
+      review: '',
+    });
+  };
+
   handleReview = event => {
     this.setState({
       review: event.target.value,
@@ -25,9 +34,10 @@ class Review extends React.Component {
   };
 
   render() {
-    const { reviewList } = this.state;
+    const { review, reviewList } = this.state;
     return (
       <div className="Review">
+        {console.log(review)}
         <div className="reviewTotal">
           <div className="reviewRate">
             <dl clannName="rateStars">
@@ -44,14 +54,23 @@ class Review extends React.Component {
           </div>
           <div className="reviewWrite">
             <div className="howManyStars">별점 평가 부분</div>
-            <div className="commentWrite">
+            <form className="commentWrite">
               <textarea
                 name="comment"
                 placeholder="
                 크다란스튜디오를 이용해 주셔서 감사합니다. 리뷰는 품질개선과
                 서비스향상에 도움이 됩니다."
+                onChange={this.handleReview}
               ></textarea>
-            </div>
+              <button
+                className="button"
+                onClick={this.handleClick}
+                onKeyPress={this.addReview}
+              >
+                {/* 눌렀을때 로그인여부확인 안되어있으면 alert */}
+                작성하기
+              </button>
+            </form>
             <div className="privacyPolicy">
               <div className="privacyTitle">
                 개인정보수집이용
@@ -101,27 +120,23 @@ class Review extends React.Component {
               </div>
             </div>
           </div>
-          <button
-            className="button"
-            onKeyPress={this.addReview}
-            onChange={this.handleReview}
-          >
-            {/* 눌렀을때 로그인여부확인 안되어있으면 alert */}
-            작성하기
-          </button>
+
           <div className="reviewList">
+            {console.log(reviewList)}
             {/* 닉네임 ** 추가 해야함 */}
-            {reviewList.map((userId, content, rating, createdAt) => {
+            {reviewList.map((review, index) => {
               return (
-                <ul className="reviewBlock" key={userId}>
+                <ul className="reviewBlock" key={review.userId}>
                   <li className="createdReview">
                     <div className="starsAndData">
-                      <span className="stars">{rating}⭐️⭐️⭐️⭐️⭐️</span>
-                      <li className="userId">{userId}</li>
-                      <li className="createdAt">{createdAt}</li>
+                      <span className="stars">
+                        {review.rating}⭐️⭐️⭐️⭐️⭐️
+                      </span>
+                      <li className="userId">{review.userId}</li>
+                      <li className="createdAt">{review.createdAt}</li>
                     </div>
                     <div className="content">
-                      {content}
+                      {review.content}
                       <div className="modifyAndDelete">
                         <span className="modify" href="#">
                           [수정]
