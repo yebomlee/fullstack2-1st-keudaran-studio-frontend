@@ -1,0 +1,121 @@
+@import '/src/styles/mixin';
+
+.ProductDescription {
+  width: 520px;
+  h3 {
+    @include fontSizeWight(28px, bold, none);
+    @include fontFamily('Spoqa Han Sans', 'Lato');
+    margin: 10px 0 30px 15px;
+  }
+
+  .price {
+    @include fontSizeWight(28px, bold, none);
+    @include fontFamily('Noto Sans KR', sans-serif);
+
+    em {
+      @include fontSizeWight(25px, 400, none);
+    }
+  }
+
+  .info {
+    margin: 0 0 50px 0;
+
+    .table {
+      margin: 30px 0 20px 0;
+
+      .tableCol {
+        td {
+          @include fontFamily('Noto Sans KR', sans-serif);
+          @include fontSizeWight(14px, none, #777);
+        }
+
+        th {
+          @include flexStyle();
+          @include fontFamily('Noto Sans KR', sans-serif);
+          @include fontSizeWight(14px, none, #3d3d3d);
+          padding: 10px 0 10px 0;
+        }
+      }
+    }
+
+    .option {
+      @include flexStyle(center, space-between);
+      margin: 0 0 30px 0;
+      padding: 30px 10px 30px 0;
+      border-top: #3d3d3d solid 1px;
+      border-bottom: #3d3d3d solid 1px;
+
+      .optionText {
+        @include fontFamily('Noto Sans KR', sans-serif);
+        @include fontSizeWight(14px, none, #3d3d3d);
+      }
+
+      dd .optionBox {
+        @include widthHeight(330px, 35px);
+        @include fontSizeWight(14px, none, #696969);
+        @include fontFamily('Noto Sans KR', sans-serif);
+        padding: 0 0 0 10px;
+        border: 1px solid #e2e2e2;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    .totalPrice {
+      @include flexStyle(none, space-between);
+      margin: 30px 0 0 0;
+      padding: 30px 10px 20px 0;
+      border-top: #3d3d3d solid 1px;
+
+      strong {
+        @include fontSizeWight(22px, bold);
+        @include fontFamily('Noto Sans KR', sans-serif);
+      }
+
+      .resultPrice {
+        @include fontSizeWight(22px, bold);
+        @include fontFamily('Noto Sans KR', sans-serif);
+
+        em {
+          @include fontSizeWight(20px, 400px);
+        }
+      }
+    }
+  }
+
+  .activeButton {
+    @include flexStyle(none, space-between);
+
+    .commonButton {
+      @include flexStyle(center, center);
+      @include widthHeight(none, 58px);
+      margin: 0 7px 0 0;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .buyButton {
+      @include widthHeight(250px);
+      @include fontSizeWight(none, none, #fff);
+      border: 1px solid #2e2e2e;
+      background-color: #2e2e2e;
+    }
+
+    .basketButton {
+      @include widthHeight(250px);
+      @include fontSizeWight(none, none, #000000);
+      border: 1px solid #000000;
+    }
+
+    .LikeButton {
+      @include fontSizeWight(26px, none, #1c1c1c);
+      padding: 15px;
+      border: 1px solid #000000;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": 1,
+  "name": "크리스마스 포스트카드",
+  "point": 0.03,
+  "price": 10000,
+  "thumbailURL": "https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg",
+  "productImgs": [
+    {
+      "id": 1,
+      "imagURL": "https://image.freepik.com/free-vector/reindeer-hipster-santa-claus-vector-eps-10_87521-3525.jpg"
+    },
+    {
+      "id": 2,
+      "imagURL": "https://image.freepik.com/free-vector/smiling-moon-sky-night-with-santa-claus-sleigh_1308-55030.jpg"
+    },
+    {
+      "id": 3,
+      "imagURL": "https://image.freepik.com/free-vector/santa-claus-boat-summer-theme_1308-53272.jpg"
+    },
+    {
+      "id": 4,
+      "imagURL": "https://image.freepik.com/free-vector/santa-claus-reindeers-with-christmas-tree_197582-107.jpg"
+    }
+  ],
+  "options": [
+    {
+      "id": 1,
+      "name": "안경잡이 루돌프",
+      "quantity": "10"
+    },
+    {
+      "id": 2,
+      "name": "달나라로 여행가는 산타",
+      "quantity": "5"
+    },
+    {
+      "id": 3,
+      "name": "일광욕 즐기는 산타",
+      "quantity": "1"
+    },
+    {
+      "id": 4,
+      "name": "루돌프 선물 훔치는 산타",
+      "quantity": "13"
+    }
+  ]
+}
