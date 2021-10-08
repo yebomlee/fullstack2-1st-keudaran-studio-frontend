@@ -1,0 +1,9 @@
+.productContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.productContainer li:nth-child(3n) {
+  margin: 0 0 100px 0;
+}

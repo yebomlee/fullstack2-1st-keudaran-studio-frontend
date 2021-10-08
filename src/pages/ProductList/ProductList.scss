@@ -1,0 +1,38 @@
+.productListWrapper {
+  margin: 0 auto;
+  width: 1200px;
+
+  .stationeryWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    height: 30px;
+    border-bottom: 1px solid #999999;
+
+    .caterogyTitle {
+      color: #333333;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .stationeryCategory {
+      display: flex;
+      flex-direction: row;
+      color: #555555;
+    }
+  }
+
+  .selector {
+    display: flex;
+    justify-content: flex-end;
+
+    .selectSorting {
+      padding: 10px 0;
+      border: none;
+      color: #a2a2a2;
+      background-color: none;
+      font-family: 'sans-serif';
+    }
+  }
+}

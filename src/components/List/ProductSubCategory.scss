@@ -1,0 +1,22 @@
+.subCategoryName {
+  padding: 5px 15px;
+  color: #555555;
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 12px;
+}
+
+.clickedSub {
+  font-weight: 700;
+}
+
+.hiddenDot {
+  display: none;
+  text-align: center;
+}
+
+.subCategoryDot {
+  position: relative;
+  top: -6px;
+  text-align: center;
+  font-size: 25px;
+}

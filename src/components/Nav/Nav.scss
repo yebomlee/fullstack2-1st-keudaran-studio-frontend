@@ -1,0 +1,194 @@
+.Nav {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  font-family: 'Spoqa Han Sans Neo';
+
+  .modalMenu {
+    position: relative;
+    top: -440px;
+    width: 100%;
+    height: 150px;
+    transition: all 1s ease-out;
+    opacity: 0;
+
+    &.menuDown {
+      top: 0;
+      opacity: 1;
+    }
+
+    .modalDropDown {
+      display: flex;
+      position: relative;
+      top: 140px;
+      background-color: #fff;
+
+      .modalSubCategory {
+        display: flex;
+        flex-direction: column;
+        min-width: 140px;
+        padding: 5px 0;
+        font-size: 16px;
+
+        .modalCategoryLink {
+          min-width: 140px;
+          margin-bottom: 10px;
+          padding: 5px;
+          color: rgb(63, 62, 62);
+          text-align: center;
+          font-size: 15px;
+
+          &:hover {
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+
+  .emptyBackgroundBox {
+    position: absolute;
+    top: 0;
+    width: 1200px;
+    height: 140px;
+    background-color: white;
+
+    .headerMenu {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0px 30px 20px;
+
+      .logo {
+        display: flex;
+        justify-content: space-between;
+
+        .logoImg {
+          margin: 20px;
+          width: 200px;
+        }
+      }
+
+      .headerListWrapper {
+        display: flex;
+        align-items: center;
+
+        .headerLink {
+          padding: 10px;
+          color: #aaa;
+          font-size: 13px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .navBar {
+    display: flex;
+    position: absolute;
+    top: 100px;
+    width: 1200px;
+
+    .dropdownMenu {
+      display: flex;
+      width: 750px;
+
+      .dropdown {
+        position: relative;
+
+        &:hover .dropdownContent {
+          display: block;
+        }
+
+        .hiddenDropdownContent {
+          display: none;
+        }
+
+        .dropBtn {
+          min-width: 140px;
+          border: none;
+          outline: none;
+          color: #000;
+          background-color: white;
+          font-size: 16px;
+          cursor: pointer;
+
+          &:hover .dropIcon {
+            opacity: 1;
+          }
+
+          .dropIcon {
+            margin: 5px 0 5px 0;
+            font-size: 13px;
+            opacity: 0;
+          }
+        }
+
+        .dropdownContent {
+          display: none;
+          min-width: 160px;
+          position: absolute;
+          top: 90%;
+          left: 50%;
+          padding: 5px;
+          background-color: white;
+          text-align: center;
+          font-size: 15px;
+          transform: translate(-50%);
+
+          .categoryLink {
+            display: block;
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            color: #666;
+            text-decoration: none;
+
+            &:hover {
+              color: #000;
+            }
+          }
+        }
+      }
+    }
+
+    .searchBar {
+      display: flex;
+      margin-left: 140px;
+      padding-bottom: 15px;
+
+      .inputDiv {
+        position: relative;
+
+        .inputBox {
+          width: 220px;
+          padding: 3px 3px;
+          border: none;
+          border-bottom: solid 2px #000;
+          outline: none;
+          font-family: 'Spoqa Han Sans Neo';
+
+          &::placeholder {
+            padding: 20px;
+            font-size: 13px;
+          }
+        }
+
+        .search {
+          position: absolute;
+          right: 10px;
+          color: #000;
+          cursor: pointer;
+        }
+      }
+
+      .shoppingCart {
+        margin: 0 20px;
+        cursor: pointer;
+      }
+
+      .bars {
+        cursor: pointer;
+      }
+    }
+  }
+}
