@@ -27,7 +27,11 @@ class ProductCard extends React.Component {
         onMouseOut={this.toggleImgHover}
       >
         <Link to="/products/id">
-          <img src={isHover ? hoverImgUrl : imgUrl} alt={name} />
+          <img
+            className="productImg"
+            src={isHover ? hoverImgUrl : imgUrl}
+            alt={name}
+          />
         </Link>
         <span className="productName">{name}</span>
         <div className="productPrice">

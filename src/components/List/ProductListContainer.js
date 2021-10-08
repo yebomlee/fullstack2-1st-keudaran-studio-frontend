@@ -28,7 +28,7 @@ class ProductListContainer extends React.Component {
         for (let k = 0; k < subCategory.length; k++) {
           arr.push(...subCategory[k].products);
         }
-        const newArr = arr.map((product, i) => {
+        const indexedAllProducts = arr.map((product, i) => {
           return {
             id: i,
             name: product.name,
@@ -36,18 +36,18 @@ class ProductListContainer extends React.Component {
             price: product.price,
           };
         });
-        this.setState({ indexedAllProducts: newArr });
+        this.setState({ indexedAllProducts: indexedAllProducts });
       });
   }
 
   render() {
     const { indexedAllProducts, allProducts } = this.state;
     const { selectedSubCategory } = this.props;
-    let fileringProduct = [];
+    let filteringProduct = [];
     if (selectedSubCategory === 0) {
-      fileringProduct = indexedAllProducts;
+      filteringProduct = indexedAllProducts;
     } else {
-      fileringProduct = JSON.parse(
+      filteringProduct = JSON.parse(
         JSON.stringify(allProducts[selectedSubCategory - 1].products)
       );
     }
@@ -55,18 +55,17 @@ class ProductListContainer extends React.Component {
     return (
       <div className="ProductListContainer">
         <ul className="productCard">
-          {fileringProduct.map(products => {
+          {filteringProduct.map(products => {
             return (
               <ProductCard
                 key={products.id}
                 name={products.name}
                 imgUrl={products.imgUrl[0]}
                 hoverImgUrl={products.imgUrl[1]}
-                price={products.price}
+                price={products.price.toLocaleString()}
               />
             );
           })}
-          ;
         </ul>
       </div>
     );
