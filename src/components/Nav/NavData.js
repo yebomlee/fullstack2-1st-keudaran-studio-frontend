@@ -1,5 +1,12 @@
+const headerMenu = [
+  { id: 1, name: 'JOIN US' },
+  { id: 2, name: 'LOGIN' },
+  { id: 3, name: 'ORDER' },
+  { id: 4, name: 'MY PAGE' },
+];
+
 const category = [
-  { id: 1, link: '/', name: 'All', subCategory: ['All', 'New', 'Best'] },
+  { id: 1, name: 'All', subCategory: ['All', 'New', 'Best'] },
   {
     id: 2,
     name: 'Stationery',
@@ -25,7 +32,7 @@ const category = [
       'Griptok',
       'Phone Case',
       'Etc',
-      'Case/Pouch',
+      'Case / Pouch',
       'Buds Case',
     ],
   },
@@ -38,4 +45,4 @@ const category = [
   { id: 6, name: 'EVENT', subCategory: ['All'] },
 ];
 
-export default category;
+export { headerMenu, category };

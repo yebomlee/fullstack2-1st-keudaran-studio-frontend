@@ -6,7 +6,7 @@ import {
   faShoppingCart,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
-import category from './NavData';
+import { headerMenu, category } from './NavData';
 import './Nav.scss';
 
 class Nav extends Component {
@@ -58,26 +58,13 @@ class Nav extends Component {
               </Link>
             </h1>
             <ul className="headerListWrapper">
-              <li className="headerList">
-                <Link to="/signin" className="headerLink">
-                  JOIN US
-                </Link>
-              </li>
-              <li className="headerList">
-                <Link to="/signup" className="headerLink">
-                  LOGIN
-                </Link>
-              </li>
-              <li className="headerList">
-                <Link to="" className="headerLink">
-                  ORDER
-                </Link>
-              </li>
-              <li className="headerList">
-                <Link to="" className="headerLink">
-                  MY PAGE
-                </Link>
-              </li>
+              {headerMenu.map(data => {
+                return (
+                  <Link to="{}" className="headerLink">
+                    {data.name}
+                  </Link>
+                );
+              })}
             </ul>
           </header>
         </div>
@@ -88,15 +75,7 @@ class Nav extends Component {
                 <div className="dropdown">
                   <button className="dropBtn">
                     {data.name}
-                    <div
-                      className="dropIcon"
-                      // {
-                      //   this.state.isMenuListDown ? 'ddddd' : 'dropIcon'
-                      // }
-                    >
-                      {/* {`dropIcon ${this.state.isMenuListDowFn ? 'gojeong' : 'move'}`} */}
-                      ●
-                    </div>
+                    <div className="dropIcon">●</div>
                   </button>
                   <div
                     className={

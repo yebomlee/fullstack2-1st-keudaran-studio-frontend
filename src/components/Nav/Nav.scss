@@ -9,17 +9,20 @@
     position: relative;
     top: -440px;
     width: 100%;
-    height: 600px;
-    transition: all 1s ease-in-out;
+    height: 150px;
+    transition: all 1s ease-out;
+    opacity: 0;
 
     &.menuDown {
       top: 0;
+      opacity: 1;
     }
 
     .modalDropDown {
       display: flex;
       position: relative;
-      top: 160px;
+      top: 140px;
+      background-color: #fff;
 
       .modalSubCategory {
         display: flex;
@@ -30,11 +33,15 @@
 
         .modalCategoryLink {
           min-width: 140px;
+          margin-bottom: 10px;
           padding: 5px;
-          color: black;
+          color: rgb(63, 62, 62);
           text-align: center;
-          font-weight: bold;
-          font-family: 'Spoqa Han Sans Neo';
+          font-size: 15px;
+
+          &:hover {
+            color: #000;
+          }
         }
       }
     }
@@ -44,7 +51,7 @@
     position: absolute;
     top: 0;
     width: 1200px;
-    height: 160px;
+    height: 140px;
     background-color: white;
 
     .headerMenu {
@@ -104,42 +111,34 @@
           color: #000;
           background-color: white;
           font-size: 16px;
-          font-family: 'Spoqa Han Sans Neo';
           cursor: pointer;
-
-          // &:hover .dropBtn {
-          //   display: block;
-          // }
 
           &:hover .dropIcon {
             opacity: 1;
           }
 
-          // .dropBtn .ddddd {
-          //   opacity: 1;
-          // }
-
           .dropIcon {
-            font-size: 12px;
+            margin: 5px 0 5px 0;
+            font-size: 13px;
             opacity: 0;
           }
         }
 
         .dropdownContent {
           display: none;
-          min-width: 140px;
+          min-width: 160px;
           position: absolute;
           top: 90%;
           left: 50%;
           padding: 5px;
           background-color: white;
+          text-align: center;
           font-size: 15px;
-          font-family: 'Spoqa Han Sans Neo';
           transform: translate(-50%);
-          box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
           .categoryLink {
             display: block;
+            margin-bottom: 8px;
             padding: 5px 10px;
             color: #666;
             text-decoration: none;
@@ -154,7 +153,6 @@
 
     .searchBar {
       display: flex;
-      justify-content: flex-end;
       margin-left: 140px;
       padding-bottom: 15px;
 
@@ -167,6 +165,7 @@
           border: none;
           border-bottom: solid 2px #000;
           outline: none;
+          font-family: 'Spoqa Han Sans Neo';
 
           &::placeholder {
             padding: 20px;
@@ -178,11 +177,17 @@
           position: absolute;
           right: 10px;
           color: #000;
+          cursor: pointer;
         }
       }
 
       .shoppingCart {
         margin: 0 20px;
+        cursor: pointer;
+      }
+
+      .bars {
+        cursor: pointer;
       }
     }
   }
