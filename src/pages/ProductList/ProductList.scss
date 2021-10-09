@@ -19,6 +19,8 @@
     .stationeryCategory {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
+      width: 700px;
       color: #555555;
     }
   }

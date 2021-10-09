@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductListMdPicks from '../../components/List/ProductListMdPicks';
 import ProductSubCategory from '../../components/List/ProductSubCategory';
 import ProductListContainer from '../../components/List/ProductListContainer';
 import './ProductList.scss';
@@ -7,6 +8,7 @@ class ProductList extends React.Component {
   constructor() {
     super();
     this.state = {
+      mdProducts: [],
       subCategory: [],
       selectedSubCategory: 0,
     };
@@ -19,6 +21,32 @@ class ProductList extends React.Component {
   };
 
   componentDidMount() {
+    fetch('/data/subCategoryProduct.json')
+      .then(res => res.json())
+      .then(res => {
+        const sub = res.MAIN_CATEGORY.SUB_CATEGORY;
+        const subArr = [];
+        for (let i = 0; i < 3; i++) {
+          subArr.push(...sub[i].products);
+        }
+        const mdArr = [];
+        for (let j = 0; j < subArr.length; j++) {
+          if (subArr[j].id === 1) {
+            mdArr.push(subArr[j]);
+          }
+        }
+        console.log(mdArr);
+        const mdProducts = mdArr.map((product, i) => {
+          return {
+            id: i,
+            name: product.name,
+            imgUrl: product.imgUrl,
+            price: product.price,
+          };
+        });
+        this.setState({ mdProducts: mdProducts });
+      });
+
     fetch('/data/stationery.json')
       .then(res => res.json())
       .then(res => {
@@ -27,10 +55,12 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { subCategory, selectedSubCategory } = this.state;
+    const { mdProducts, subCategory, selectedSubCategory } = this.state;
     return (
       <div className="ProductList">
         <div className="productListWrapper">
+          <ProductListMdPicks mdProducts={mdProducts} />
+
           <div className="stationeryWrap">
             <div className="caterogyTitle">Stationery</div>
             <ul className="stationeryCategory">

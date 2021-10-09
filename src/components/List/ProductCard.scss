@@ -16,9 +16,15 @@
     display: flex;
     margin-top: 15px;
     padding: 5px 0;
+    font-family: sans-serif;
+  }
+
+  .productPrice {
+    font-family: sans-serif;
   }
 
   .productPrice span:first-child {
+    font-family: 'Lato', sans-serif;
     font-weight: 700;
   }
 }

@@ -26,7 +26,14 @@ class ProductCard extends React.Component {
         onMouseOver={this.toggleImgHover}
         onMouseOut={this.toggleImgHover}
       >
-        <Link to="/products/id">
+        <Link
+          to={{
+            pathname: `/products/`,
+            state: {
+              //id,
+            },
+          }}
+        >
           <img
             className="productImg"
             src={isHover ? hoverImgUrl : imgUrl}
