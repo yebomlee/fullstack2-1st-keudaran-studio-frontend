@@ -34,6 +34,22 @@ class ProductDetail extends Component {
     setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
   }
 
+  // componentDidMount() {   //차후 변경 예정 은정님이 아이디 서브카테고리 메인카테고리 줘야됨
+  //                          post로 바디에 담아서 백단에 요청
+  //   fetch('http://localhost:3000/data/product.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       const listId = this.props.location.state?.id;
+  //       let mainData = data['LIST_MENU'].find(el => listId === el.id);
+  //       if (!mainData) mainData = data[0];
+  //       this.setState({
+  //         productData
+  //         changeMainImg: productData.thumbailURL,
+  //       });
+  //     });
+  //       setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
+  // }
+
   clickChangeImg = e => {
     this.setState({
       changeMainImg: e.target.currentSrc,
@@ -178,10 +194,6 @@ class ProductDetail extends Component {
     return (
       <div className="Detail">
         <div className="total">
-          <header className="header">
-            <header className="navbar">상단 top</header>
-            <nav className="navbar">메뉴부분</nav>
-          </header>
           <section className="product">
             <div className="main">
               <ProductPhoto
@@ -216,7 +228,6 @@ class ProductDetail extends Component {
             changeStateEventShow={this.changeStateEventShow}
             changePositionScroll={this.changePositionScroll}
           ></HambergerIcon>
-          <footer className="footer">하단 footer</footer>
         </div>
       </div>
     );
