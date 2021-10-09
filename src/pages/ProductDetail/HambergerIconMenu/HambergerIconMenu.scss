@@ -1,0 +1,35 @@
+@import '/src/styles/mixin';
+
+.HambergerIconMenu {
+  .hambergerIcon {
+    align-self: flex-end; //햄버거바 하위로 메뉴넣고 fixed 메뉴는 absolute로 표기해야됨
+    position: fixed;
+    top: 30rem;
+    right: 2rem;
+    font-size: 50px;
+    color: grey;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+      color: green;
+    }
+  }
+  .hambergerMenuBox {
+    @include flexStyle(none, none, column);
+    position: fixed;
+    top: 35rem;
+    right: 1rem;
+    .menuButton {
+      @include flexStyle(none, center);
+      @include fontSizeWight(20px, bold gray);
+      @include fontFamily('Noto Sans KR', sans-serif);
+      padding: 10px;
+      border: 1px solid gray;
+      cursor: pointer;
+      &:hover {
+        @include fontSizeWight(20px, 500, green);
+        border: 4px solid green;
+      }
+    }
+  }
+}

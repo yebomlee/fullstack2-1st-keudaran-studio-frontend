@@ -1,6 +1,6 @@
 @import '/src/styles/mixin';
 
-.ProductContents {
+.ProductInfoContent {
   @include flexStyle(none, none, column);
   margin: 30px 0 50px;
 }
