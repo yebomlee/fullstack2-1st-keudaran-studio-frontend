@@ -83,7 +83,7 @@ class Review extends React.Component {
   render() {
     const { reviewList, isPolicyDetail, agreePolicy } = this.state;
     const averageRating = this.calculateRating(reviewList);
-    const ratingScore = averageRating / 20;
+    const ratingScore = Math.round((averageRating / 20) * 10) / 10;
     return (
       <div className="Review">
         <div className="reviewInner">
