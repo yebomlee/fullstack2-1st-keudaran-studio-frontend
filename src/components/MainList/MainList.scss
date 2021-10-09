@@ -1,0 +1,9 @@
+.MainList {
+  width: 1200px;
+  margin: 0 auto;
+  .productListWraper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
