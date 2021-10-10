@@ -6,7 +6,7 @@ import {
   faShoppingCart,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
-import { headerMenu, category } from './NavData';
+import { headerMenu } from './NavData';
 import './Nav.scss';
 
 class Nav extends Component {
@@ -14,12 +14,23 @@ class Nav extends Component {
     super(props);
     this.state = {
       isMenuListDown: false,
+      category: [],
     };
   }
 
   scrollDownMenuList = () => {
     this.setState({ isMenuListDown: !this.state.isMenuListDown });
   };
+
+  componentDidMount() {
+    fetch('/data/navCategory.json', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ category: data.CATEGORY });
+      });
+  }
 
   render() {
     return (
@@ -30,13 +41,13 @@ class Nav extends Component {
           }
         >
           <div className="modalDropDown">
-            {category.map(data => {
+            {this.state.category.map(data => {
               return (
                 <div className="modalSubCategory">
                   {data.subCategory.map(data => {
                     return (
                       <Link to="{}" className="modalCategoryLink">
-                        {data}
+                        {data.name}
                       </Link>
                     );
                   })}
@@ -70,7 +81,7 @@ class Nav extends Component {
         </div>
         <nav className="navBar">
           <div className="dropdownMenu">
-            {category.map(data => {
+            {this.state.category.map(data => {
               return (
                 <div className="dropdown">
                   <button className="dropBtn">
@@ -87,7 +98,7 @@ class Nav extends Component {
                     {data.subCategory.map(data => {
                       return (
                         <Link to="{}" className="categoryLink">
-                          {data}
+                          {data.name}
                         </Link>
                       );
                     })}
