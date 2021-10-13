@@ -30,4 +30,15 @@
       }
     }
   }
+  .productReview {
+    margin: 300px 0 50px 0;
+    .areviewTitle {
+      @include fontSizeWight(30px, bold);
+      @include fontFamily('Noto Sans KR', sans-serif);
+      width: 300px;
+      margin: 0 0 100px 0;
+      padding: 0 0 20px 40px;
+      border-bottom: 10px solid #84bd76;
+    }
+  }
 }

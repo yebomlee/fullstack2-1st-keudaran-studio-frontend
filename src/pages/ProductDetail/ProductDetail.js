@@ -175,7 +175,7 @@ class ProductDetail extends Component {
   changePositionScroll = whereMovePosition => {
     const MOVE_PHOTO_POSITION = 0;
     const MOVE_INFO_POSITION = 1150;
-    const MOVE_REVIEW_POSITION = 3100;
+    const MOVE_REVIEW_POSITION = 10000;
     const moveSroll = movePosition => {
       const position = { top: movePosition, left: 0, behavior: 'smooth' };
       window.scrollTo(position);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ProductInfoContent from './ProductInfoContent';
-import ProductReview from './ProductReview';
+import Review from '../../../components/Review/Review';
 import './ProductInfo.scss';
 
 class ProductInfo extends Component {
@@ -26,7 +26,10 @@ class ProductInfo extends Component {
           </li>
         </ul>
         <ProductInfoContent descriptionImageUrl={descriptionImageUrl} />
-        <ProductReview />
+        <div className="productReview">
+          <strong className="areviewTitle">상품 후기</strong>
+          <Review />
+        </div>
       </div>
     );
   }
