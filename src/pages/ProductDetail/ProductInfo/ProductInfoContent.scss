@@ -1,6 +1,9 @@
 @import '/src/styles/mixin';
 
 .ProductInfoContent {
-  @include flexStyle(none, none, column);
+  @include flexStyle(center, none, column);
   margin: 30px 0 50px;
+  img {
+    width: 1000px;
+  }
 }
