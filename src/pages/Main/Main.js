@@ -1,8 +1,12 @@
 import React from 'react';
-
+import BestReviewCarousel from '../../components/BestReviewCarousel/BestReviewCarousel';
 class Main extends React.Component {
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <BestReviewCarousel />
+      </div>
+    );
   }
 }
 
