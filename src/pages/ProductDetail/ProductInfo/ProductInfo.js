@@ -5,7 +5,7 @@ import './ProductInfo.scss';
 
 class ProductInfo extends Component {
   render() {
-    const { clickMenu, changePositionScroll } = this.props;
+    const { clickMenu, changePositionScroll, descriptionImageUrl } = this.props;
     const whatColotMenu = menu =>
       clickMenu === menu ? 'yesChangeColor' : 'notChangeColor';
 
@@ -25,7 +25,7 @@ class ProductInfo extends Component {
             상품후기
           </li>
         </ul>
-        <ProductInfoContent />
+        <ProductInfoContent descriptionImageUrl={descriptionImageUrl} />
         <ProductReview />
       </div>
     );

@@ -34,7 +34,7 @@ class ProductPhoto extends Component {
                 <li className="subImage" key={el.id}>
                   <img
                     alt={name}
-                    src={el.imagURL}
+                    src={el.imageUrl}
                     onMouseOver={clickChangeImg}
                   />
                 </li>
