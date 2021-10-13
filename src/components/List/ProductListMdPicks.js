@@ -12,7 +12,7 @@ class ProductListMdPicks extends React.Component {
           <p className="line"></p>
         </div>
         <ul className="mdBox">
-          {{ mdProducts }.map(md => {
+          {mdProducts.map(md => {
             return (
               <ProductCard
                 key={md.id}

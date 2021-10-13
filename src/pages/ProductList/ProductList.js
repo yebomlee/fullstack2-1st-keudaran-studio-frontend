@@ -29,13 +29,14 @@ class ProductList extends React.Component {
         for (let i = 0; i < 3; i++) {
           subArr.push(...sub[i].products);
         }
+
         const mdArr = [];
         for (let j = 0; j < subArr.length; j++) {
           if (subArr[j].id === 1) {
             mdArr.push(subArr[j]);
           }
         }
-        console.log(mdArr);
+
         const mdProducts = mdArr.map((product, i) => {
           return {
             id: i,
@@ -61,9 +62,9 @@ class ProductList extends React.Component {
         <div className="productListWrapper">
           <ProductListMdPicks mdProducts={mdProducts} />
 
-          <div className="stationeryWrap">
-            <div className="caterogyTitle">Stationery</div>
-            <ul className="stationeryCategory">
+          <div className="productListWrap">
+            <div className="subCaterogyTitle">Stationery</div>
+            <ul className="subCategory">
               {subCategory.map(sub => {
                 return (
                   <ProductSubCategory
