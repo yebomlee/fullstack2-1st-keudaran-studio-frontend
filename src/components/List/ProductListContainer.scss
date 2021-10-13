@@ -1,9 +1,9 @@
-.productCard {
+.productContainer {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
 }
 
-.productCard li:nth-child(3n) {
+.productContainer li:nth-child(3n) {
   margin: 0 0 100px 0;
 }

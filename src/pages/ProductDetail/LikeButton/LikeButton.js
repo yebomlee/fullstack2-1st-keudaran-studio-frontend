@@ -5,13 +5,13 @@ import './LikeButton.scss';
 
 class LikeButton extends Component {
   render() {
-    const { isLikedProduct, clickLikedProduct } = this.props;
+    const { isLikedProduct, changeStateEventShow } = this.props;
     return (
       <div className="LikeButton">
         <FontAwesomeIcon
           className={isLikedProduct ? 'likeButton changeColor' : 'likeButton'}
           icon={faHeart}
-          onClick={clickLikedProduct}
+          onClick={() => changeStateEventShow('like')}
         />
       </div>
     );

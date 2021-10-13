@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import ChoiceOption from './ChoiceOption';
-import LikeButton from './LikeButton';
+import LikeButton from '../LikeButton/LikeButton';
+import ChoiceOptionBox from '../ChoiceOptionBox/ChoiceOptionBox';
+import ShareKakaoLink from '../ShareKakaoLink/ShareKakaoLink';
 import './ProductDescription.scss';
 
 class ProductDescription extends Component {
   render() {
     const { id, name, price, point, options } = this.props;
     const { origin, brand, shippingFee } = this.props;
-    const { isLikedProduct, choiceOptionArray } = this.props;
+    const { isLikedProduct, choiceOptionArray, isSharedLinkMenu } = this.props;
     const {
       increaseCounter,
       decreaseCounter,
       choiceOptionChange,
-      clickLikedProduct,
+      changeStateEventShow,
       deleteChoiceOption,
     } = this.props;
     let totalCount = 0;
@@ -22,6 +24,7 @@ class ProductDescription extends Component {
     const totalPrice = totalCount * price;
     return (
       <section className="ProductDescription" key={id}>
+        <ShareKakaoLink {...{ isSharedLinkMenu, changeStateEventShow }} />
         <h3>{name} </h3>
         <p className="price">
           {price} <em>원</em>
@@ -56,22 +59,7 @@ class ProductDescription extends Component {
               </tr>
             </tbody>
           </table>
-          <dl className="option">
-            <dt className="optionText">옵션</dt>
-            <dd>
-              <select className="optionBox" onChange={choiceOptionChange}>
-                <option value={[]}>옵션 선택</option>
-                {options?.map(option => {
-                  const { id, name, quantity } = option;
-                  return (
-                    <option value={name} key={id}>
-                      {name} ({quantity})
-                    </option>
-                  );
-                })}
-              </select>
-            </dd>
-          </dl>
+          <ChoiceOptionBox {...{ options, choiceOptionChange }} />
           {choiceOptionArray.map(choiceOption => {
             return (
               <ChoiceOption
@@ -113,7 +101,7 @@ class ProductDescription extends Component {
           </p>
           <LikeButton
             className="ChangeHeart"
-            {...{ isLikedProduct, clickLikedProduct }}
+            {...{ isLikedProduct, changeStateEventShow }}
           />
         </div>
       </section>
