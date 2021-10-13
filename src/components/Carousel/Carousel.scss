@@ -1,65 +1,74 @@
 .Carousel {
   display: block;
   position: relative;
-  width: 1200px;
   margin: 0 auto;
-  overflow: hidden;
+  z-index: 0;
 
-  .container {
-    display: flex;
-    flex-direction: row;
+  .btnNorm {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
 
-    .inner {
-      float: left;
+    .containerWraper {
+      position: relative;
+      width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
 
-      img {
-        height: 450px;
-        object-fit: cover;
+      .container {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .transformTimeOn {
+        transition: transform 1s;
       }
     }
 
-    &:hover {
-      animation-play-state: paused;
+    .leftBtn {
+      position: absolute;
+      top: 220px;
+      left: -70px;
+      width: 45px;
+      height: 45px;
+      padding-right: 5px;
+      border: 4px solid grey;
+      border-radius: 50px;
+      font-size: 50px;
+      color: grey;
+      &:hover {
+        opacity: 0.6;
+      }
+      &:active {
+        opacity: 0.1;
+      }
+    }
+
+    .rightBtn {
+      position: absolute;
+      top: 220px;
+      right: -70px;
+      width: 45px;
+      height: 45px;
+      padding-left: 5px;
+      border: 4px solid grey;
+      border-radius: 50px;
+      font-size: 50px;
+      color: grey;
+      &:hover {
+        opacity: 0.6;
+      }
+      &:active {
+        opacity: 0.1;
+      }
     }
   }
 
-  .transformTimeOn {
-    transition: transform 1s;
-  }
-}
-
-.dotBtnWraper {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  bottom: 30px;
-  left: 45%;
-}
-
-.leftBtn {
-  position: absolute;
-  top: 45%;
-  left: 5%;
-  font-size: 50px;
-  color: grey;
-  &:hover {
-    opacity: 0.6;
-  }
-  &:active {
-    opacity: 0.1;
-  }
-}
-
-.rightBtn {
-  position: absolute;
-  top: 45%;
-  right: 5%;
-  font-size: 50px;
-  color: grey;
-  &:hover {
-    opacity: 0.6;
-  }
-  &:active {
-    opacity: 0.1;
+  .dotBtnWraper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    bottom: 30px;
+    left: 45%;
   }
 }
