@@ -56,11 +56,11 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { mdProducts, subCategory, selectedSubCategory } = this.state;
+    const { id, mdProducts, subCategory, selectedSubCategory } = this.state;
     return (
       <div className="ProductList">
         <div className="productListWrapper">
-          <ProductListMdPicks mdProducts={mdProducts} />
+          <ProductListMdPicks id={id} mdProducts={mdProducts} />
 
           <div className="productListWrap">
             <div className="subCaterogyTitle">Stationery</div>

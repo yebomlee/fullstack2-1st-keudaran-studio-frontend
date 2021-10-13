@@ -19,7 +19,7 @@ class ProductCard extends React.Component {
 
   render() {
     const { isHover } = this.state;
-    const { name, price, hoverImgUrl, imgUrl } = this.props;
+    const { id, name, price, hoverImgUrl, imgUrl } = this.props;
     return (
       <li
         className="ProductCard"
@@ -28,10 +28,7 @@ class ProductCard extends React.Component {
       >
         <Link
           to={{
-            pathname: `/products/`,
-            state: {
-              //id,
-            },
+            pathname: `/products/${id + 1}`,
           }}
         >
           <img

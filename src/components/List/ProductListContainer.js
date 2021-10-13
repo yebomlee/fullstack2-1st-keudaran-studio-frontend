@@ -59,6 +59,7 @@ class ProductListContainer extends React.Component {
             return (
               <ProductCard
                 key={products.id}
+                id={products.id}
                 name={products.name}
                 imgUrl={products.imgUrl[0]}
                 hoverImgUrl={products.imgUrl[1]}
