@@ -1,0 +1,33 @@
+@import '/src/styles/mixin';
+
+.ProductInfo {
+  .middleMenu {
+    @include flexStyle(none, space-around);
+    position: sticky;
+    top: 0;
+
+    li {
+      @include flexStyle(center, center);
+      @include widthHeight(600px, 60px);
+      @include fontSizeWight(20px, none, none);
+      border-bottom: 1px solid #000;
+      &:hover {
+        @include fontSizeWight(20px, bold, none);
+      }
+    }
+
+    .yesChangeColor {
+      background-color: #333;
+      @include fontSizeWight(none, none, #fff);
+    }
+
+    .notChangeColor {
+      background-color: #fff;
+      @include fontSizeWight(none, none, #8b8b8b);
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+}

@@ -1,12 +1,10 @@
 .SlideImage {
   .inner {
-    width: 100vw;
     float: left;
-    z-index: 1;
 
     img {
-      width: 100vw;
-      height: 30vw;
+      width: 1500px;
+      height: 500px;
       object-fit: fill;
     }
   }

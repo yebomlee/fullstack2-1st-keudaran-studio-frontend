@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
-import ProductMiddleNav from './ProductMiddleNav/ProductMiddleNav';
-import ProductContents from './ProductContents/ProductContents';
+import ProductInfo from './ProductInfo/ProductInfo';
+import HambergerIcon from './HambergerIconMenu/HambergerIconMenu';
 import productData from './productData.json';
 import descriptionData from './descriptionData.json';
 import './ProductDetail.scss';
@@ -18,6 +18,9 @@ class ProductDetail extends Component {
       changeMainImg: '',
       isLikedProduct: 0,
       choiceOptionArray: [],
+      isPositionMenu: false,
+      isSharedLinkMenu: false,
+      clickMenu: '',
     };
   }
 
@@ -30,6 +33,22 @@ class ProductDetail extends Component {
     });
     setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
   }
+
+  // componentDidMount() {   //차후 변경 예정 은정님이 아이디 서브카테고리 메인카테고리 줘야됨
+  //                          post로 바디에 담아서 백단에 요청
+  //   fetch('http://localhost:3000/data/product.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       const listId = this.props.location.state?.id;
+  //       let mainData = data['LIST_MENU'].find(el => listId === el.id);
+  //       if (!mainData) mainData = data[0];
+  //       this.setState({
+  //         productData
+  //         changeMainImg: productData.thumbailURL,
+  //       });
+  //     });
+  //       setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
+  // }
 
   clickChangeImg = e => {
     this.setState({
@@ -112,11 +131,21 @@ class ProductDetail extends Component {
     });
   };
 
-  clickLikedProduct = () => {
-    const { isLikedProduct } = this.state;
-    this.setState({
-      isLikedProduct: !isLikedProduct,
-    });
+  changeStateEventShow = role => {
+    const { isLikedProduct, isMovePositionMenu, isSharedLinkMenu } = this.state;
+    if (role === 'like') {
+      this.setState({
+        isLikedProduct: !isLikedProduct,
+      });
+    } else if (role === 'move') {
+      this.setState({
+        isMovePositionMenu: !isMovePositionMenu,
+      });
+    } else {
+      this.setState({
+        isSharedLinkMenu: !isSharedLinkMenu,
+      });
+    }
   };
 
   deleteChoiceOption = id => {
@@ -126,18 +155,45 @@ class ProductDetail extends Component {
     this.setState({ choiceOptionArray });
   };
 
+  changePositionScroll = whereMovePosition => {
+    const MOVE_PHOTO_POSITION = 0;
+    const MOVE_INFO_POSITION = 1150;
+    const MOVE_REVIEW_POSITION = 3100;
+    const moveSroll = movePosition => {
+      const position = { top: movePosition, left: 0, behavior: 'smooth' };
+      window.scrollTo(position);
+    };
+    this.setState({
+      clickMenu: whereMovePosition,
+    });
+    if (whereMovePosition === 'info') moveSroll(MOVE_INFO_POSITION);
+    else if (whereMovePosition === 'review') moveSroll(MOVE_REVIEW_POSITION);
+    else moveSroll(MOVE_PHOTO_POSITION);
+  };
+
+  showSharedLinkMenu = () => {
+    const { isSharedLinkMenu } = this.state;
+    this.setState({
+      isSharedLinkMenu: !isSharedLinkMenu,
+    });
+  };
+
   render() {
     const { id, name, price, point, productImgs, options } =
       this.state.productData;
     const { origin, brand, shippingFee } = this.state.descriptionData;
-    const { changeMainImg, isLikedProduct, choiceOptionArray } = this.state;
+    const {
+      changeMainImg,
+      isLikedProduct,
+      choiceOptionArray,
+      isMovePositionMenu,
+      isSharedLinkMenu,
+      clickMenu,
+    } = this.state;
+
     return (
       <div className="Detail">
         <div className="total">
-          <header className="header">
-            <header className="navbar">상단 top</header>
-            <nav className="navbar">메뉴부분</nav>
-          </header>
           <section className="product">
             <div className="main">
               <ProductPhoto
@@ -151,20 +207,27 @@ class ProductDetail extends Component {
                 {...{
                   isLikedProduct,
                   choiceOptionArray,
+                  isSharedLinkMenu,
                 }}
                 increaseCounter={this.increaseCounter}
                 decreaseCounter={this.decreaseCounter}
                 choiceOptionChange={this.choiceOptionChange}
-                clickLikedProduct={this.clickLikedProduct}
+                changeStateEventShow={this.changeStateEventShow}
                 deleteChoiceOption={this.deleteChoiceOption}
               />
             </div>
             <article className="content">
-              <ProductMiddleNav />
-              <ProductContents />
+              <ProductInfo
+                clickMenu={clickMenu}
+                changePositionScroll={this.changePositionScroll}
+              />
             </article>
           </section>
-          <footer className="footer">하단 footer</footer>
+          <HambergerIcon
+            {...{ isMovePositionMenu }}
+            changeStateEventShow={this.changeStateEventShow}
+            changePositionScroll={this.changePositionScroll}
+          ></HambergerIcon>
         </div>
       </div>
     );
