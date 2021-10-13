@@ -23,17 +23,23 @@ class ReviewCard extends Component {
           />
           <div className="reviewTextWraper">
             <p className="reviewText">{text}</p>
-            <span className="rate">{rate}</span>
-            <span className="userId">{userId}</span>
-          </div>
-          {/* <Link to={`/products/${porductId}`}> */}
-          <div className="productWraper">
-            <img className="productImg" src={productImgUrl} alt={productName} />
-            <p className="productName">
-              {productName + '이름이 겁나 길면 어떻게 될까?'}
+            <p className="rateBox">
+              <span className="rate">{rate}</span>
+              <span className="userId">{userId}</span>
             </p>
           </div>
-          {/* </Link> */}
+          <Link to={`/products/${porductId}`}>
+            <div className="productWraper">
+              <img
+                className="productImg"
+                src={productImgUrl}
+                alt={productName}
+              />
+              <div className="textBox">
+                <p className="productName">{productName}</p>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     );

@@ -12,47 +12,24 @@ class BestReviewCarousel extends Component {
     this.state = {
       reviews: reviews,
       currentIdx: 0,
-      isTransformTimeOn: true,
     };
   }
-
-  componentDidMount() {
-    // this.startAutoSlide();
-  }
-
-  componentWillUnmount() {
-    this.stopAutoSlide();
-  }
-
-  startAutoSlide = () => {
-    const INTERVAL_TIME_MS = 3000;
-    const LAST_IMG_WAITING_TIME_MS = 900;
-    if (this.autoSlideId) return;
-
-    this.autoSlideId = setInterval(() => {
-      if (this.state.currentIdx === this.state.reviews.length - 1) {
-        this.setState({
-          currentIdx: this.state.reviews.length,
-        });
-        setTimeout(() => {
-          this.setState({ isTransformTimeOn: false });
-          this.setState({ currentIdx: 0 });
-        }, LAST_IMG_WAITING_TIME_MS);
-      } else {
-        this.setState({ isTransformTimeOn: true });
-        this.setState({ currentIdx: this.state.currentIdx + 1 });
-      }
-    }, INTERVAL_TIME_MS);
-  };
-
-  stopAutoSlide = () => {
-    clearInterval(this.autoSlideId);
-  };
+  // 백엔드 API 수정 후 시간 나면
+  // componentDidMount() {
+  //   console.log('hello');
+  //   fetch('/review?id=2&sort=rating', {
+  //     method: 'GET',
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log(data.result);
+  //       this.setState({ reviews: data.result });
+  //     });
+  // }
 
   slideToRight = () => {
     const { currentIdx, reviews } = this.state;
-    if (currentIdx === 0) this.setState({ isTransformTimeOn: true });
-    if (currentIdx === reviews.length - 1) return;
+    if (currentIdx === reviews.length / 4 - 1) return;
     this.setState({ currentIdx: currentIdx + 1 });
   };
 
@@ -80,11 +57,9 @@ class BestReviewCarousel extends Component {
               }`}
               style={{ transform: `translateX(${-currentIdx * 1200}px)` }}
             >
-              {reviews.map(review => {
-                return <ReviewCard key={review.id} review={review} />;
+              {reviews.map((review, i) => {
+                return <ReviewCard key={i} review={review} />;
               })}
-
-              {/* 무한회전을 위한 아이템 */}
             </div>
           </div>
           <FontAwesomeIcon
