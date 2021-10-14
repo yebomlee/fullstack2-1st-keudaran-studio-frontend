@@ -9,10 +9,11 @@
     li {
       @include flexStyle(center, center);
       @include widthHeight(600px, 60px);
-      @include fontSizeWight(20px, none, none);
+      @include fontSizeWight(22px, none, none);
       border-bottom: 1px solid #000;
+      cursor: pointer;
       &:hover {
-        @include fontSizeWight(20px, bold, none);
+        @include fontSizeWight(26px, bold, none);
       }
     }
 
@@ -30,15 +31,12 @@
       }
     }
   }
-  .productReview {
-    margin: 300px 0 50px 0;
-    .areviewTitle {
-      @include fontSizeWight(30px, bold);
-      @include fontFamily('Noto Sans KR', sans-serif);
-      width: 300px;
-      margin: 0 0 100px 0;
-      padding: 0 0 20px 40px;
-      border-bottom: 10px solid #84bd76;
-    }
+  .reviewTitle {
+    @include fontSizeWight(30px, bold);
+    @include fontFamily('Noto Sans KR', sans-serif);
+    width: 300px;
+    margin: 200px 0 120px 0;
+    padding: 0 0 20px 40px;
+    border-bottom: 10px solid #84bd76;
   }
 }

@@ -87,7 +87,6 @@ class Review extends React.Component {
     return (
       <div className="Review">
         <div className="reviewInner">
-          <h1 className="reviewTitle">REVIEW</h1>
           <div className="reviewRate">
             <div className="userRateWrap">
               <p className="rateTotal">사용자 총 평점</p>
