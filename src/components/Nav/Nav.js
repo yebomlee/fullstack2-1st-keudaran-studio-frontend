@@ -19,10 +19,6 @@ class Nav extends Component {
     };
   }
 
-  // scrollDownMenuList = () => {
-  //   this.setState({ isMenuListDown: !this.state.isMenuListDown });
-  // };
-
   scrollDownMenuList = e => {
     if (this.state.isMenuListDown) {
       this.closeMenu();
@@ -94,7 +90,15 @@ class Nav extends Component {
                 />
               </Link>
             </h1>
+
             <ul className="headerListWrapper">
+              <span className="welcoming">
+                WELCOME
+                <span className="userName">
+                  {'  ' + new Cookies().get('user').id + '  '}
+                </span>
+                <span className="imoji">🦖</span>
+              </span>
               <>
                 {!isLogin ? (
                   <>
