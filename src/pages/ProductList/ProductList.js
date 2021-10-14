@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'qs';
 import ProductSubCategory from '../../components/List/ProductSubCategory';
 import ProductListContainer from '../../components/List/ProductListContainer';
 import './ProductList.scss';
@@ -7,6 +8,7 @@ class ProductList extends React.Component {
   constructor() {
     super();
     this.state = {
+      allCategoryData: '',
       subCategory: [],
       selectedSubCategory: 0,
     };
@@ -19,32 +21,46 @@ class ProductList extends React.Component {
   };
 
   componentDidMount() {
-    fetch('/data/stationery.json')
+    fetch('/category', {
+      method: 'GET',
+    })
       .then(res => res.json())
-      .then(res => {
-        this.setState({ subCategory: res.STATIONERY });
+      .then(data => {
+        this.setState({ allCategoryData: data.categories });
       });
   }
 
   render() {
-    const { subCategory, selectedSubCategory } = this.state;
+    const { selectedSubCategory } = this.state;
+    const { location } = this.props;
+    const query = qs.parse(location.search, { ignoreQueryPrefix: true });
     return (
       <div className="ProductList">
         <div className="productListWrapper">
           <div className="stationeryWrap">
-            <div className="caterogyTitle">Stationery</div>
+            {this.state.allCategoryData && (
+              <div className="caterogyTitle">
+                {this.state.allCategoryData[+query.main - 1].name}
+              </div>
+            )}
             <ul className="stationeryCategory">
-              {subCategory.map(sub => {
-                return (
-                  <ProductSubCategory
-                    key={sub.id}
-                    id={sub.id}
-                    name={sub.name}
-                    selectedSubCategory={selectedSubCategory}
-                    selectSubCategory={this.selectSubCategory}
-                  />
-                );
-              })}
+              {/* {subCategory.map(sub => { */}
+              {this.state.allCategoryData &&
+                this.state.allCategoryData[+query.main - 1].subCategory.map(
+                  (sub, idx) => {
+                    return (
+                      <ProductSubCategory
+                        key={sub.id}
+                        id={sub.id}
+                        name={sub.name}
+                        selectedSubCategory={selectedSubCategory}
+                        selectSubCategory={this.selectSubCategory}
+                        idx={idx}
+                        main={+query.main}
+                      />
+                    );
+                  }
+                )}
             </ul>
           </div>
 
