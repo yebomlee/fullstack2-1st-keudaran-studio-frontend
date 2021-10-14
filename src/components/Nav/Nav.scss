@@ -77,11 +77,32 @@
         display: flex;
         align-items: center;
 
+        .welcoming {
+          margin-right: 10px;
+          color: #aaa;
+          font-size: 12px;
+          font-weight: bold;
+          font-family: 'Spoqa Han Sans Neo';
+          line-height: 3px;
+
+          .imoji {
+            font-size: 20px;
+          }
+
+          .userName {
+            color: #29b473;
+            margin: 0 4px;
+            font-weight: bold;
+            font-size: 14px;
+          }
+        }
+
         .headerLink {
           padding: 10px;
           color: #aaa;
           font-size: 13px;
           font-weight: bold;
+          font-family: 'Spoqa Han Sans Neo';
         }
       }
     }

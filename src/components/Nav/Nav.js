@@ -89,7 +89,15 @@ class Nav extends Component {
                 />
               </Link>
             </h1>
+
             <ul className="headerListWrapper">
+              <span className="welcoming">
+                WELCOME
+                <span className="userName">
+                  {'  ' + new Cookies().get('user').id + '  '}
+                </span>
+                <span className="imoji">🦖</span>
+              </span>
               <>
                 {!isLogin ? (
                   <>

@@ -6,12 +6,12 @@
 
   .btnNorm {
     position: relative;
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
 
     .containerWraper {
       position: relative;
-      width: 1200px;
+      max-width: 1200px;
       margin: 0 auto;
       overflow: hidden;
 
@@ -67,8 +67,8 @@
   .dotBtnWraper {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     position: relative;
-    bottom: 30px;
-    left: 45%;
+    bottom: 35px;
   }
 }

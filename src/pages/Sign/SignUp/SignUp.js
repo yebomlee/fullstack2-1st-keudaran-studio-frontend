@@ -166,7 +166,6 @@ class SignUp extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.message === 'SIGN_UP_SUCCESS') {
           alert('회원가입 성공!');
           this.props.history.push('/');
