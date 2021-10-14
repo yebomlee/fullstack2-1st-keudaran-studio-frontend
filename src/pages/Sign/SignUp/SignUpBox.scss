@@ -16,6 +16,7 @@
     border-top: 1px solid #000;
 
     .signUpForm {
+      position: relative;
       max-width: 680px;
       width: 100%;
       padding-top: 40px;
@@ -36,6 +37,28 @@
           font-size: 15px;
         }
       }
+      .uniqueIdDeclare {
+        position: absolute;
+        top: 111.1px;
+        right: 110px;
+        // color: #23a267;
+        color: #0549bb;
+        font-weight: 600;
+      }
+      .duplicateTestButton {
+        position: absolute;
+        top: 101px;
+        right: -20px;
+        margin: 0 40px 0 5px;
+        padding: 7px 15px 3px 15px;
+        border-radius: 3px;
+        background-color: #fff;
+        border: 1px solid #0549bb;
+        color: #0549bb;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
       .phoneInput {
         border-bottom: 1px solid #dadada;
       }
@@ -78,12 +101,13 @@
             font-weight: 600;
             line-height: 30px;
 
-            .littleGreyBtn {
+            .littleBlueBtn {
               margin: 0 40px 0 5px;
               padding: 5px 5px 3px 5px;
-              border-radius: 5px;
-              background-color: #eee;
-              border: 1px solid #adadad;
+              border-radius: 3px;
+              background-color: #fff;
+              border: 1px solid #0549bb;
+              color: #0549bb;
               font-size: 10px;
               cursor: pointer;
             }
