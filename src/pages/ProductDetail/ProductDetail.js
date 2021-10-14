@@ -4,6 +4,7 @@ import ProductDescription from './ProductDescription/ProductDescription';
 import ProductInfo from './ProductInfo/ProductInfo';
 import HambergerIcon from './HambergerIconMenu/HambergerIconMenu';
 import './ProductDetail.scss';
+import Cookies from 'universal-cookie';
 
 class ProductDetail extends Component {
   constructor() {
@@ -18,6 +19,7 @@ class ProductDetail extends Component {
       isPositionMenu: false,
       isSharedLinkMenu: false,
       clickMenu: '',
+      isLogin: false,
     };
   }
 
@@ -35,7 +37,18 @@ class ProductDetail extends Component {
         });
       });
     setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
+    this.checkLogin();
   }
+
+  checkLogin = () => {
+    if (new Cookies().get('user')) this.setState({ isLogin: true });
+  };
+
+  toggleIsLogin = () => {
+    new Cookies().get('user')
+      ? this.setState({ isLogin: true })
+      : this.setState({ isLogin: false });
+  };
 
   clickChangeImg = e => {
     this.setState({
@@ -183,6 +196,7 @@ class ProductDetail extends Component {
       isMovePositionMenu,
       isSharedLinkMenu,
       clickMenu,
+      isLogin,
     } = this.state;
     return (
       <div className="Detail">
@@ -214,6 +228,9 @@ class ProductDetail extends Component {
                 descriptionImageUrl={descriptionImageUrl}
                 clickMenu={clickMenu}
                 changePositionScroll={this.changePositionScroll}
+                id={this.props.match.params.id}
+                isLogin={isLogin}
+                toggleIsLogin={this.toggleIsLogin}
               />
             </article>
           </section>

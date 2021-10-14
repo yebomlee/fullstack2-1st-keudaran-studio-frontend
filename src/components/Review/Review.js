@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
 import './Review.scss';
 class Review extends React.Component {
   constructor() {
@@ -12,29 +13,76 @@ class Review extends React.Component {
     };
   }
 
+  componentDidMount = () => {
+    fetch(`/review?id=${this.props.id}`, {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ reviewList: data.result });
+      });
+  };
+
+  removeCookie = async () => {
+    const cookie = new Cookies();
+    cookie.remove('user');
+    this.props.toggleIsLogin();
+  };
+
   createNewReview = e => {
     e.preventDefault();
     const { agreePolicy, starRating, review, reviewList } = this.state;
+    const { id } = new Cookies().get('user');
     if (agreePolicy.notAgreePolicyRadio)
       return alert('약관에 동의가 필요합니다.');
-    else if (starRating === 0) return alert('별점을 선택해주세요');
-    else if (review === '') return alert('리뷰 내용을 입력해주세요.');
-    this.setState({
-      reviewList: [
-        ...this.state.reviewList,
-        {
-          id:
-            reviewList.length > 0
-              ? reviewList[reviewList.length - 1].id + 1
-              : 1,
-          content: this.state.review,
-          rating: +this.state.starRating,
-        },
-      ],
-      review: '',
-    });
+    if (starRating === 0) return alert('별점을 선택해주세요');
+    if (review === '') return alert('리뷰 내용을 입력해주세요.');
+
+    fetch('/review', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        user: id,
+        rating: starRating,
+        productId: this.props.id,
+        content: review,
+        imageUrl: null,
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.message === 'TOKEN_EXPIRED') {
+          alert('로그인 시간이 경과하였습니다. 새로 로그인 해주세요.');
+          this.removeCookie();
+        }
+        const newReviewList = [...reviewList];
+        newReviewList.unshift(result.result);
+        this.setState({
+          reviewList: newReviewList,
+          starRating: 0,
+          review: '',
+          isPolicyDetail: false,
+          agreePolicy: { agreePolicyRadio: true, notAgreePolicyRadio: false },
+        });
+      })
+      .catch(e => console.log(e));
+    // this.setState({
+    //   reviewList: [
+    //     ...this.state.reviewList,
+    //     {
+    //       id:
+    //         reviewList.length > 0
+    //           ? reviewList[reviewList.length - 1].id + 1
+    //           : 1,
+    //       content: this.state.review,
+    //       rating: +this.state.starRating,
+    //     },
+    //   ],
+    //   review: '',
+    // });
   };
-  // 백엔드 연결 시 id값은 백엔드에서 받아온값으로 주기
 
   handelInputChange = event => {
     const { name, value } = event.target;
@@ -67,7 +115,9 @@ class Review extends React.Component {
   };
 
   deleteReview = id => {
-    const reviewArr = [...this.state.reviewList].filter(el => el.id !== id);
+    const reviewArr = [...this.state.reviewList].filter(
+      review => review.id !== id
+    );
     this.setState({ reviewList: reviewArr });
   };
 
@@ -82,6 +132,7 @@ class Review extends React.Component {
 
   render() {
     const { reviewList, isPolicyDetail, agreePolicy } = this.state;
+    const { isLogin } = this.props;
     const averageRating = this.calculateRating(reviewList);
     const ratingScore = Math.round((averageRating / 20) * 10) / 10;
     return (
@@ -138,84 +189,85 @@ class Review extends React.Component {
                 className="reviewSubmitButton"
                 onClick={this.createNewReview}
               >
-                {/* 눌렀을때 로그인여부확인 안되어있으면 alert -> 백엔드 연결시 추가해야함*/}
                 리뷰 등록
               </button>
             </form>
-            <div className="privacyPolicy">
-              <div className="privacyTitle">
-                <p className="privacyTitleInner">
-                  <b>개인정보수집이용</b>
-                  <u onClick={this.showPolicyDetail}>자세히 보기</u>
-                </p>
+            {isLogin ? null : (
+              <div className="privacyPolicy">
+                <div className="privacyTitle">
+                  <p className="privacyTitleInner">
+                    <b>개인정보수집이용</b>
+                    <u onClick={this.showPolicyDetail}>자세히 보기</u>
+                  </p>
 
-                <div className="privacyRadioBox">
-                  <input
-                    type="radio"
-                    name="agree"
-                    value="1"
-                    checked={agreePolicy.agreePolicyRadio}
-                    id="agreePolicyRadio"
-                    onChange={this.checkPolicyRadio}
-                  />
-                  <label className="agreeOrNot" htmlFor="agreePolicyRadio">
-                    <b>동의</b>
-                  </label>
-                  <input
-                    type="radio"
-                    name="agree"
-                    value="0"
-                    checked={agreePolicy.notAgreePolicyRadio}
-                    id="notAgreePolicyRadio"
-                    onChange={this.checkPolicyRadio}
-                  />
-                  <label className="agreeOrNot" htmlFor="notAgreePolicyRadio">
-                    <b>미동의</b>
-                  </label>
+                  <div className="privacyRadioBox">
+                    <input
+                      type="radio"
+                      name="agree"
+                      value="1"
+                      checked={agreePolicy.agreePolicyRadio}
+                      id="agreePolicyRadio"
+                      onChange={this.checkPolicyRadio}
+                    />
+                    <label className="agreeOrNot" htmlFor="agreePolicyRadio">
+                      <b>동의</b>
+                    </label>
+                    <input
+                      type="radio"
+                      name="agree"
+                      value="0"
+                      checked={agreePolicy.notAgreePolicyRadio}
+                      id="notAgreePolicyRadio"
+                      onChange={this.checkPolicyRadio}
+                    />
+                    <label className="agreeOrNot" htmlFor="notAgreePolicyRadio">
+                      <b>미동의</b>
+                    </label>
+                  </div>
+                </div>
+                {isPolicyDetail ? (
+                  <table className="privacyTable">
+                    <colgroup>
+                      <col width="200"></col>
+                      <col width="250"></col>
+                      <col width="130"></col>
+                    </colgroup>
+                    <thead className="tableHead">
+                      <tr>
+                        <th scope="col">목적</th>
+                        <th scope="col">항목</th>
+                        <th scope="col">보유기간</th>
+                      </tr>
+                    </thead>
+                    <tbody className="tableBody">
+                      <tr>
+                        <td className="perpose">
+                          <div className="privacyTxt">
+                            게시판 서비스 제공 / 이용 고객 확인
+                          </div>
+                        </td>
+                        <td className="items">
+                          <div className="privacyTxt">
+                            이름, 비밀번호, 작성내용, IP주소
+                          </div>
+                        </td>
+                        <td className="hold">
+                          <div className="privacyTxt">게시글 삭제시까지</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                ) : null}
+                <div className="agreeForFillOut">
+                  * 동의하셔야 서비스를 이용하실 수 있습니다.
                 </div>
               </div>
-              {isPolicyDetail ? (
-                <table className="privacyTable">
-                  <colgroup>
-                    <col width="200"></col>
-                    <col width="250"></col>
-                    <col width="130"></col>
-                  </colgroup>
-                  <thead className="tableHead">
-                    <tr>
-                      <th scope="col">목적</th>
-                      <th scope="col">항목</th>
-                      <th scope="col">보유기간</th>
-                    </tr>
-                  </thead>
-                  <tbody className="tableBody">
-                    <tr>
-                      <td className="perpose">
-                        <div className="privacyTxt">
-                          게시판 서비스 제공 / 이용 고객 확인
-                        </div>
-                      </td>
-                      <td className="items">
-                        <div className="privacyTxt">
-                          이름, 비밀번호, 작성내용, IP주소
-                        </div>
-                      </td>
-                      <td className="hold">
-                        <div className="privacyTxt">게시글 삭제시까지</div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              ) : null}
-              <div className="agreeForFillOut">
-                * 동의하셔야 서비스를 이용하실 수 있습니다.
-              </div>
-            </div>
+            )}
           </div>
 
           <div className="reviewList">
             {reviewList.length > 0 ? (
-              reviewList.map((review, index) => {
+              reviewList.map(review => {
                 return (
                   <ul className="reviewBlock" key={review.id}>
                     <li className="createdReview">
@@ -224,11 +276,11 @@ class Review extends React.Component {
                           {this.decideStarRating(review.rating)}
                         </span>
                         <div className="reviewUserInfo">
-                          <span className="userId">
-                            서버에서 받아올 아이디 {review.userId}
-                          </span>
+                          <span className="userId">{review.username}</span>
                           <span className="createdAt">
-                            서버에서 받아올 시간 {review.createdAt}
+                            {review.created_at.slice(0, 10) +
+                              ' ' +
+                              review.created_at.slice(11, 19)}
                           </span>
                         </div>
                       </div>
