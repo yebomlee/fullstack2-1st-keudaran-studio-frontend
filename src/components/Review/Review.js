@@ -1,6 +1,7 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
 import './Review.scss';
+
 class Review extends React.Component {
   constructor() {
     super();
@@ -24,19 +25,20 @@ class Review extends React.Component {
   };
 
   removeCookie = async () => {
-    const cookie = new Cookies();
-    cookie.remove('user');
+    new Cookies().remove('user', { path: '/' });
     this.props.toggleIsLogin();
   };
 
   createNewReview = e => {
     e.preventDefault();
     const { agreePolicy, starRating, review, reviewList } = this.state;
-    const { id } = new Cookies().get('user');
+    let id = '';
+    if (!this.props.isLogin) return alert('서비스 준비중입니다.');
     if (agreePolicy.notAgreePolicyRadio)
       return alert('약관에 동의가 필요합니다.');
     if (starRating === 0) return alert('별점을 선택해주세요');
     if (review === '') return alert('리뷰 내용을 입력해주세요.');
+    if (new Cookies().get('user')) id = new Cookies().get('user').id;
 
     fetch('/review', {
       headers: {
@@ -68,6 +70,7 @@ class Review extends React.Component {
         });
       })
       .catch(e => console.log(e));
+    // 비회원 리뷰 기능 구현시 참고
     // this.setState({
     //   reviewList: [
     //     ...this.state.reviewList,
