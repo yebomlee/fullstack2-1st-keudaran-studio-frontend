@@ -10,7 +10,6 @@ class ProductDetail extends Component {
     super();
     this.state = {
       productData: [],
-      descriptionData: [],
       imgNum: 1,
       howCount: 0,
       changeMainImg: '',
@@ -24,44 +23,15 @@ class ProductDetail extends Component {
 
   componentDidMount() {
     const CHANGE_IMG_INTERVER = 5000;
-    //const listId = this.props.location.state?.id;
-    const listId = 1;
+    const listId = this.props.match.params?.id;
     fetch(`/product/detail?id=${listId}`, {
       method: 'GET',
     })
       .then(res => res.json())
-      .then(data => {
-        const {
-          id,
-          name,
-          price,
-          point,
-          productImage,
-          productOption,
-          origin,
-          brand,
-          shippingFee,
-          thrmbnailUrl,
-          descriptionImageUrl,
-        } = data;
-        const productData = {
-          id,
-          name,
-          price,
-          point,
-          productImage,
-          productOption,
-          descriptionImageUrl,
-        };
-        const descriptionData = {
-          origin,
-          brand,
-          shippingFee,
-        };
+      .then(productData => {
         this.setState({
           productData,
-          descriptionData,
-          changeMainImg: thrmbnailUrl,
+          changeMainImg: productData.thumbnailUrl,
         });
       });
     setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
@@ -205,7 +175,7 @@ class ProductDetail extends Component {
       productOption,
       descriptionImageUrl,
     } = this.state.productData;
-    const { origin, brand, shippingFee } = this.state.descriptionData;
+    const { origin, brand, shippingFee } = this.state.productData;
     const {
       changeMainImg,
       isLikedProduct,
