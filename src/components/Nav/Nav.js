@@ -19,10 +19,6 @@ class Nav extends Component {
     };
   }
 
-  // scrollDownMenuList = () => {
-  //   this.setState({ isMenuListDown: !this.state.isMenuListDown });
-  // };
-
   scrollDownMenuList = e => {
     if (this.state.isMenuListDown) {
       this.closeMenu();
@@ -41,7 +37,6 @@ class Nav extends Component {
   handleRemoveCookie = () => {
     const cookie = new Cookies();
     cookie.remove('user');
-
     this.props.changeLoginState();
   };
 
@@ -107,11 +102,11 @@ class Nav extends Component {
                   </>
                 ) : (
                   <>
-                    <Link to="/" className="headerLink">
+                    <Link to="" className="headerLink">
                       MODIFY
                     </Link>
                     <Link
-                      to="/"
+                      to=""
                       className="headerLink"
                       onClick={this.handleRemoveCookie}
                     >
@@ -121,10 +116,10 @@ class Nav extends Component {
                 )}
               </>
 
-              <Link to="/" className="headerLink">
+              <Link to="" className="headerLink">
                 ORDER
               </Link>
-              <Link to="/" className="headerLink">
+              <Link to="" className="headerLink">
                 MY PAGE
               </Link>
             </ul>
@@ -138,7 +133,7 @@ class Nav extends Component {
                   <Link
                     to={{
                       pathname: `/products`,
-                      paramas: data.id,
+                      params: data.id,
                     }}
                     key={data.id}
                   >
@@ -159,7 +154,7 @@ class Nav extends Component {
                         <Link
                           to={{
                             pathname: `/products`,
-                            paramas: data.id,
+                            params: data.id,
                           }}
                           className="categoryLink"
                           key={data.id}
