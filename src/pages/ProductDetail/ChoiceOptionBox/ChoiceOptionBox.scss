@@ -22,6 +22,8 @@
     cursor: pointer;
     &:hover {
       transform: scale(1.05);
+      background-color: #2ab372;
+      @include fontSizeWight(16px, bold);
     }
   }
 }

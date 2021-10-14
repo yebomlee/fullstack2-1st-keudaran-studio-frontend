@@ -1,5 +1,6 @@
 import React from 'react';
 import qs from 'qs';
+import ProductListMdPicks from '../../components/List/ProductListMdPicks';
 import ProductSubCategory from '../../components/List/ProductSubCategory';
 import ProductListContainer from '../../components/List/ProductListContainer';
 import './ProductList.scss';
@@ -9,6 +10,7 @@ class ProductList extends React.Component {
     super();
     this.state = {
       allCategoryData: '',
+      mdProducts: [],
       subCategory: [],
       selectedSubCategory: 0,
     };
@@ -28,22 +30,51 @@ class ProductList extends React.Component {
       .then(data => {
         this.setState({ allCategoryData: data.categories });
       });
+
+    fetch('/data/subCategoryProduct.json')
+      .then(res => res.json())
+      .then(res => {
+        const sub = res.MAIN_CATEGORY.SUB_CATEGORY;
+        const subArr = [];
+        for (let i = 0; i < 3; i++) {
+          subArr.push(...sub[i].products);
+        }
+
+        const mdArr = [];
+        for (let j = 0; j < subArr.length; j++) {
+          if (subArr[j].id === 1) {
+            mdArr.push(subArr[j]);
+          }
+        }
+
+        const mdProducts = mdArr.map((product, i) => {
+          return {
+            id: i,
+            name: product.name,
+            imgUrl: product.imgUrl,
+            price: product.price,
+          };
+        });
+        this.setState({ mdProducts: mdProducts });
+      });
   }
 
   render() {
-    const { selectedSubCategory } = this.state;
+    const { id, mdProducts, subCategory, selectedSubCategory } = this.state;
     const { location } = this.props;
     const query = qs.parse(location.search, { ignoreQueryPrefix: true });
     return (
       <div className="ProductList">
         <div className="productListWrapper">
-          <div className="stationeryWrap">
+          <ProductListMdPicks id={id} mdProducts={mdProducts} />
+
+          <div className="productListWrap">
             {this.state.allCategoryData && (
               <div className="caterogyTitle">
                 {this.state.allCategoryData[+query.main - 1].name}
               </div>
             )}
-            <ul className="stationeryCategory">
+            <ul className="subCategory">
               {/* {subCategory.map(sub => { */}
               {this.state.allCategoryData &&
                 this.state.allCategoryData[+query.main - 1].subCategory.map(
