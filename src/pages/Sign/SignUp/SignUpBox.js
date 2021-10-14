@@ -32,6 +32,9 @@ class SignUpBox extends React.Component {
       changeCheckAll,
       changeMarketingCheckAll,
       submitUserData,
+      testUsernameDuplicate,
+      detectUsernameChange,
+      isUsernameUnique,
     } = this.props;
     return (
       <section className="SignUpBox">
@@ -55,7 +58,20 @@ class SignUpBox extends React.Component {
                   className="usernameInput userInfoInput"
                   placeholder="아이디"
                   onChange={saveInputChange}
+                  onInput={detectUsernameChange}
                 />
+                {isUsernameUnique ? (
+                  <p className="uniqueIdDeclare">
+                    중복되지 않은 아이디 입니다!
+                  </p>
+                ) : null}
+                <button
+                  type="submit"
+                  className="duplicateTestButton"
+                  onClick={testUsernameDuplicate}
+                >
+                  중복확인
+                </button>
               </li>
               <li>
                 <input
@@ -137,7 +153,7 @@ class SignUpBox extends React.Component {
                   <label htmlFor="usePolicyCheck">이용약관</label>
                   <button
                     type="button"
-                    className="littleGreyBtn"
+                    className="littleBlueBtn"
                     onClick={this.scrollToUsePolicy}
                   >
                     내용 보기
@@ -154,7 +170,7 @@ class SignUpBox extends React.Component {
                   </label>
                   <button
                     type="button"
-                    className="littleGreyBtn"
+                    className="littleBlueBtn"
                     onClick={this.scrollToPrivacy}
                   >
                     내용 보기
