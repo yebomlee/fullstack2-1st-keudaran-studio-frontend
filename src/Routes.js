@@ -8,6 +8,7 @@ import SignIn from './pages/Sign/SignIn/SignIn';
 import SignUp from './pages/Sign/SignUp/SignUp';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
+import ScrollTop from './components/ScrollTop/ScrollTop';
 
 class Routes extends React.Component {
   constructor() {
@@ -26,6 +27,7 @@ class Routes extends React.Component {
   render() {
     return (
       <BrowserRouter>
+        <ScrollTop />
         <Switch>
           <>
             <Nav
