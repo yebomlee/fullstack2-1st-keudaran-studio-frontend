@@ -131,7 +131,7 @@ class SignUp extends React.Component {
     else if (/\W/.exec(username))
       return alert('아이디에 특수문자는 들어갈 수 없습니다.');
     else if (
-      !/[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i.exec(
+      !/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.exec(
         email
       )
     )
@@ -170,6 +170,22 @@ class SignUp extends React.Component {
         if (res.message === 'SIGN_UP_SUCCESS') {
           alert('회원가입 성공!');
           this.props.history.push('/');
+        } else if (res.message === 'Duplicate') {
+          alert('아이디 중복입니다.');
+        } else if (res.message === 'IS_NOT_REALNAME_FORMAT') {
+          alert('실명은 2자~4자까지 입력 가능합니다.');
+        } else if (res.message === 'IS_NOT_USERNAME_FORMAT') {
+          alert(
+            '아이디는 6글자 이상으로, 특수문자와 한글을 들어갈 수 없습니다.'
+          );
+        } else if (res.message === 'IS_NOT_PASSWORD_FORMAT') {
+          alert(
+            '비밀번호는 8글자 이상으로 특수문자, 숫자, 영어가 포함되어야 합니다.'
+          );
+        } else if (res.message === 'IS_NOT_EMAIL_FORMAT') {
+          alert('올바른 이메일 형식을 사용해주세요.');
+        } else if (res.message === 'IS_NOT_PHONENUMBER_FORMAT') {
+          alert('핸드폰 번호 형식에 맞춰 써주세요.');
         } else {
           alert(res.message);
         }

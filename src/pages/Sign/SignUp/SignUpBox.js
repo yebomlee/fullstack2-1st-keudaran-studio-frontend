@@ -105,7 +105,7 @@ class SignUpBox extends React.Component {
                   type="text"
                   name="phoneNumber"
                   className="phoneInput userInfoInput"
-                  placeholder="휴대폰 번호"
+                  placeholder="휴대폰 번호 ( - 없이 숫자만 써주세요)"
                   onChange={saveInputChange}
                 />
               </li>
