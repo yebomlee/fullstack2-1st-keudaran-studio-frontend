@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import './BestReviewCarousel.scss';
-import reviews from './MockData';
+import reviews from './bestReviewMockData';
 
 class BestReviewCarousel extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class BestReviewCarousel extends Component {
 
   slideToRight = () => {
     const { currentIdx, reviews } = this.state;
-    if (currentIdx === reviews.length / 4 - 1) return;
+    if (currentIdx === Math.ceil(reviews.length / 4) - 1) return;
     this.setState({ currentIdx: currentIdx + 1 });
   };
 

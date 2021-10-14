@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -82,11 +83,13 @@ class Carousel extends Component {
             >
               {slideImgs.map(imgData => {
                 return (
-                  <SlideImage
-                    key={imgData.id}
-                    name={imgData.name}
-                    img={imgData.img}
-                  />
+                  <Link to={`/products/${imgData.productId}`}>
+                    <SlideImage
+                      key={imgData.id}
+                      name={imgData.name}
+                      img={imgData.img}
+                    />
+                  </Link>
                 );
               })}
               <div className="SlideImage">
