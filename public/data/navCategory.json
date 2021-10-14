@@ -1,0 +1,160 @@
+{
+  "CATEGORY": [
+    {
+      "id": 1,
+      "name": "All",
+      "subCategory": [
+        {
+          "id": 1,
+          "name": "All"
+        },
+        {
+          "id": 2,
+          "name": "New"
+        },
+        {
+          "id": 3,
+          "name": "Best"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Stationery",
+      "subCategory": [
+        {
+          "id": 1,
+          "name": "Postcard"
+        },
+        {
+          "id": 2,
+          "name": " Notebook"
+        },
+        {
+          "id": 3,
+          "name": " Memo Pad"
+        },
+        {
+          "id": 4,
+          "name": "Poster"
+        },
+        {
+          "id": 5,
+          "name": "Tape"
+        },
+        {
+          "id": 6,
+          "name": "Tattoo Sticker"
+        },
+        {
+          "id": 7,
+          "name": "Sticker"
+        },
+        {
+          "id": 8,
+          "name": "Diary"
+        },
+        {
+          "id": 9,
+          "name": "Calendar"
+        },
+        {
+          "id": 10,
+          "name": "Etc"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Digital",
+      "subCategory": [
+        {
+          "id": 1,
+          "name": "AirPods Case"
+        },
+        {
+          "id": 2,
+          "name": "AirPods Pro Case"
+        },
+        {
+          "id": 3,
+          "name": "Griptok"
+        },
+        {
+          "id": 4,
+          "name": "Phone Case"
+        },
+        {
+          "id": 5,
+          "name": "Etc"
+        },
+        {
+          "id": 6,
+          "name": "Case / Pouch"
+        },
+        {
+          "id": 7,
+          "name": "Buds Case"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Fabric & Living",
+      "subCategory": [
+        {
+          "id": 1,
+          "name": "Cup"
+        },
+        {
+          "id": 2,
+          "name": "Fabric"
+        },
+        {
+          "id": 3,
+          "name": "Pouch"
+        },
+        {
+          "id": 4,
+          "name": "Bag"
+        },
+        {
+          "id": 5,
+          "name": "Fashion"
+        },
+        {
+          "id": 6,
+          "name": "Pet"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Acc",
+      "subCategory": [
+        {
+          "id": 1,
+          "name": "Key Ring"
+        },
+        {
+          "id": 2,
+          "name": "Pin Button"
+        },
+        {
+          "id": 3,
+          "name": "Best"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "EVENT",
+      "subCategory": [
+        {
+          "id": 1,
+          "name": "All"
+        }
+      ]
+    }
+  ]
+}

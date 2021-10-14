@@ -4,6 +4,7 @@
   max-width: 1200px;
   width: 100%;
   font-family: 'Spoqa Han Sans Neo';
+  z-index: 10;
 
   .modalMenu {
     position: relative;
@@ -59,14 +60,14 @@
     .headerMenu {
       display: flex;
       justify-content: space-between;
-      margin: 20px 0px 30px 20px;
+      margin: 20px 0px 30px 0px;
 
       .logo {
         display: flex;
         justify-content: space-between;
 
         .logoImg {
-          margin: 20px;
+          margin: 20px 20px 20px 0;
           width: 200px;
         }
       }
