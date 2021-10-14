@@ -47,6 +47,14 @@ class SignIn extends React.Component {
       .catch(e => console.log(e));
   };
 
+  goToSignUp = () => {
+    this.props.history.push('/signup');
+  };
+
+  getReady = () => {
+    alert('준비중입니다.');
+  };
+
   render() {
     const { userData, tempUserData } = this.state;
     return (
@@ -57,6 +65,8 @@ class SignIn extends React.Component {
           saveInputChange={this.saveInputChange}
           login={this.login}
           checkInputFilled={this.checkInputFilled}
+          goToSignUp={this.goToSignUp}
+          getReady={this.getReady}
         />
       </div>
     );
