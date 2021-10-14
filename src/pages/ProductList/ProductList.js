@@ -74,7 +74,6 @@ class ProductList extends React.Component {
       <div className="ProductList">
         <div className="productListWrapper">
           <ProductListMdPicks id={id} mdProducts={mdProducts} />
-
           <div className="productListWrap">
             {this.state.allCategoryData && (
               <div className="caterogyTitle">
@@ -100,7 +99,6 @@ class ProductList extends React.Component {
                 )}
             </ul>
           </div>
-          {/* {console.log(this.state.sorting)} */}
           <div className="selector">
             <select
               className="selectSorting"
@@ -119,6 +117,7 @@ class ProductList extends React.Component {
             allSortedProducts={allSortedProducts}
             selectedSubCategory={selectedSubCategory}
             subCategoryId={+query.sub}
+            mainCategoryId={+query.main}
             sorting={sorting}
           />
         </div>

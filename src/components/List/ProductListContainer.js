@@ -22,29 +22,61 @@ class ProductListContainer extends React.Component {
     fetch(`/product/sort?sort=${this.props.sorting}`)
       .then(res => res.json())
       .then(res => {
-        const product = res.data.filter(product => {
-          return product.subCategoryId === this.props.subCategoryId;
-        });
-        this.setState({ allProducts: product }, () => {
-          console.log(this.state.allProducts);
-        });
+        if (Number.isNaN(this.props.subCategoryId)) {
+          if (this.props.mainCategoryId === 1) {
+            const product = res.data;
+            this.setState({ allProducts: product });
+          } else {
+            const product = res.data.filter(product => {
+              return product.mainCategoryId === this.props.mainCategoryId;
+            });
+            this.setState({ allProducts: product });
+          }
+        } else {
+          if (this.props.subCategoryId < 4) {
+            const product = res.data;
+            this.setState({ allProducts: product });
+          } else {
+            const product = res.data.filter(product => {
+              return product.subCategoryId === this.props.subCategoryId;
+            });
+            this.setState({ allProducts: product });
+          }
+        }
       });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      this.props.subCategoryId !== prevProps.subCategoryId ||
+      this.props.mainCategoryId !== prevProps.mainCategoryId ||
+      (this.props.subCategoryId !== prevProps.subCategoryId &&
+        this.props.subCategoryId) ||
       this.props.sorting !== prevProps.sorting
     ) {
       fetch(`/product/sort?sort=${this.props.sorting}`)
         .then(res => res.json())
         .then(res => {
-          const product = res.data.filter(product => {
-            return product.subCategoryId === this.props.subCategoryId;
-          });
-          this.setState({ allProducts: product }, () => {
-            console.log(this.state.allProducts);
-          });
+          if (Number.isNaN(this.props.subCategoryId)) {
+            if (this.props.mainCategoryId === 1) {
+              const product = res.data;
+              this.setState({ allProducts: product });
+            } else {
+              const product = res.data.filter(product => {
+                return product.mainCategoryId === this.props.mainCategoryId;
+              });
+              this.setState({ allProducts: product });
+            }
+          } else {
+            if (this.props.subCategoryId < 4) {
+              const product = res.data;
+              this.setState({ allProducts: product });
+            } else {
+              const product = res.data.filter(product => {
+                return product.subCategoryId === this.props.subCategoryId;
+              });
+              this.setState({ allProducts: product });
+            }
+          }
         });
     }
   }
@@ -54,7 +86,6 @@ class ProductListContainer extends React.Component {
 
     return (
       <div className="ProductListContainer">
-        {console.log(this.props.sorting)}
         <ul className="productContainer">
           {allProducts.map(products => {
             return (

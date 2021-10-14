@@ -32,7 +32,7 @@ class ProductCard extends React.Component {
           }}
         >
           <img
-            className="productImg"
+            className="productListImages"
             src={isHover ? hoverImgUrl : imgUrl}
             alt={name}
           />
