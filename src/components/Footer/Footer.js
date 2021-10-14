@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './Footer.scss';
 import {
   footerMenu,
   companyInfo,
   companyInfo2,
   companyInfo3,
   companyInfo4,
-} from './FooterData';
+} from './FooterMockData';
+import './Footer.scss';
 
 class Footer extends Component {
   render() {

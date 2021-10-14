@@ -19,10 +19,6 @@ class Nav extends Component {
     };
   }
 
-  // scrollDownMenuList = () => {
-  //   this.setState({ isMenuListDown: !this.state.isMenuListDown });
-  // };
-
   scrollDownMenuList = e => {
     if (this.state.isMenuListDown) {
       this.closeMenu();
@@ -41,7 +37,6 @@ class Nav extends Component {
   handleRemoveCookie = () => {
     const cookie = new Cookies();
     cookie.remove('user');
-
     this.props.changeLoginState();
   };
 
@@ -94,7 +89,15 @@ class Nav extends Component {
                 />
               </Link>
             </h1>
+
             <ul className="headerListWrapper">
+              <span className="welcoming">
+                WELCOME
+                <span className="userName">
+                  {'  ' + new Cookies().get('user').id + '  '}
+                </span>
+                <span className="imoji">🦖</span>
+              </span>
               <>
                 {!isLogin ? (
                   <>
@@ -107,11 +110,11 @@ class Nav extends Component {
                   </>
                 ) : (
                   <>
-                    <Link to="/" className="headerLink">
+                    <Link to="" className="headerLink">
                       MODIFY
                     </Link>
                     <Link
-                      to="/"
+                      to=""
                       className="headerLink"
                       onClick={this.handleRemoveCookie}
                     >
@@ -121,10 +124,10 @@ class Nav extends Component {
                 )}
               </>
 
-              <Link to="/" className="headerLink">
+              <Link to="" className="headerLink">
                 ORDER
               </Link>
-              <Link to="/" className="headerLink">
+              <Link to="" className="headerLink">
                 MY PAGE
               </Link>
             </ul>

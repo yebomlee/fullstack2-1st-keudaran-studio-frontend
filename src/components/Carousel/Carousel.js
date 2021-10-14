@@ -81,14 +81,10 @@ class Carousel extends Component {
               }`}
               style={{ transform: `translateX(${-currentImg * 1500}px)` }}
             >
-              {slideImgs.map(imgData => {
+              {slideImgs.map((imgData, i) => {
                 return (
-                  <Link to={`/products/${imgData.productId}`}>
-                    <SlideImage
-                      key={imgData.id}
-                      name={imgData.name}
-                      img={imgData.img}
-                    />
+                  <Link to={`/products/${imgData.productId}`} key={i}>
+                    <SlideImage name={imgData.name} img={imgData.img} />
                   </Link>
                 );
               })}
@@ -111,10 +107,10 @@ class Carousel extends Component {
           />
         </div>
         <div className="dotBtnWraper">
-          {slideImgs.map(imgData => {
+          {slideImgs.map((imgData, i) => {
             return (
               <DotButton
-                key={imgData.id}
+                key={i}
                 id={imgData.id}
                 currentImg={currentImg}
                 slideToClickedImg={this.slideToClickedImg}
