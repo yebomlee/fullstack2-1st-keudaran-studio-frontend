@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import {
   faSearch,
   faShoppingCart,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
-import { headerMenu } from './NavData';
 import './Nav.scss';
 
 class Nav extends Component {
@@ -15,24 +15,50 @@ class Nav extends Component {
     this.state = {
       isMenuListDown: false,
       category: [],
+      cookie: '',
     };
   }
 
-  scrollDownMenuList = () => {
-    this.setState({ isMenuListDown: !this.state.isMenuListDown });
+  // scrollDownMenuList = () => {
+  //   this.setState({ isMenuListDown: !this.state.isMenuListDown });
+  // };
+
+  scrollDownMenuList = e => {
+    if (this.state.isMenuListDown) {
+      this.closeMenu();
+      return;
+    }
+    this.setState({ isMenuListDown: true });
+    e.stopPropagation();
+    document.addEventListener('click', this.closeMenu);
+  };
+
+  closeMenu = () => {
+    this.setState({ isMenuListDown: false });
+    document.removeEventListener('click', this.closeMenu);
+  };
+
+  handleRemoveCookie = () => {
+    const cookie = new Cookies();
+    cookie.remove('user');
+
+    this.props.changeLoginState();
   };
 
   componentDidMount() {
-    fetch('/data/navCategory.json', {
+    const { changeLoginState } = this.props;
+    fetch('/category', {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
-        this.setState({ category: data.CATEGORY });
+        this.setState({ category: data.categories });
       });
+    changeLoginState();
   }
 
   render() {
+    const { isLogin } = this.props;
     return (
       <div className="Nav">
         <div
@@ -43,10 +69,10 @@ class Nav extends Component {
           <div className="modalDropDown">
             {this.state.category.map(data => {
               return (
-                <div className="modalSubCategory">
+                <div className="modalSubCategory" key={data.id}>
                   {data.subCategory.map(data => {
                     return (
-                      <Link to="{}" className="modalCategoryLink">
+                      <Link to="/" className="modalCategoryLink" key={data.id}>
                         {data.name}
                       </Link>
                     );
@@ -69,13 +95,38 @@ class Nav extends Component {
               </Link>
             </h1>
             <ul className="headerListWrapper">
-              {headerMenu.map(data => {
-                return (
-                  <Link to="{}" className="headerLink">
-                    {data.name}
-                  </Link>
-                );
-              })}
+              <>
+                {!isLogin ? (
+                  <>
+                    <Link to="/signup" className="headerLink">
+                      JOIN US
+                    </Link>
+                    <Link to="/signin" className="headerLink">
+                      LOGIN
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/" className="headerLink">
+                      MODIFY
+                    </Link>
+                    <Link
+                      to="/"
+                      className="headerLink"
+                      onClick={this.handleRemoveCookie}
+                    >
+                      LOGOUT
+                    </Link>
+                  </>
+                )}
+              </>
+
+              <Link to="/" className="headerLink">
+                ORDER
+              </Link>
+              <Link to="/" className="headerLink">
+                MY PAGE
+              </Link>
             </ul>
           </header>
         </div>
@@ -83,11 +134,19 @@ class Nav extends Component {
           <div className="dropdownMenu">
             {this.state.category.map(data => {
               return (
-                <div className="dropdown">
-                  <button className="dropBtn">
-                    {data.name}
-                    <div className="dropIcon">●</div>
-                  </button>
+                <div className="dropdown" key={data.id}>
+                  <Link
+                    to={{
+                      pathname: `/products`,
+                      paramas: data.id,
+                    }}
+                    key={data.id}
+                  >
+                    <button className="dropBtn">
+                      {data.name}
+                      <div className="dropIcon">●</div>
+                    </button>
+                  </Link>
                   <div
                     className={
                       this.state.isMenuListDown
@@ -97,7 +156,14 @@ class Nav extends Component {
                   >
                     {data.subCategory.map(data => {
                       return (
-                        <Link to="{}" className="categoryLink">
+                        <Link
+                          to={{
+                            pathname: `/products`,
+                            paramas: data.id,
+                          }}
+                          className="categoryLink"
+                          key={data.id}
+                        >
                           {data.name}
                         </Link>
                       );

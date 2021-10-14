@@ -17,7 +17,7 @@ class Footer extends Component {
             <ul className="footerMainList">
               {footerMenu.map(data => {
                 return (
-                  <li className="title">
+                  <li className="title" key={data.id}>
                     <h4>{data.name}</h4>
                   </li>
                 );
@@ -27,7 +27,7 @@ class Footer extends Component {
             <ul className="companyInfo">
               {companyInfo.map(data => {
                 return (
-                  <li className="info">
+                  <li className="info" key={data.id}>
                     {data.content}
                     <span className="verticalBar">|</span>
                   </li>
@@ -37,7 +37,7 @@ class Footer extends Component {
             <ul className="companyInfo">
               {companyInfo2.map(data => {
                 return (
-                  <li className="info">
+                  <li className="info" key={data.id}>
                     {data.content}
                     <span className="verticalBar">|</span>
                   </li>
@@ -47,7 +47,7 @@ class Footer extends Component {
             <ul className="companyInfo">
               {companyInfo3.map(data => {
                 return (
-                  <li className="info">
+                  <li className="info" key={data.id}>
                     {data.content}
                     <span className="verticalBar">|</span>
                   </li>
@@ -57,7 +57,7 @@ class Footer extends Component {
             <ul className="companyInfo">
               {companyInfo4.map(data => {
                 return (
-                  <li className="info">
+                  <li className="info" key={data.id}>
                     {data.content}
                     <span className="verticalBar">|</span>
                   </li>

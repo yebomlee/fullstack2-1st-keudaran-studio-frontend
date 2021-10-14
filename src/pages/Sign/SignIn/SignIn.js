@@ -1,6 +1,7 @@
 import React from 'react';
 import SignInBox from './SignInBox';
 import './SignIn.scss';
+import { withRouter } from 'react-router-dom';
 
 class SignIn extends React.Component {
   constructor() {
@@ -24,9 +25,10 @@ class SignIn extends React.Component {
   };
 
   login = e => {
+    const { changeLoginState } = this.props;
     e.preventDefault();
     const { tempUserData } = this.state;
-    fetch('/user/login', {
+    fetch('/user/signin', {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -38,10 +40,11 @@ class SignIn extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.message === 'INVALID_USER') {
-          alert('아이디 혹은 비밀번호가 틀렸습니다.');
-        } else {
+        if (res.message === 'SIGN_IN_SUCCESS') {
+          changeLoginState();
           this.props.history.push('/');
+        } else {
+          alert('아이디 혹은 비밀번호가 틀렸습니다.');
         }
       })
       .catch(e => console.log(e));
@@ -49,6 +52,7 @@ class SignIn extends React.Component {
 
   render() {
     const { userData, tempUserData } = this.state;
+
     return (
       <div className="SignIn">
         <SignInBox
@@ -63,4 +67,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);
