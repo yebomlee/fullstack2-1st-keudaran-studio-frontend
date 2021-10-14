@@ -16,13 +16,11 @@ class BestReviewCarousel extends Component {
   }
   // 백엔드 API 수정 후 시간 나면
   // componentDidMount() {
-  //   console.log('hello');
   //   fetch('/review?id=2&sort=rating', {
   //     method: 'GET',
   //   })
   //     .then(res => res.json())
   //     .then(data => {
-  //       console.log(data.result);
   //       this.setState({ reviews: data.result });
   //     });
   // }

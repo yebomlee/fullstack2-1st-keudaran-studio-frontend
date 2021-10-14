@@ -214,7 +214,6 @@ class ProductDetail extends Component {
       isSharedLinkMenu,
       clickMenu,
     } = this.state;
-    console.log(productImage);
     return (
       <div className="Detail">
         <div className="total">

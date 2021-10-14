@@ -34,16 +34,17 @@ class ReviewCard extends Component {
           <div className="reviewTextWraper">
             <p className="reviewText">{text}</p>
             <p className="rateBox">
-              <div className="starWrapper">
-                {booleanRate.map(boolean => {
+              <span className="starWrapper">
+                {booleanRate.map((boolean, i) => {
                   return (
                     <FontAwesomeIcon
                       icon={boolean ? faStarS : faStarR}
                       className={boolean ? 'starOn' : 'starOff'}
+                      key={i}
                     />
                   );
                 })}
-              </div>
+              </span>
               <span className="userId">{userId}</span>
             </p>
           </div>
