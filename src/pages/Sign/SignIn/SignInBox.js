@@ -2,7 +2,8 @@ import React from 'react';
 import './SignInBox.scss';
 class SignInBox extends React.Component {
   render() {
-    const { saveInputChange, login, checkInputFilled } = this.props;
+    const { saveInputChange, login, checkInputFilled, goToSignUp, getReady } =
+      this.props;
     return (
       <section className="SignInBox">
         <h1 className="signInTitle">로그인</h1>
@@ -55,7 +56,11 @@ class SignInBox extends React.Component {
                 <br />
                 회원가입을 하시면 다양한 혜택을 편리하게 이용하실 수 있습니다.
               </p>
-              <button type="button" className="signInBtnEmptyStyle">
+              <button
+                type="button"
+                className="signInBtnEmptyStyle"
+                onClick={goToSignUp}
+              >
                 JOIN-US
               </button>
             </div>
@@ -65,7 +70,11 @@ class SignInBox extends React.Component {
                 <br />
                 간단한 정보를 입력 후 잃어버린 정보를 찾으실 수 있습니다.
               </p>
-              <button type="button" className="signInBtnEmptyStyle">
+              <button
+                type="button"
+                className="signInBtnEmptyStyle"
+                onClick={getReady}
+              >
                 ID/PASSWORD
               </button>
             </div>
