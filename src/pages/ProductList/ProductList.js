@@ -14,8 +14,13 @@ class ProductList extends React.Component {
       subCategory: [],
       selectedSubCategory: 0,
       allSortedProducts: '',
+      sorting: 'name',
     };
   }
+
+  changeSortingSelector = e => {
+    this.setState({ sorting: e.currentTarget.value });
+  };
 
   selectSubCategory = id => {
     this.setState({
@@ -61,7 +66,8 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { id, mdProducts, selectedSubCategory } = this.state;
+    const { id, mdProducts, selectedSubCategory, allSortedProducts, sorting } =
+      this.state;
     const { location } = this.props;
     const query = qs.parse(location.search, { ignoreQueryPrefix: true });
     return (
@@ -94,24 +100,26 @@ class ProductList extends React.Component {
                 )}
             </ul>
           </div>
-
+          {/* {console.log(this.state.sorting)} */}
           <div className="selector">
-            <select className="selectSorting" name="sort" id="sort">
-              <option value="popular" defaultValue>
-                인기상품순
-              </option>
-              <option value="new">신상품순</option>
-              <option value="named">상품명순</option>
-              <option value="cheap">낮은가격순</option>
-              <option value="expensive">높은가격순</option>
-              <option value="mostClicked">조회순</option>
+            <select
+              className="selectSorting"
+              name="sort"
+              id="sort"
+              onChange={this.changeSortingSelector}
+            >
+              <option value="name">상품명순</option>
+              <option value="recent">신상품순</option>
+              <option value="lowprice">낮은가격순</option>
+              <option value="highprice">높은가격순</option>
             </select>
           </div>
 
           <ProductListContainer
-            allSortedProducts={this.state.allSortedProducts}
+            allSortedProducts={allSortedProducts}
             selectedSubCategory={selectedSubCategory}
             subCategoryId={+query.sub}
+            sorting={sorting}
           />
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import qs from 'qs';
 import { Link } from 'react-router-dom';
 import './ProductSubCategory.scss';
 

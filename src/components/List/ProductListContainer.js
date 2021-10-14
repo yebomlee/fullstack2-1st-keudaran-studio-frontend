@@ -19,25 +19,32 @@ class ProductListContainer extends React.Component {
   };
 
   componentDidMount() {
-    fetch('/product/sort?sort=name')
+    fetch(`/product/sort?sort=${this.props.sorting}`)
       .then(res => res.json())
       .then(res => {
         const product = res.data.filter(product => {
           return product.subCategoryId === this.props.subCategoryId;
         });
-        this.setState({ allProducts: product });
+        this.setState({ allProducts: product }, () => {
+          console.log(this.state.allProducts);
+        });
       });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.subCategoryId !== prevProps.subCategoryId) {
-      fetch('/product/sort?sort=name')
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.subCategoryId !== prevProps.subCategoryId ||
+      this.props.sorting !== prevProps.sorting
+    ) {
+      fetch(`/product/sort?sort=${this.props.sorting}`)
         .then(res => res.json())
         .then(res => {
           const product = res.data.filter(product => {
             return product.subCategoryId === this.props.subCategoryId;
           });
-          this.setState({ allProducts: product });
+          this.setState({ allProducts: product }, () => {
+            console.log(this.state.allProducts);
+          });
         });
     }
   }
@@ -47,6 +54,7 @@ class ProductListContainer extends React.Component {
 
     return (
       <div className="ProductListContainer">
+        {console.log(this.props.sorting)}
         <ul className="productContainer">
           {allProducts.map(products => {
             return (
