@@ -23,7 +23,8 @@ class ProductDetail extends Component {
 
   componentDidMount() {
     const CHANGE_IMG_INTERVER = 5000;
-    const listId = this.props.match.params?.id;
+    let listId = this.props.match.params?.id;
+    if (listId <= 0 || listId > 15) listId = 1;
     fetch(`/product/detail?id=${listId}`, {
       method: 'GET',
     })
