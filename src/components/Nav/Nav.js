@@ -94,7 +94,8 @@ class Nav extends Component {
               <span className="welcoming">
                 WELCOME
                 <span className="userName">
-                  {'  ' + new Cookies().get('user').id + '  '}
+                  {new Cookies().get('user') &&
+                    '  ' + new Cookies().get('user').id + '  '}
                 </span>
                 <span className="imoji">🦖</span>
               </span>
