@@ -2,23 +2,25 @@
   margin: 0 auto;
   width: 1200px;
 
-  .stationeryWrap {
+  .productListWrap {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
     height: 30px;
     border-bottom: 1px solid #999999;
 
-    .caterogyTitle {
+    .subCaterogyTitle {
       color: #333333;
       font-size: 16px;
       font-weight: 700;
       font-family: 'Lato', sans-serif;
     }
 
-    .stationeryCategory {
+    .subCategory {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
+      max-width: 700px;
       color: #555555;
     }
   }
