@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProductCard from './ProductCard';
+import ProductCard from './MainProductCard';
 import MainListProducts from './MainListMockData';
 import './MainList.scss';
 

@@ -4,7 +4,6 @@ import './SlideImage.scss';
 class SlideImage extends Component {
   render() {
     const { img, name } = this.props;
-    console.log(img, name);
     return (
       <div className="SlideImage">
         <div className="inner">

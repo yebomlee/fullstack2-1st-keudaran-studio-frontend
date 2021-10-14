@@ -11,38 +11,55 @@
 
     .reviewTextWraper {
       position: relative;
-      padding: 10px;
+      padding: 15px;
       background-color: white;
 
       .reviewText {
+        line-height: 20px;
       }
 
       .rateBox {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-top: 10px;
+        margin-top: 25px;
 
-        .rate {
-          margin-left: 5px;
+        .starWrapper {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          width: 40%;
+
+          .starOn {
+            color: #29b473;
+          }
+
+          .starOff {
+            color: gray;
+          }
         }
 
         .userId {
           margin-right: 5px;
+          color: lightgray;
         }
       }
     }
 
     .productWraper {
       position: relative;
-      height: 90px;
       margin-top: 15px;
+      height: 90px;
       background-color: white;
-
-      .productImg {
-        float: left;
-        width: 33%;
+      .imgWrapper {
+        .productImg {
+          float: left;
+          width: 90px;
+          height: 90px;
+          object-fit: cover;
+        }
       }
+
       .textBox {
         display: flex;
         flex-direction: row;
@@ -53,6 +70,7 @@
         height: 95%;
 
         .productName {
+          font-size: 17px;
         }
       }
     }

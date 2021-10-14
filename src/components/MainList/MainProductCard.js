@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './ProductCard.scss';
+import './MainProductCard.scss';
 
-class ProductCard extends React.Component {
+class MainProductCard extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -34,7 +34,7 @@ class ProductCard extends React.Component {
     const { id, name, price, imgUrl } = this.props.product;
     return (
       <li
-        className="ProductCard"
+        className="MainProductCard"
         onMouseOver={this.toggleImgHover}
         onMouseOut={this.toggleImgHover}
       >
@@ -55,4 +55,4 @@ class ProductCard extends React.Component {
   }
 }
 
-export default ProductCard;
+export default MainProductCard;
