@@ -13,6 +13,7 @@ class ProductList extends React.Component {
       mdProducts: [],
       subCategory: [],
       selectedSubCategory: 0,
+      allSortedProducts: '',
     };
   }
 
@@ -60,7 +61,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { id, mdProducts, subCategory, selectedSubCategory } = this.state;
+    const { id, mdProducts, selectedSubCategory } = this.state;
     const { location } = this.props;
     const query = qs.parse(location.search, { ignoreQueryPrefix: true });
     return (
@@ -75,7 +76,6 @@ class ProductList extends React.Component {
               </div>
             )}
             <ul className="subCategory">
-              {/* {subCategory.map(sub => { */}
               {this.state.allCategoryData &&
                 this.state.allCategoryData[+query.main - 1].subCategory.map(
                   (sub, idx) => {
@@ -108,7 +108,11 @@ class ProductList extends React.Component {
             </select>
           </div>
 
-          <ProductListContainer selectedSubCategory={selectedSubCategory} />
+          <ProductListContainer
+            allSortedProducts={this.state.allSortedProducts}
+            selectedSubCategory={selectedSubCategory}
+            subCategoryId={+query.sub}
+          />
         </div>
       </div>
     );
