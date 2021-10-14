@@ -1,0 +1,31 @@
+.MainProductCard {
+  display: flex;
+  flex-direction: column;
+  margin: 0 60px 30px 0;
+  width: 30%;
+  color: #333333;
+
+  .productImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .productName {
+    display: flex;
+    margin-top: 15px;
+    padding: 5px 0;
+    font-size: 17px;
+  }
+
+  .productPrice {
+    .price {
+      font-weight: 700;
+    }
+
+    .priceUnit {
+      margin-left: 2px;
+    }
+  }
+}
