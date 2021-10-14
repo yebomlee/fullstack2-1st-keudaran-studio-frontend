@@ -3,8 +3,6 @@ import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
 import ProductInfo from './ProductInfo/ProductInfo';
 import HambergerIcon from './HambergerIconMenu/HambergerIconMenu';
-import productData from './productData.json';
-import descriptionData from './descriptionData.json';
 import './ProductDetail.scss';
 
 class ProductDetail extends Component {
@@ -26,29 +24,48 @@ class ProductDetail extends Component {
 
   componentDidMount() {
     const CHANGE_IMG_INTERVER = 5000;
-    this.setState({
-      productData,
-      descriptionData,
-      changeMainImg: productData.thumbailURL,
-    });
+    //const listId = this.props.location.state?.id;
+    const listId = 1;
+    fetch(`/product/detail?id=${listId}`, {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        const {
+          id,
+          name,
+          price,
+          point,
+          productImage,
+          productOption,
+          origin,
+          brand,
+          shippingFee,
+          thrmbnailUrl,
+          descriptionImageUrl,
+        } = data;
+        const productData = {
+          id,
+          name,
+          price,
+          point,
+          productImage,
+          productOption,
+          descriptionImageUrl,
+        };
+        const descriptionData = {
+          origin,
+          brand,
+          shippingFee,
+        };
+        this.setState({
+          productData,
+          descriptionData,
+          changeMainImg: thrmbnailUrl,
+        });
+      });
     setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
   }
-
-  // componentDidMount() {   //차후 변경 예정 은정님이 아이디 서브카테고리 메인카테고리 줘야됨
-  //                          post로 바디에 담아서 백단에 요청
-  //   fetch('http://localhost:3000/data/product.json')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       const listId = this.props.location.state?.id;
-  //       let mainData = data['LIST_MENU'].find(el => listId === el.id);
-  //       if (!mainData) mainData = data[0];
-  //       this.setState({
-  //         productData
-  //         changeMainImg: productData.thumbailURL,
-  //       });
-  //     });
-  //       setInterval(this.clickArrowChangeImg, CHANGE_IMG_INTERVER);
-  // }
 
   clickChangeImg = e => {
     this.setState({
@@ -72,12 +89,12 @@ class ProductDetail extends Component {
   };
 
   findSameImg = num => {
-    const changeMainImg = this.state.productData.productImgs.find(
+    const changeMainImg = this.state.productData.productImage.find(
       productImg => productImg.id === num
     );
     this.setState({
       imgNum: num,
-      changeMainImg: changeMainImg.imagURL,
+      changeMainImg: changeMainImg.imageUrl,
     });
   };
 
@@ -108,7 +125,7 @@ class ProductDetail extends Component {
 
   choiceOptionChange = e => {
     const { choiceOptionArray, productData } = this.state;
-    const resultOption = productData.options?.find(option => {
+    const resultOption = productData.productOption?.find(option => {
       return option.name === e.target.value;
     });
     if (!resultOption) return;
@@ -158,7 +175,7 @@ class ProductDetail extends Component {
   changePositionScroll = whereMovePosition => {
     const MOVE_PHOTO_POSITION = 0;
     const MOVE_INFO_POSITION = 1150;
-    const MOVE_REVIEW_POSITION = 3100;
+    const MOVE_REVIEW_POSITION = 10000;
     const moveSroll = movePosition => {
       const position = { top: movePosition, left: 0, behavior: 'smooth' };
       window.scrollTo(position);
@@ -179,8 +196,15 @@ class ProductDetail extends Component {
   };
 
   render() {
-    const { id, name, price, point, productImgs, options } =
-      this.state.productData;
+    const {
+      id,
+      name,
+      price,
+      point,
+      productImage,
+      productOption,
+      descriptionImageUrl,
+    } = this.state.productData;
     const { origin, brand, shippingFee } = this.state.descriptionData;
     const {
       changeMainImg,
@@ -190,19 +214,18 @@ class ProductDetail extends Component {
       isSharedLinkMenu,
       clickMenu,
     } = this.state;
-
     return (
       <div className="Detail">
         <div className="total">
           <section className="product">
             <div className="main">
               <ProductPhoto
-                {...{ id, name, mainImg: changeMainImg, subImgs: productImgs }}
+                {...{ id, name, mainImg: changeMainImg, subImgs: productImage }}
                 clickChangeImg={this.clickChangeImg}
                 clickArrowChangeImg={this.clickArrowChangeImg}
               />
               <ProductDescription
-                {...{ id, name, price, point, options }}
+                {...{ id, name, price, point, productOption }}
                 {...{ origin, brand, shippingFee }}
                 {...{
                   isLikedProduct,
@@ -218,6 +241,7 @@ class ProductDetail extends Component {
             </div>
             <article className="content">
               <ProductInfo
+                descriptionImageUrl={descriptionImageUrl}
                 clickMenu={clickMenu}
                 changePositionScroll={this.changePositionScroll}
               />

@@ -3,11 +3,11 @@ import './SlideImage.scss';
 
 class SlideImage extends Component {
   render() {
-    const { url, name } = this.props;
+    const { img, name } = this.props;
     return (
       <div className="SlideImage">
         <div className="inner">
-          <img src={url} alt={name} />
+          <img src={img} alt={name} />
         </div>
       </div>
     );

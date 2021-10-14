@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import SlideImage from './SlideImage';
 import DotButton from './DotButton';
-import slideImgs from './mockData';
+import slideImgs from './carouselMockData';
 import './Carousel.scss';
 
 class Carousel extends Component {
@@ -72,18 +73,42 @@ class Carousel extends Component {
     const { currentImg, slideImgs, isTransformTimeOn } = this.state;
     return (
       <div className="Carousel">
-        <div
-          className={`container ${isTransformTimeOn ? 'transformTimeOn' : ''}`}
-          style={{ transform: `translateX(${-currentImg * 100}vw)` }}
-        >
-          {slideImgs.map(imgData => {
-            return <SlideImage key={imgData.id} url={imgData.imgUrl} />;
-          })}
-          <div className="SlideImage">
-            <div className="inner">
-              <img src={slideImgs[0].imgUrl} alt={slideImgs[0].name} />
+        <div className="btnNorm">
+          <div className="containerWraper">
+            <div
+              className={`container ${
+                isTransformTimeOn ? 'transformTimeOn' : ''
+              }`}
+              style={{ transform: `translateX(${-currentImg * 1500}px)` }}
+            >
+              {slideImgs.map(imgData => {
+                return (
+                  <Link to={`/products/${imgData.productId}`}>
+                    <SlideImage
+                      key={imgData.id}
+                      name={imgData.name}
+                      img={imgData.img}
+                    />
+                  </Link>
+                );
+              })}
+              <div className="SlideImage">
+                <div className="inner">
+                  <img src={slideImgs[0].img} alt={slideImgs[0].name} />
+                </div>
+              </div>
             </div>
           </div>
+          <FontAwesomeIcon
+            icon={faAngleLeft}
+            className="leftBtn"
+            onClick={this.slideToLeft}
+          />
+          <FontAwesomeIcon
+            icon={faAngleRight}
+            className="rightBtn"
+            onClick={this.slideToRight}
+          />
         </div>
         <div className="dotBtnWraper">
           {slideImgs.map(imgData => {
@@ -97,16 +122,6 @@ class Carousel extends Component {
             );
           })}
         </div>
-        <FontAwesomeIcon
-          icon={faAngleLeft}
-          className="leftBtn"
-          onClick={this.slideToLeft}
-        />
-        <FontAwesomeIcon
-          icon={faAngleRight}
-          className="rightBtn"
-          onClick={this.slideToRight}
-        />
       </div>
     );
   }

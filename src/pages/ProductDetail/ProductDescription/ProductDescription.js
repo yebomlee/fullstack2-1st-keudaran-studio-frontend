@@ -7,7 +7,7 @@ import './ProductDescription.scss';
 
 class ProductDescription extends Component {
   render() {
-    const { id, name, price, point, options } = this.props;
+    const { id, name, price, point, productOption } = this.props;
     const { origin, brand, shippingFee } = this.props;
     const { isLikedProduct, choiceOptionArray, isSharedLinkMenu } = this.props;
     const {
@@ -59,7 +59,7 @@ class ProductDescription extends Component {
               </tr>
             </tbody>
           </table>
-          <ChoiceOptionBox {...{ options, choiceOptionChange }} />
+          <ChoiceOptionBox {...{ productOption, choiceOptionChange }} />
           {choiceOptionArray.map(choiceOption => {
             return (
               <ChoiceOption

@@ -1,0 +1,78 @@
+.ReviewCard {
+  .reviewWraper {
+    width: 280px;
+    margin: 10px;
+
+    .reviewImg {
+      width: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .reviewTextWraper {
+      position: relative;
+      padding: 15px;
+      background-color: white;
+
+      .reviewText {
+        line-height: 20px;
+      }
+
+      .rateBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 25px;
+
+        .starWrapper {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          width: 40%;
+
+          .starOn {
+            color: #29b473;
+          }
+
+          .starOff {
+            color: gray;
+          }
+        }
+
+        .userId {
+          margin-right: 5px;
+          color: lightgray;
+        }
+      }
+    }
+
+    .productWraper {
+      position: relative;
+      margin-top: 15px;
+      height: 90px;
+      background-color: white;
+      .imgWrapper {
+        .productImg {
+          float: left;
+          width: 90px;
+          height: 90px;
+          object-fit: cover;
+        }
+      }
+
+      .textBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        float: right;
+        width: 67%;
+        height: 95%;
+
+        .productName {
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}

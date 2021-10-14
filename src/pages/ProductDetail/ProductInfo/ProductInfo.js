@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ProductInfoContent from './ProductInfoContent';
-import ProductReview from './ProductReview';
+import Review from '../../../components/Review/Review';
 import './ProductInfo.scss';
 
 class ProductInfo extends Component {
   render() {
-    const { clickMenu, changePositionScroll } = this.props;
+    const { clickMenu, changePositionScroll, descriptionImageUrl } = this.props;
     const whatColotMenu = menu =>
       clickMenu === menu ? 'yesChangeColor' : 'notChangeColor';
 
@@ -25,8 +25,11 @@ class ProductInfo extends Component {
             상품후기
           </li>
         </ul>
-        <ProductInfoContent />
-        <ProductReview />
+        <ProductInfoContent descriptionImageUrl={descriptionImageUrl} />
+        <div className="productReview">
+          <strong className="areviewTitle">상품 후기</strong>
+          <Review />
+        </div>
       </div>
     );
   }
