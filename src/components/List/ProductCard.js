@@ -19,14 +19,18 @@ class ProductCard extends React.Component {
 
   render() {
     const { isHover } = this.state;
-    const { name, price, hoverImgUrl, imgUrl } = this.props;
+    const { id, name, price, hoverImgUrl, imgUrl } = this.props;
     return (
       <li
         className="ProductCard"
         onMouseOver={this.toggleImgHover}
         onMouseOut={this.toggleImgHover}
       >
-        <Link to="/products/id">
+        <Link
+          to={{
+            pathname: `/products/${id + 1}`,
+          }}
+        >
           <img
             className="productImg"
             src={isHover ? hoverImgUrl : imgUrl}

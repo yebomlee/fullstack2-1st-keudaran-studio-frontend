@@ -26,10 +26,8 @@ class ProductInfo extends Component {
           </li>
         </ul>
         <ProductInfoContent descriptionImageUrl={descriptionImageUrl} />
-        <div className="productReview">
-          <strong className="areviewTitle">상품 후기</strong>
-          <Review />
-        </div>
+        <h1 className="reviewTitle">REVIEW</h1>
+        <Review />
       </div>
     );
   }

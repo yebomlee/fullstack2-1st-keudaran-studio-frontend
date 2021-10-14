@@ -1,50 +1,44 @@
 @import '/src/styles/mixin';
 
 .Review {
-  @include flexStyle(center, none, column);
-  max-width: 1200px;
-  // width: 100%;
-  margin: 0 auto;
+  margin: 0 0 50px 0;
   font-family: 'Spoqa Han Sans', 'Lato', sans-serif;
-
-  .reviewTitle {
-    align-self: flex-start;
-    padding: 40px 0 15px 0;
-    font-family: 'Lato';
-  }
-
+  width: 1200px;
+  @include flexStyle(none, center);
   .reviewInner {
-    width: 100%;
-
+    @include flexStyle(none, none, column);
+    width: 90%;
     .reviewRate {
-      // width: 100%;
       height: 150px;
       border: 1px solid #dadada;
-      padding: 5px;
-      margin-bottom: 10px;
+      margin-bottom: 50px;
       @include flexStyle(center, center, row);
-      // background-color: #e2e2e2;
 
       .userRateWrap {
         @include flexStyle(center, none, column);
-        margin-right: 40px;
+        margin-right: 90px;
 
         .rateTotal {
           margin-bottom: 5px;
+          @include fontFamily('Noto Sans KR', sans-serif);
+          @include fontSizeWight(23px, bold, #000000);
         }
 
         .totalAmountReview {
-          font-size: 12px;
+          @include fontFamily('Noto Sans KR', sans-serif);
+          @include fontSizeWight(18px, none, black);
+          margin-top: 10px;
         }
       }
       .averageRate {
         h2 {
-          margin-top: 10px;
-          font-size: 15px;
+          margin-top: 15px;
+          @include fontFamily('Noto Sans KR', sans-serif);
+          @include fontSizeWight(16px, none, black);
           text-align: center;
         }
         .starRating {
-          width: 304px;
+          width: 300px;
         }
         .starRating,
         .innerStarRating {
@@ -62,15 +56,15 @@
     }
 
     .reviewWrite {
-      padding: 10px;
+      padding: 15px;
       border: 1px solid #dadada;
+      margin: 0 0 50px 0;
 
       .reviewForm {
         display: flex;
         flex-direction: column;
 
         .howManyStars {
-          width: 100%;
           height: 40px;
           padding: 10px;
 
@@ -82,6 +76,12 @@
             color: #333;
             outline: 0;
             font-family: inherit;
+            cursor: pointer;
+            &:hover {
+              transform: scale(1.05);
+              background-color: #2ab372;
+              @include fontSizeWight(17px, bold);
+            }
           }
         }
 
@@ -100,18 +100,20 @@
           position: relative;
           top: 4px;
           align-self: flex-end;
-          // align-self: center;
           width: 180px;
           height: 35px;
+          border-radius: 8px;
           line-height: 35px;
-          border: 1px solid #333;
           background-color: #333;
-          color: #fff;
-          opacity: 0.7;
+          margin: 0 15px 15px 0;
+          @include fontSizeWight(15px, normal, #fff);
           text-align: center;
+          border: 1px solid gray;
+          cursor: pointer;
           &:hover {
-            opacity: 1;
-            cursor: pointer;
+            transform: scale(1.05);
+            background-color: #2ab372;
+            @include fontSizeWight(17px, bold, #fff);
           }
         }
       }
@@ -119,14 +121,14 @@
         display: flex;
         flex-direction: column;
         width: 99.8%;
-        margin: 10px auto;
+        margin: 10px 0 0 0;
         border: 1px solid #dadada;
 
         .privacyTitle {
           display: flex;
           justify-content: space-between;
           flex-direction: row;
-          margin: 10px;
+          margin: 20px 20px 10px 20px;
           font-size: 13px;
           .privacyTitleInner {
             margin: 2.5px;
@@ -139,9 +141,17 @@
             }
           }
           .privacyRadioBox {
-            margin-right: 10px;
             input {
               margin: 2.5px;
+            }
+            .agreeOrNot {
+              cursor: pointer;
+              margin: 0 10px 0 0;
+              @include fontSizeWight(12px, normal);
+              &:hover {
+                transform: scale(1.05);
+                @include fontSizeWight(15px, bold, #2ab372);
+              }
             }
           }
         }
@@ -168,41 +178,36 @@
           }
         }
         .agreeForFillOut {
-          margin: 10px;
-          font-size: 8px;
+          margin: 10px 0 20px 20px;
+          @include fontSizeWight(12px, normal);
         }
       }
     }
-    // .button {
-    //   @include fontSizeWight(10px);
-    //   align-self: flex-end;
-    //   width: 60px;
-    //   margin: 5px 0px;
-    // }
+
     .reviewList {
       width: 100%;
-      margin-top: 10px;
-      padding: 10px;
+      padding: 15px;
       border: 1px solid #dadada;
 
       .reviewBlock {
-        margin: 20px 0;
         .createdReview {
           .starsAndData {
             display: flex;
             justify-content: space-between;
+            margin: 30px 20px 5px 10px;
             .stars {
-              // @include flexStyle(none, flex-start);
-              color: #777;
+              color: #2ab372;
+              font-size: 15px;
             }
 
             .userId {
-              margin-right: 10px;
+              margin-right: 12px;
             }
 
             .userId,
             .createdAt {
-              @include fontSizeWight(12px, none, grey);
+              @include fontFamily('Noto Sans KR', sans-serif);
+              @include fontSizeWight(13px, none, gray);
             }
           }
 
@@ -218,6 +223,7 @@
             }
 
             .modifyAndDelete {
+              margin: 10px 20px 50px 20px;
               @include flexStyle(none, flex-end);
               @include fontSizeWight(12px, none, grey);
 
