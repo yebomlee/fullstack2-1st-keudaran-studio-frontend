@@ -90,7 +90,7 @@ class ProductDetail extends Component {
 
   findSameImg = num => {
     const changeMainImg = this.state.productData.productImage.find(
-      productImg => productImg.id === num
+      (productImg, index) => index + 1 === num
     );
     this.setState({
       imgNum: num,
@@ -214,6 +214,7 @@ class ProductDetail extends Component {
       isSharedLinkMenu,
       clickMenu,
     } = this.state;
+    console.log(productImage);
     return (
       <div className="Detail">
         <div className="total">
