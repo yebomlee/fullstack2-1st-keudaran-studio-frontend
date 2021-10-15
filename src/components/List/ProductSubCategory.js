@@ -4,7 +4,8 @@ import './ProductSubCategory.scss';
 
 class ProductSubCategory extends React.Component {
   render() {
-    const { id, name, selectSubCategory, selectedSubCategory } = this.props;
+    const { id, name, selectSubCategory, selectedSubCategory, main } =
+      this.props;
     return (
       <div className="ProductSubCategory">
         <li
@@ -12,9 +13,16 @@ class ProductSubCategory extends React.Component {
           onClick={() => selectSubCategory(id)}
           className={id === selectedSubCategory ? 'clickedSub' : ''}
         >
-          <Link className="subCategoryName" to="#">
+          <Link
+            className="subCategoryName"
+            to={{
+              pathname: `/products`,
+              search: `?main=${main}&sub=${id}`,
+            }}
+          >
             {name}
           </Link>
+
           <div
             className={
               id === selectedSubCategory ? 'subCategoryDot' : 'hiddenDot'

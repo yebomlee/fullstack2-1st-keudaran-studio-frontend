@@ -19,50 +19,82 @@ class ProductListContainer extends React.Component {
   };
 
   componentDidMount() {
-    fetch('/data/subCategoryProduct.json')
+    fetch(`/product/sort?sort=${this.props.sorting}`)
       .then(res => res.json())
       .then(res => {
-        const subCategory = res.MAIN_CATEGORY.SUB_CATEGORY;
-        const arr = [];
-        this.setState({ allProducts: subCategory });
-        for (let k = 0; k < subCategory.length; k++) {
-          arr.push(...subCategory[k].products);
+        if (Number.isNaN(this.props.subCategoryId)) {
+          if (this.props.mainCategoryId === 1) {
+            const product = res.data;
+            this.setState({ allProducts: product });
+          } else {
+            const product = res.data.filter(product => {
+              return product.mainCategoryId === this.props.mainCategoryId;
+            });
+            this.setState({ allProducts: product });
+          }
+        } else {
+          if (this.props.subCategoryId < 4) {
+            const product = res.data;
+            this.setState({ allProducts: product });
+          } else {
+            const product = res.data.filter(product => {
+              return product.subCategoryId === this.props.subCategoryId;
+            });
+            this.setState({ allProducts: product });
+          }
         }
-        const indexedAllProducts = arr.map((product, i) => {
-          return {
-            id: i,
-            name: product.name,
-            imgUrl: product.imgUrl,
-            price: product.price,
-          };
-        });
-        this.setState({ indexedAllProducts: indexedAllProducts });
       });
   }
 
-  render() {
-    const { indexedAllProducts, allProducts } = this.state;
-    const { selectedSubCategory } = this.props;
-    let filteringProduct = [];
-    if (selectedSubCategory === 0) {
-      filteringProduct = indexedAllProducts;
-    } else {
-      filteringProduct = JSON.parse(
-        JSON.stringify(allProducts[selectedSubCategory - 1].products)
-      );
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.mainCategoryId !== prevProps.mainCategoryId ||
+      (this.props.subCategoryId !== prevProps.subCategoryId &&
+        this.props.subCategoryId) ||
+      this.props.sorting !== prevProps.sorting
+    ) {
+      fetch(`/product/sort?sort=${this.props.sorting}`)
+        .then(res => res.json())
+        .then(res => {
+          if (Number.isNaN(this.props.subCategoryId)) {
+            if (this.props.mainCategoryId === 1) {
+              const product = res.data;
+              this.setState({ allProducts: product });
+            } else {
+              const product = res.data.filter(product => {
+                return product.mainCategoryId === this.props.mainCategoryId;
+              });
+              this.setState({ allProducts: product });
+            }
+          } else {
+            if (this.props.subCategoryId < 4) {
+              const product = res.data;
+              this.setState({ allProducts: product });
+            } else {
+              const product = res.data.filter(product => {
+                return product.subCategoryId === this.props.subCategoryId;
+              });
+              this.setState({ allProducts: product });
+            }
+          }
+        });
     }
+  }
+
+  render() {
+    const { allProducts } = this.state;
 
     return (
       <div className="ProductListContainer">
         <ul className="productContainer">
-          {filteringProduct.map(products => {
+          {allProducts.map(products => {
             return (
               <ProductCard
                 key={products.id}
                 id={products.id}
                 name={products.name}
-                imgUrl={products.imgUrl[0]}
-                hoverImgUrl={products.imgUrl[1]}
+                imgUrl={products.thumbnailUrl}
+                hoverImgUrl={products.hoverImages}
                 price={products.price.toLocaleString()}
               />
             );
