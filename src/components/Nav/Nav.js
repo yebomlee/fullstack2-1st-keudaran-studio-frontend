@@ -36,7 +36,7 @@ class Nav extends Component {
 
   handleRemoveCookie = () => {
     const cookie = new Cookies();
-    cookie.remove('user');
+    cookie.remove('user', { path: '/' });
     this.props.changeLoginState();
   };
 
