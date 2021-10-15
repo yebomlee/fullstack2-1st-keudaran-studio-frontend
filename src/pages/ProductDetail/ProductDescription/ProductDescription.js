@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ChoiceOption from './ChoiceOption';
-import LikeButton from '../LikeButton/LikeButton';
 import ChoiceOptionBox from '../ChoiceOptionBox/ChoiceOptionBox';
 import ShareKakaoLink from '../ShareKakaoLink/ShareKakaoLink';
+import ActiveButtonChange from './ActiveButtonChange';
 import './ProductDescription.scss';
 
 class ProductDescription extends Component {
@@ -18,8 +18,12 @@ class ProductDescription extends Component {
       deleteChoiceOption,
     } = this.props;
     let totalCount = 0;
+    let productTotalQuantity = 0;
     choiceOptionArray.forEach(option => {
       totalCount = totalCount + option.choiceCount;
+    });
+    productOption?.forEach(option => {
+      productTotalQuantity = productTotalQuantity + option.quantity;
     });
     const totalPrice = totalCount * price;
     return (
@@ -82,28 +86,9 @@ class ProductDescription extends Component {
             </span>
           </div>
         </article>
-        <div className="activeButton">
-          <p
-            className="buyButton commonButton"
-            onClick={() => {
-              alert('준비중입니다');
-            }}
-          >
-            구매하기
-          </p>
-          <p
-            className="basketButton commonButton"
-            onClick={() => {
-              alert('준비중입니다');
-            }}
-          >
-            장바구니
-          </p>
-          <LikeButton
-            className="ChangeHeart"
-            {...{ isLikedProduct, changeStateEventShow }}
-          />
-        </div>
+        <ActiveButtonChange
+          {...{ isLikedProduct, changeStateEventShow, productTotalQuantity }}
+        />
       </section>
     );
   }
