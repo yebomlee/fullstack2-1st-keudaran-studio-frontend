@@ -159,7 +159,7 @@ class ProductDetail extends Component {
   changePositionScroll = whereMovePosition => {
     const MOVE_PHOTO_POSITION = 0;
     const MOVE_INFO_POSITION = 1150;
-    const MOVE_REVIEW_POSITION = 10000;
+    const MOVE_REVIEW_POSITION = 7150;
     const moveSroll = movePosition => {
       const position = { top: movePosition, left: 0, behavior: 'smooth' };
       window.scrollTo(position);
@@ -177,6 +177,18 @@ class ProductDetail extends Component {
     this.setState({
       isSharedLinkMenu: !isSharedLinkMenu,
     });
+  };
+
+  addComma = price => {
+    const commaPrice = (price + '')
+      .split('')
+      .reverse()
+      .map((num, i) => {
+        return i % 3 === 2 ? ',' + num : num;
+      })
+      .reverse()
+      .join('');
+    return commaPrice.charAt(0) === ',' ? commaPrice.slice(1) : commaPrice;
   };
 
   render() {
@@ -222,6 +234,7 @@ class ProductDetail extends Component {
                 choiceOptionChange={this.choiceOptionChange}
                 changeStateEventShow={this.changeStateEventShow}
                 deleteChoiceOption={this.deleteChoiceOption}
+                addComma={this.addComma}
               />
             </div>
             <article className="content">
