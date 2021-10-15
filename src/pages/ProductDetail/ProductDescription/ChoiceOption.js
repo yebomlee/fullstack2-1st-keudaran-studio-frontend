@@ -7,7 +7,8 @@ import './ChoiceOption.scss';
 class ChoiceOption extends Component {
   render() {
     const { price, choiceOption } = this.props;
-    const { increaseCounter, decreaseCounter, deleteChoiceOption } = this.props;
+    const { increaseCounter, decreaseCounter, deleteChoiceOption, addComma } =
+      this.props;
     const productTotalPrice = price * choiceOption.choiceCount;
     return (
       <div className="ChoiceOption">
@@ -38,7 +39,7 @@ class ChoiceOption extends Component {
         </div>
         <div>
           <p className="totalOptionPrice">
-            {productTotalPrice}
+            {addComma(productTotalPrice)}
             <em>원</em>
           </p>
           <FontAwesomeIcon

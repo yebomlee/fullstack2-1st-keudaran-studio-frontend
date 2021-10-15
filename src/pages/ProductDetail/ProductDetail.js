@@ -179,6 +179,18 @@ class ProductDetail extends Component {
     });
   };
 
+  addComma = price => {
+    const commaPrice = (price + '')
+      .split('')
+      .reverse()
+      .map((num, i) => {
+        return i % 3 === 2 ? ',' + num : num;
+      })
+      .reverse()
+      .join('');
+    return commaPrice.charAt(0) === ',' ? commaPrice.slice(1) : commaPrice;
+  };
+
   render() {
     const {
       id,
@@ -222,6 +234,7 @@ class ProductDetail extends Component {
                 choiceOptionChange={this.choiceOptionChange}
                 changeStateEventShow={this.changeStateEventShow}
                 deleteChoiceOption={this.deleteChoiceOption}
+                addComma={this.addComma}
               />
             </div>
             <article className="content">

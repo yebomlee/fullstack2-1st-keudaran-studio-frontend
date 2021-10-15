@@ -16,6 +16,7 @@ class ProductDescription extends Component {
       choiceOptionChange,
       changeStateEventShow,
       deleteChoiceOption,
+      addComma,
     } = this.props;
     let totalCount = 0;
     let productTotalQuantity = 0;
@@ -31,7 +32,7 @@ class ProductDescription extends Component {
         <ShareKakaoLink {...{ isSharedLinkMenu, changeStateEventShow }} />
         <h3>{name} </h3>
         <p className="price">
-          {price} <em>원</em>
+          {addComma(price)} <em>원</em>
         </p>
         <article className="info">
           <table className="table">
@@ -74,6 +75,7 @@ class ProductDescription extends Component {
                   increaseCounter,
                   decreaseCounter,
                   deleteChoiceOption,
+                  addComma,
                 }}
               />
             );
@@ -81,7 +83,7 @@ class ProductDescription extends Component {
           <div className="totalPrice">
             <strong>총 상품 금액</strong>
             <span className="resultPrice">
-              {totalPrice}
+              {addComma(totalPrice)}
               <em>원</em>
             </span>
           </div>
