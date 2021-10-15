@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import SignUpBox from './SignUpBox';
 import './SignUp.scss';
 
@@ -167,7 +168,9 @@ class SignUp extends React.Component {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'SIGN_UP_SUCCESS') {
+          const { changeLoginState } = this.props;
           alert('회원가입 성공!');
+          changeLoginState();
           this.props.history.push('/');
         } else if (res.message === 'Duplicate') {
           alert('아이디 중복입니다.');
@@ -212,4 +215,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

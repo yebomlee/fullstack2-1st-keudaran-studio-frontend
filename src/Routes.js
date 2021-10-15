@@ -42,7 +42,11 @@ class Routes extends React.Component {
               path="/signin"
               render={() => <SignIn changeLoginState={this.changeLoginState} />}
             />
-            <Route exact path="/signup" component={SignUp} />
+            <Route
+              exact
+              path="/signup"
+              render={() => <SignUp changeLoginState={this.changeLoginState} />}
+            />
             <Footer />
           </>
         </Switch>
