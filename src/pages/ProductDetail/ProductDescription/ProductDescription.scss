@@ -42,7 +42,7 @@
     .totalPrice {
       @include flexStyle(none, space-between);
       margin: 30px 0 0 0;
-      padding: 30px 10px 20px 0;
+      padding: 30px 10px 0 0;
       border-top: #3d3d3d solid 1px;
 
       strong {
@@ -58,40 +58,6 @@
           @include fontSizeWight(20px, 400px);
         }
       }
-    }
-  }
-
-  .activeButton {
-    @include flexStyle(none, space-between);
-
-    .commonButton {
-      @include flexStyle(center, center);
-      @include widthHeight(none, 58px);
-      margin: 0 7px 0 0;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.05);
-        font-weight: bold;
-      }
-    }
-
-    .buyButton {
-      @include widthHeight(250px);
-      @include fontSizeWight(20px, none, #fff);
-      border: 1px solid #2e2e2e;
-      background-color: #2e2e2e;
-    }
-
-    .basketButton {
-      @include widthHeight(250px);
-      @include fontSizeWight(20px, none, #000000);
-      border: 1px solid #000000;
-    }
-
-    .LikeButton {
-      @include fontSizeWight(26px, none, #1c1c1c);
-      padding: 15px;
-      border: 1px solid #000000;
     }
   }
 }
