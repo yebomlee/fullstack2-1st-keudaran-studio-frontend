@@ -27,13 +27,13 @@ class HambergerIconMenu extends Component {
             </li>
             <li
               className="menuButton"
-              onClick={() => changePositionScroll('info')}
+              onClick={() => changePositionScroll('infoRef')}
             >
               상품 상세
             </li>
             <li
               className="menuButton"
-              onClick={() => changePositionScroll('review')}
+              onClick={() => changePositionScroll('reviewRef')}
             >
               후기
             </li>
