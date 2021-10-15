@@ -160,10 +160,9 @@ class ProductDetail extends Component {
   };
 
   changePositionScroll = whereMovePosition => {
-    let movePosition = 0;
-    if (this.multiRefs[whereMovePosition]?.current) {
-      movePosition = this.multiRefs[whereMovePosition].current.offsetTop;
-    }
+    const movePosition = this.multiRefs[whereMovePosition]?.current
+      ? this.multiRefs[whereMovePosition].current.offsetTop
+      : 0;
     const moveSroll = movePosition => {
       const position = { top: movePosition, left: 0, behavior: 'smooth' };
       window.scrollTo(position);
