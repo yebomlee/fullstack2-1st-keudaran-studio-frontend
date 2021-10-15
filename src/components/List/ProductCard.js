@@ -28,11 +28,11 @@ class ProductCard extends React.Component {
       >
         <Link
           to={{
-            pathname: `/products/${id + 1}`,
+            pathname: `/products/${id}`,
           }}
         >
           <img
-            className="productImg"
+            className="productListImages"
             src={isHover ? hoverImgUrl : imgUrl}
             alt={name}
           />

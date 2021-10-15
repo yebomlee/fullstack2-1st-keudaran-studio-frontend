@@ -138,18 +138,18 @@ class Nav extends Component {
         </div>
         <nav className="navBar">
           <div className="dropdownMenu">
-            {this.state.category.map(data => {
+            {this.state.category.map(mainCategory => {
               return (
-                <div className="dropdown" key={data.id}>
+                <div className="dropdown" key={mainCategory.id}>
                   <Link
                     to={{
                       pathname: `/products`,
-                      params: data.id,
+                      search: `?main=${mainCategory.id}`,
                     }}
-                    key={data.id}
+                    key={mainCategory.id}
                   >
                     <button className="dropBtn">
-                      {data.name}
+                      {mainCategory.name}
                       <div className="dropIcon">●</div>
                     </button>
                   </Link>
@@ -160,17 +160,17 @@ class Nav extends Component {
                         : 'dropdownContent'
                     }
                   >
-                    {data.subCategory.map(data => {
+                    {mainCategory.subCategory.map(subCategoryData => {
                       return (
                         <Link
                           to={{
                             pathname: `/products`,
-                            params: data.id,
+                            search: `?main=${mainCategory.id}&sub=${subCategoryData.id}`,
                           }}
                           className="categoryLink"
-                          key={data.id}
+                          key={subCategoryData.id}
                         >
-                          {data.name}
+                          {subCategoryData.name}
                         </Link>
                       );
                     })}

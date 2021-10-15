@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'qs';
 import ProductListMdPicks from '../../components/List/ProductListMdPicks';
 import ProductSubCategory from '../../components/List/ProductSubCategory';
 import ProductListContainer from '../../components/List/ProductListContainer';
@@ -8,11 +9,18 @@ class ProductList extends React.Component {
   constructor() {
     super();
     this.state = {
+      allCategoryData: '',
       mdProducts: [],
       subCategory: [],
       selectedSubCategory: 0,
+      allSortedProducts: '',
+      sorting: 'name',
     };
   }
+
+  changeSortingSelector = e => {
+    this.setState({ sorting: e.currentTarget.value });
+  };
 
   selectSubCategory = id => {
     this.setState({
@@ -21,6 +29,14 @@ class ProductList extends React.Component {
   };
 
   componentDidMount() {
+    fetch('/category', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ allCategoryData: data.categories });
+      });
+
     fetch('/data/subCategoryProduct.json')
       .then(res => res.json())
       .then(res => {
@@ -47,52 +63,63 @@ class ProductList extends React.Component {
         });
         this.setState({ mdProducts: mdProducts });
       });
-
-    fetch('/data/stationery.json')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ subCategory: res.STATIONERY });
-      });
   }
 
   render() {
-    const { id, mdProducts, subCategory, selectedSubCategory } = this.state;
+    const { id, mdProducts, selectedSubCategory, allSortedProducts, sorting } =
+      this.state;
+    const { location } = this.props;
+    const query = qs.parse(location.search, { ignoreQueryPrefix: true });
     return (
       <div className="ProductList">
         <div className="productListWrapper">
           <ProductListMdPicks id={id} mdProducts={mdProducts} />
-
           <div className="productListWrap">
-            <div className="subCaterogyTitle">Stationery</div>
+            {this.state.allCategoryData && (
+              <div className="caterogyTitle">
+                {this.state.allCategoryData[+query.main - 1].name}
+              </div>
+            )}
             <ul className="subCategory">
-              {subCategory.map(sub => {
-                return (
-                  <ProductSubCategory
-                    key={sub.id}
-                    id={sub.id}
-                    name={sub.name}
-                    selectedSubCategory={selectedSubCategory}
-                    selectSubCategory={this.selectSubCategory}
-                  />
-                );
-              })}
+              {this.state.allCategoryData &&
+                this.state.allCategoryData[+query.main - 1].subCategory.map(
+                  (sub, idx) => {
+                    return (
+                      <ProductSubCategory
+                        key={sub.id}
+                        id={sub.id}
+                        name={sub.name}
+                        selectedSubCategory={selectedSubCategory}
+                        selectSubCategory={this.selectSubCategory}
+                        idx={idx}
+                        main={+query.main}
+                      />
+                    );
+                  }
+                )}
             </ul>
           </div>
-
           <div className="selector">
-            <select className="selectSorting" name="sort" id="sort">
-              <option value="popular" defaultValue>
-                인기상품순
-              </option>
-              <option value="new">신상품순</option>
-              <option value="named">상품명순</option>
-              <option value="cheap">낮은가격순</option>
-              <option value="expensive">높은가격순</option>
-              <option value="mostClicked">조회순</option>
+            <select
+              className="selectSorting"
+              name="sort"
+              id="sort"
+              onChange={this.changeSortingSelector}
+            >
+              <option value="name">상품명순</option>
+              <option value="recent">신상품순</option>
+              <option value="lowprice">낮은가격순</option>
+              <option value="highprice">높은가격순</option>
             </select>
           </div>
 
-          <ProductListContainer selectedSubCategory={selectedSubCategory} />
+          <ProductListContainer
+            allSortedProducts={allSortedProducts}
+            selectedSubCategory={selectedSubCategory}
+            subCategoryId={+query.sub}
+            mainCategoryId={+query.main}
+            sorting={sorting}
+          />
         </div>
       </div>
     );
