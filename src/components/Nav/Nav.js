@@ -62,12 +62,19 @@ class Nav extends Component {
           }
         >
           <div className="modalDropDown">
-            {this.state.category.map(data => {
+            {this.state.category.map(mainCategory => {
               return (
-                <div className="modalSubCategory" key={data.id}>
-                  {data.subCategory.map(data => {
+                <div className="modalSubCategory" key={mainCategory.id}>
+                  {mainCategory.subCategory.map(data => {
                     return (
-                      <Link to="/" className="modalCategoryLink" key={data.id}>
+                      <Link
+                        to={{
+                          pathname: '/products',
+                          search: `?main=${mainCategory.id}&sub=${data.id}`,
+                        }}
+                        className="modalCategoryLink"
+                        key={data.id}
+                      >
                         {data.name}
                       </Link>
                     );
