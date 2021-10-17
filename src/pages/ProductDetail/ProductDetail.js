@@ -18,8 +18,11 @@ class ProductDetail extends Component {
       choiceOptionArray: [],
       isPositionMenu: false,
       isSharedLinkMenu: false,
-      clickMenu: '',
       isLogin: false,
+    };
+    this.multiRefs = {
+      infoRef: React.createRef(),
+      reviewRef: React.createRef(),
     };
   }
 
@@ -157,19 +160,16 @@ class ProductDetail extends Component {
   };
 
   changePositionScroll = whereMovePosition => {
-    const MOVE_PHOTO_POSITION = 0;
-    const MOVE_INFO_POSITION = 1150;
-    const MOVE_REVIEW_POSITION = 7150;
+    const movePosition = this.multiRefs[whereMovePosition]?.current
+      ? this.multiRefs[whereMovePosition].current.offsetTop
+      : 0;
     const moveSroll = movePosition => {
       const position = { top: movePosition, left: 0, behavior: 'smooth' };
       window.scrollTo(position);
     };
-    this.setState({
-      clickMenu: whereMovePosition,
-    });
-    if (whereMovePosition === 'info') moveSroll(MOVE_INFO_POSITION);
-    else if (whereMovePosition === 'review') moveSroll(MOVE_REVIEW_POSITION);
-    else moveSroll(MOVE_PHOTO_POSITION);
+    if (whereMovePosition === 'infoRef') moveSroll(movePosition);
+    else if (whereMovePosition === 'reviewRef') moveSroll(movePosition);
+    else moveSroll(movePosition);
   };
 
   showSharedLinkMenu = () => {
@@ -239,6 +239,7 @@ class ProductDetail extends Component {
             </div>
             <article className="content">
               <ProductInfo
+                ref={this.multiRefs}
                 descriptionImageUrl={descriptionImageUrl}
                 clickMenu={clickMenu}
                 changePositionScroll={this.changePositionScroll}
