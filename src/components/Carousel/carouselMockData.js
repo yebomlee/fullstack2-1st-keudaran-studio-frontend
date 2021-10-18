@@ -1,28 +1,28 @@
-const carouselImgs = [
+const carouselpaths = [
   {
-    id: 0,
+    id: 1,
     name: '로고',
-    img: 'images/carousel0.png',
+    path: 'images/carousel0.png',
     productId: 1,
   },
   {
-    id: 1,
+    id: 2,
     name: '흰 이어폰',
-    img: 'images/carousel1.png',
+    path: 'images/carousel1.png',
     productId: 2,
   },
   {
-    id: 2,
+    id: 3,
     name: '크다란 공책',
-    img: 'images/carousel2.png',
+    path: 'images/carousel2.png',
     productId: 3,
   },
   {
-    id: 3,
+    id: 4,
     name: '이어폰 청록배경',
-    img: 'images/carousel3.png',
+    path: 'images/carousel3.png',
     productId: 4,
   },
 ];
 
-export default carouselImgs;
+export default carouselpaths;

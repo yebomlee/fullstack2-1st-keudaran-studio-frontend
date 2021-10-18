@@ -8,89 +8,106 @@ import DotButton from './DotButton';
 import slideImgs from './carouselMockData';
 import './Carousel.scss';
 
+const TRANSITION_WAITING_TIME = 2500;
+const TRANSITION_TIME = 900;
+
 class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      slideImgs: slideImgs,
-      currentImg: 0,
-      isTransformTimeOn: true,
+      currentIdx: 1,
     };
+    this.slideImgs = slideImgs;
+    this.isButtonAvailable = true;
+    this.isSlideAnimationOn = true;
   }
 
   componentDidMount() {
-    this.startAutoSlide();
+    setInterval(this.slideToRight, TRANSITION_WAITING_TIME);
   }
 
-  componentWillUnmount() {
-    this.stopAutoSlide();
+  componentDidUpdate() {
+    if (this.isSlideAnimationOn) return;
+
+    setTimeout(() => {
+      this.isSlideAnimationOn = true;
+    }, 50);
   }
-
-  startAutoSlide = () => {
-    const INTERVAL_TIME_MS = 3000;
-    const LAST_IMG_WAITING_TIME_MS = 900;
-    if (this.autoSlideId) return;
-
-    this.autoSlideId = setInterval(() => {
-      if (this.state.currentImg === this.state.slideImgs.length - 1) {
-        this.setState({
-          currentImg: this.state.slideImgs.length,
-        });
-        setTimeout(() => {
-          this.setState({ isTransformTimeOn: false });
-          this.setState({ currentImg: 0 });
-        }, LAST_IMG_WAITING_TIME_MS);
-      } else {
-        this.setState({ isTransformTimeOn: true });
-        this.setState({ currentImg: this.state.currentImg + 1 });
-      }
-    }, INTERVAL_TIME_MS);
-  };
-
-  stopAutoSlide = () => {
-    clearInterval(this.autoSlideId);
-  };
-
-  slideToClickedImg = e => {
-    if (this.state.currentImg === 0) this.setState({ isTransformTimeOn: true });
-    this.setState({ currentImg: +e.target.className.charAt(3) });
-  };
 
   slideToRight = () => {
-    const { currentImg, slideImgs } = this.state;
-    if (currentImg === 0) this.setState({ isTransformTimeOn: true });
-    if (currentImg === slideImgs.length - 1) return;
-    this.setState({ currentImg: currentImg + 1 });
+    if (!this.isButtonAvailable || !this.isSlideAnimationOn) return;
+
+    const { currentIdx } = this.state;
+    const imgLength = this.slideImgs.length;
+    const newIdx = currentIdx + 1;
+    this.setState({ currentIdx: newIdx });
+
+    if (newIdx === imgLength + 1) {
+      this.isButtonAvailable = false;
+      setTimeout(() => {
+        this.isSlideAnimationOn = false;
+        this.setState({ currentIdx: 1 });
+        this.isButtonAvailable = true;
+      }, TRANSITION_TIME);
+    }
   };
 
   slideToLeft = () => {
-    const { currentImg } = this.state;
-    if (currentImg === 0) return;
-    this.setState({ currentImg: currentImg - 1 });
+    if (!this.isButtonAvailable || !this.isSlideAnimationOn) return;
+
+    const { currentIdx } = this.state;
+    const newIdx = currentIdx - 1;
+    const imgLength = this.slideImgs.length;
+    this.setState({ currentIdx: newIdx });
+
+    if (newIdx === 0) {
+      this.isButtonAvailable = false;
+      setTimeout(() => {
+        this.isSlideAnimationOn = false;
+        this.setState({ currentIdx: imgLength });
+        this.isButtonAvailable = true;
+      }, TRANSITION_TIME);
+    }
+  };
+
+  slideToClickedImg = id => {
+    this.setState({ currentIdx: id });
   };
 
   render() {
-    const { currentImg, slideImgs, isTransformTimeOn } = this.state;
+    const { currentIdx } = this.state;
+    const imgLength = this.slideImgs.length;
     return (
       <div className="Carousel">
         <div className="btnNorm">
           <div className="containerWraper">
             <div
-              className={`container ${
-                isTransformTimeOn ? 'transformTimeOn' : ''
-              }`}
-              style={{ transform: `translateX(${-currentImg * 1500}px)` }}
+              className="container"
+              style={{
+                transform: `translateX(${-currentIdx * 1500}px)`,
+                transition: this.isSlideAnimationOn
+                  ? `transform ${TRANSITION_TIME}ms ease`
+                  : 'none',
+              }}
             >
-              {slideImgs.map((imgData, i) => {
+              <div className="SlideImage">
+                <div className="inner">
+                  <img
+                    src={slideImgs[imgLength - 1].path}
+                    alt={slideImgs[imgLength - 1].name}
+                  />
+                </div>
+              </div>
+              {slideImgs.map(img => {
                 return (
-                  <Link to={`/products/${imgData.productId}`} key={i}>
-                    <SlideImage name={imgData.name} img={imgData.img} />
+                  <Link to={`/products/${img.productId}`} key={img.id}>
+                    <SlideImage name={img.name} img={img.path} />
                   </Link>
                 );
               })}
               <div className="SlideImage">
                 <div className="inner">
-                  <img src={slideImgs[0].img} alt={slideImgs[0].name} />
+                  <img src={slideImgs[0].path} alt={slideImgs[0].name} />
                 </div>
               </div>
             </div>
@@ -107,12 +124,12 @@ class Carousel extends Component {
           />
         </div>
         <div className="dotBtnWraper">
-          {slideImgs.map((imgData, i) => {
+          {slideImgs.map(img => {
             return (
               <DotButton
-                key={i}
-                id={imgData.id}
-                currentImg={currentImg}
+                key={img.id}
+                id={img.id}
+                currentIdx={currentIdx}
                 slideToClickedImg={this.slideToClickedImg}
               />
             );
