@@ -111,35 +111,43 @@ class ProductDetail extends Component {
   };
 
   increaseCounter = id => {
+    const { choiceOptionArray } = this.state;
+    const selectedIndex = choiceOptionArray.findIndex(
+      option => option.id === id
+    );
+    const newOptions = [...choiceOptionArray];
+    const selectedOption = newOptions[selectedIndex];
+    if (selectedOption.choiceCount >= selectedOption.quantity) {
+      alert('재고량을 다시 확인하세요');
+      return;
+    }
+    newOptions[selectedIndex] = {
+      ...selectedOption,
+      choiceCount: selectedOption.choiceCount + 1,
+    };
     this.setState({
-      choiceOptionArray: this.state.choiceOptionArray.map(option => {
-        if (option.id === id) {
-          if (option.choiceCount >= option.quantity) {
-            alert('재고량을 다시 확인하세요');
-            return option;
-          }
-          return { ...option, choiceCount: option.choiceCount + 1 };
-        } else {
-          return option;
-        }
-      }),
+      choiceOptionArray: newOptions,
     });
   };
 
   decreaseCounter = id => {
     const MIN_LIMIT_OPTION_NUM = 1;
+    const { choiceOptionArray } = this.state;
+    const selectedIndex = choiceOptionArray.findIndex(
+      option => option.id === id
+    );
+    const newOptions = [...choiceOptionArray];
+    const selectedOption = newOptions[selectedIndex];
+    if (selectedOption.choiceCount < MIN_LIMIT_OPTION_NUM) {
+      alert('1개 이상 선택해야됩니다');
+      return;
+    }
+    newOptions[selectedIndex] = {
+      ...selectedOption,
+      choiceCount: selectedOption.choiceCount - 1,
+    };
     this.setState({
-      choiceOptionArray: this.state.choiceOptionArray.map(option => {
-        if (option.id === id) {
-          if (option.choiceCount < MIN_LIMIT_OPTION_NUM) {
-            alert('1개 이상 선택해야됩니다');
-            return option;
-          }
-          return { ...option, choiceCount: option.choiceCount - 1 };
-        } else {
-          return option;
-        }
-      }),
+      choiceOptionArray: newOptions,
     });
   };
 
