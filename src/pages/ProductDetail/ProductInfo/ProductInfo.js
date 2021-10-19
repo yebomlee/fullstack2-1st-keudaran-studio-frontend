@@ -6,37 +6,40 @@ import './ProductInfo.scss';
 class ProductInfo extends Component {
   render() {
     const {
-      clickMenu,
       changePositionScroll,
       descriptionImageUrl,
       id,
       isLogin,
+      isReviewColor,
+      isInfoColor,
       toggleIsLogin,
     } = this.props;
-    const whatColotMenu = menu =>
-      clickMenu === menu ? 'yesChangeColor' : 'notChangeColor';
     return (
-      <div className="ProductInfo">
+      <div className="ProductInfo" ref={this.props.forwardRef.infoRef}>
         <ul className="middleMenu">
           <li
-            className={whatColotMenu('info')}
-            onClick={() => changePositionScroll('info')}
+            className={isInfoColor ? 'yesChangeColor' : 'notChangeColor'}
+            onClick={() => changePositionScroll('infoRef')}
           >
             상품상세
           </li>
           <li
-            className={whatColotMenu('review')}
-            onClick={() => changePositionScroll('review')}
+            className={isReviewColor ? 'yesChangeColor' : 'notChangeColor'}
+            onClick={() => changePositionScroll('reviewRef')}
           >
             상품후기
           </li>
         </ul>
         <ProductInfoContent descriptionImageUrl={descriptionImageUrl} />
-        <h1 className="reviewTitle">REVIEW</h1>
+        <h1 className="reviewTitle" ref={this.props.forwardRef.reviewRef}>
+          REVIEW
+        </h1>
         <Review id={id} isLogin={isLogin} toggleIsLogin={toggleIsLogin} />
       </div>
     );
   }
 }
 
-export default ProductInfo;
+export default React.forwardRef((props, ref) => {
+  return <ProductInfo {...props} forwardRef={ref} />;
+});

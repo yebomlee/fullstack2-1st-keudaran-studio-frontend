@@ -9,11 +9,11 @@ class ChoiceOptionBox extends Component {
         <dt className="optionText">옵션</dt>
         <dd>
           <select className="optionBox" onChange={choiceOptionChange}>
-            <option value={[]}>옵션 선택</option>
+            <option>옵션 선택</option>
             {productOption?.map(option => {
               const { id, name, quantity } = option;
               return (
-                <option value={name} key={id}>
+                <option value={id} key={id}>
                   {name} ({quantity})
                 </option>
               );

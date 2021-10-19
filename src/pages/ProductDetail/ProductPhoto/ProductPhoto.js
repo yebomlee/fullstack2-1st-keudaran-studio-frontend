@@ -9,7 +9,7 @@ import './ProductPhoto.scss';
 class ProductPhoto extends Component {
   render() {
     const { id, name, mainImg, subImgs } = this.props;
-    const { clickChangeImg, clickArrowChangeImg } = this.props;
+    const { hoverChangeImg, clickArrowChangeImg } = this.props;
     return (
       <div className="ProductPhoto">
         <main className="mainPhoto">
@@ -35,7 +35,7 @@ class ProductPhoto extends Component {
                   <img
                     alt={name}
                     src={el.imageUrl}
-                    onMouseOver={clickChangeImg}
+                    onMouseOver={hoverChangeImg}
                   />
                 </li>
               );

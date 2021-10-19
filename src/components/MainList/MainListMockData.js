@@ -1,6 +1,6 @@
 const DATA = [
   {
-    id: 0,
+    id: 9,
     name: '작지 않은 Post Card',
     imgUrl: [
       'https://images.unsplash.com/photo-1595265616410-a6119ff0c87e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80',

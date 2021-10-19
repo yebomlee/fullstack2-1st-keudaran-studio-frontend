@@ -7,8 +7,7 @@ import './ChoiceOption.scss';
 class ChoiceOption extends Component {
   render() {
     const { price, choiceOption } = this.props;
-    const { increaseCounter, decreaseCounter, deleteChoiceOption, addComma } =
-      this.props;
+    const { increaseCounter, decreaseCounter, deleteChoiceOption } = this.props;
     const productTotalPrice = price * choiceOption.choiceCount;
     return (
       <div className="ChoiceOption">
@@ -27,19 +26,19 @@ class ChoiceOption extends Component {
               <FontAwesomeIcon
                 className="arrowButton"
                 icon={faCaretUp}
-                onClick={() => increaseCounter(choiceOption)}
+                onClick={() => increaseCounter(choiceOption?.id)}
               />
               <FontAwesomeIcon
                 className="arrowButton"
                 icon={faCaretDown}
-                onClick={() => decreaseCounter(choiceOption)}
+                onClick={() => decreaseCounter(choiceOption?.id)}
               />
             </span>
           </div>
         </div>
         <div>
           <p className="totalOptionPrice">
-            {addComma(productTotalPrice)}
+            {productTotalPrice?.toLocaleString()}
             <em>원</em>
           </p>
           <FontAwesomeIcon
