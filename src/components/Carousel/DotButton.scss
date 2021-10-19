@@ -1,4 +1,11 @@
+@import './variables';
+@import './mixin';
+
 .DotButton {
+  @include flexRow(center);
+  position: relative;
+  bottom: 15px;
+
   .dotBtn {
     border: none;
     border-radius: 50px;
@@ -6,18 +13,13 @@
     width: 15px;
     height: 15px;
     opacity: 0.6;
-    background-color: #999999;
-    transition: all 0.4s;
+    background-color: $DotBtnColor;
+    transition: $DotBtnTransition;
+    @include clickAniStandard;
   }
 
   .selected {
     width: 75px;
     opacity: 1;
-  }
-  &:hover {
-    opacity: 0.6;
-  }
-  &:active {
-    opacity: 0.1;
   }
 }

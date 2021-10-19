@@ -123,18 +123,11 @@ class Carousel extends Component {
             onClick={this.slideToRight}
           />
         </div>
-        <div className="dotBtnWraper">
-          {slideImgs.map(img => {
-            return (
-              <DotButton
-                key={img.id}
-                id={img.id}
-                currentIdx={currentIdx}
-                slideToClickedImg={this.slideToClickedImg}
-              />
-            );
-          })}
-        </div>
+        <DotButton
+          slideImgs={slideImgs}
+          currentIdx={currentIdx}
+          slideToClickedImg={this.slideToClickedImg}
+        />
       </div>
     );
   }

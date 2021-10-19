@@ -3,14 +3,21 @@ import './DotButton.scss';
 
 class DotButton extends Component {
   render() {
-    const { id, currentIdx, slideToClickedImg } = this.props;
-    console.log(id, currentIdx);
+    const { slideImgs, currentIdx, slideToClickedImg } = this.props;
     return (
       <div className="DotButton">
-        <button
-          className={`btn${id} dotBtn ${id === currentIdx ? 'selected' : ''}`}
-          onClick={() => slideToClickedImg(id)}
-        />
+        {slideImgs.map(img => {
+          return (
+            <div className="DotButton">
+              <button
+                className={`btn${img.id} dotBtn ${
+                  img.id === currentIdx ? 'selected' : ''
+                }`}
+                onClick={() => slideToClickedImg(img.id)}
+              />
+            </div>
+          );
+        })}
       </div>
     );
   }
