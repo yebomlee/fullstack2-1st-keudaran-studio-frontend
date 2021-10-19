@@ -12,15 +12,17 @@ class ProductDetail extends Component {
     this.state = {
       productData: [],
       imgNum: 1,
-      howCount: 0,
       changeMainImg: '',
-      isLikedProduct: 0,
       choiceOptionArray: [],
+      isInfoColor: false,
+      isReviewColor: false,
+      isLikedProduct: false,
       isPositionMenu: false,
       isSharedLinkMenu: false,
       isLogin: false,
     };
     this.multiRefs = {
+      topRef: React.createRef(),
       infoRef: React.createRef(),
       reviewRef: React.createRef(),
     };
@@ -54,7 +56,7 @@ class ProductDetail extends Component {
       : this.setState({ isLogin: false });
   };
 
-  clickChangeImg = e => {
+  hoverChangeImg = e => {
     this.setState({
       changeMainImg: e.target.currentSrc,
     });
@@ -66,67 +68,40 @@ class ProductDetail extends Component {
     const MIN_LIMIT_IMG_NUM = 1;
     const CHANGE_MAX_IMG_NUM = 4;
     const { imgNum } = this.state;
-    let imgId = 0;
+    let changeImgNum = 0;
     if (position === 'right') {
-      imgId = imgNum <= MIN_LIMIT_IMG_NUM ? CHANGE_MAX_IMG_NUM : imgNum - 1;
+      changeImgNum =
+        imgNum <= MIN_LIMIT_IMG_NUM ? CHANGE_MAX_IMG_NUM : imgNum - 1;
     } else {
-      imgId = imgNum > MAX_LIMIT_IMG_NUM ? CHANGE_MIN_IMG_NUM : imgNum + 1;
+      changeImgNum =
+        imgNum > MAX_LIMIT_IMG_NUM ? CHANGE_MIN_IMG_NUM : imgNum + 1;
     }
-    this.findSameImg(imgId);
+    this.findSameImg(changeImgNum);
   };
 
-  findSameImg = num => {
+  findSameImg = changeImgNum => {
     const changeMainImg = this.state.productData.productImage.find(
-      (productImg, index) => index + 1 === num
+      (productImg, index) => index + 1 === changeImgNum
     );
     this.setState({
-      imgNum: num,
+      imgNum: changeImgNum,
       changeMainImg: changeMainImg.imageUrl,
-    });
-  };
-
-  increaseCounter = option => {
-    const { choiceCount, quantity } = option;
-    if (choiceCount >= quantity) {
-      alert('재고량을 다시 확인하세요');
-      return;
-    }
-    option.choiceCount = choiceCount + 1;
-    this.setState({
-      howCount: choiceCount + 1,
-    });
-  };
-
-  decreaseCounter = option => {
-    const { choiceCount } = option;
-    const MIN_LIMIT_OPTION_NUM = 1;
-    if (choiceCount < MIN_LIMIT_OPTION_NUM) {
-      alert('1개 이상 선택해야됩니다');
-      return;
-    }
-    option.choiceCount = choiceCount - 1;
-    this.setState({
-      howCount: choiceCount - 1,
     });
   };
 
   choiceOptionChange = e => {
     const { choiceOptionArray, productData } = this.state;
-    const resultOption = productData.productOption?.find(option => {
-      return option.name === e.target.value;
+    const resultOption = productData.productOption.find(option => {
+      return option.id === Number(e.target.value);
     });
-    if (!resultOption) return;
-    const { name, quantity } = resultOption;
-    const isExist = choiceOptionArray.some(option => option.name === name);
+    const { id, name, quantity } = resultOption;
+    const isExist = choiceOptionArray.some(option => option.id === id);
     if (isExist) return;
     this.setState({
-      choiceCount: 0,
       choiceOptionArray: [
         ...choiceOptionArray,
         {
-          id: choiceOptionArray.length
-            ? choiceOptionArray[choiceOptionArray.length - 1].id + 1
-            : 1,
+          id,
           name,
           quantity,
           choiceCount: 0,
@@ -135,60 +110,63 @@ class ProductDetail extends Component {
     });
   };
 
+  increaseCounter = id => {
+    this.setState({
+      choiceOptionArray: this.state.choiceOptionArray.map(option => {
+        if (option.id === id) {
+          if (option.choiceCount >= option.quantity) {
+            alert('재고량을 다시 확인하세요');
+            return option;
+          }
+          return { ...option, choiceCount: option.choiceCount + 1 };
+        } else {
+          return option;
+        }
+      }),
+    });
+  };
+
+  decreaseCounter = id => {
+    const MIN_LIMIT_OPTION_NUM = 1;
+    this.setState({
+      choiceOptionArray: this.state.choiceOptionArray.map(option => {
+        if (option.id === id) {
+          if (option.choiceCount < MIN_LIMIT_OPTION_NUM) {
+            alert('1개 이상 선택해야됩니다');
+            return option;
+          }
+          return { ...option, choiceCount: option.choiceCount - 1 };
+        } else {
+          return option;
+        }
+      }),
+    });
+  };
+
   changeStateEventShow = role => {
     const { isLikedProduct, isMovePositionMenu, isSharedLinkMenu } = this.state;
-    if (role === 'like') {
-      this.setState({
-        isLikedProduct: !isLikedProduct,
-      });
-    } else if (role === 'move') {
-      this.setState({
-        isMovePositionMenu: !isMovePositionMenu,
-      });
-    } else {
-      this.setState({
-        isSharedLinkMenu: !isSharedLinkMenu,
-      });
-    }
+    this.setState({
+      isLikedProduct: role === 'like' && !isLikedProduct,
+      isMovePositionMenu: role === 'move' && !isMovePositionMenu,
+      isSharedLinkMenu: role === 'share' && !isSharedLinkMenu,
+    });
   };
 
   deleteChoiceOption = id => {
     const choiceOptionArray = this.state.choiceOptionArray.filter(
-      el => el.id !== id
+      choiceOption => choiceOption.id !== id
     );
     this.setState({ choiceOptionArray });
   };
 
   changePositionScroll = whereMovePosition => {
-    const movePosition = this.multiRefs[whereMovePosition]?.current
-      ? this.multiRefs[whereMovePosition].current.offsetTop
-      : 0;
-    const moveSroll = movePosition => {
-      const position = { top: movePosition, left: 0, behavior: 'smooth' };
-      window.scrollTo(position);
-    };
-    if (whereMovePosition === 'infoRef') moveSroll(movePosition);
-    else if (whereMovePosition === 'reviewRef') moveSroll(movePosition);
-    else moveSroll(movePosition);
-  };
-
-  showSharedLinkMenu = () => {
-    const { isSharedLinkMenu } = this.state;
-    this.setState({
-      isSharedLinkMenu: !isSharedLinkMenu,
+    this.multiRefs[whereMovePosition]?.current.scrollIntoView({
+      behavior: 'smooth',
     });
-  };
-
-  addComma = price => {
-    const commaPrice = (price + '')
-      .split('')
-      .reverse()
-      .map((num, i) => {
-        return i % 3 === 2 ? ',' + num : num;
-      })
-      .reverse()
-      .join('');
-    return commaPrice.charAt(0) === ',' ? commaPrice.slice(1) : commaPrice;
+    this.setState({
+      isInfoColor: whereMovePosition === 'infoRef',
+      isReviewColor: whereMovePosition === 'reviewRef',
+    });
   };
 
   render() {
@@ -205,20 +183,21 @@ class ProductDetail extends Component {
     const {
       changeMainImg,
       isLikedProduct,
-      choiceOptionArray,
       isMovePositionMenu,
       isSharedLinkMenu,
-      clickMenu,
+      isReviewColor,
+      isInfoColor,
+      choiceOptionArray,
       isLogin,
     } = this.state;
     return (
-      <div className="Detail">
+      <div className="Detail" ref={this.multiRefs.topRef}>
         <div className="total">
           <section className="product">
             <div className="main">
               <ProductPhoto
                 {...{ id, name, mainImg: changeMainImg, subImgs: productImage }}
-                clickChangeImg={this.clickChangeImg}
+                hoverChangeImg={this.hoverChangeImg}
                 clickArrowChangeImg={this.clickArrowChangeImg}
               />
               <ProductDescription
@@ -234,17 +213,17 @@ class ProductDetail extends Component {
                 choiceOptionChange={this.choiceOptionChange}
                 changeStateEventShow={this.changeStateEventShow}
                 deleteChoiceOption={this.deleteChoiceOption}
-                addComma={this.addComma}
               />
             </div>
             <article className="content">
               <ProductInfo
+                id={this.props.match.params.id}
                 ref={this.multiRefs}
                 descriptionImageUrl={descriptionImageUrl}
-                clickMenu={clickMenu}
-                changePositionScroll={this.changePositionScroll}
-                id={this.props.match.params.id}
+                isInfoColor={isInfoColor}
+                isReviewColor={isReviewColor}
                 isLogin={isLogin}
+                changePositionScroll={this.changePositionScroll}
                 toggleIsLogin={this.toggleIsLogin}
               />
             </article>

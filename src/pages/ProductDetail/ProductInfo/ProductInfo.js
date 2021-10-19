@@ -6,26 +6,25 @@ import './ProductInfo.scss';
 class ProductInfo extends Component {
   render() {
     const {
-      clickMenu,
       changePositionScroll,
       descriptionImageUrl,
       id,
       isLogin,
+      isReviewColor,
+      isInfoColor,
       toggleIsLogin,
     } = this.props;
-    const whatColorMenu = menu =>
-      clickMenu === menu ? 'yesChangeColor' : 'notChangeColor';
     return (
       <div className="ProductInfo" ref={this.props.forwardRef.infoRef}>
         <ul className="middleMenu">
           <li
-            className={whatColorMenu('info')}
+            className={isInfoColor ? 'yesChangeColor' : 'notChangeColor'}
             onClick={() => changePositionScroll('infoRef')}
           >
             상품상세
           </li>
           <li
-            className={whatColorMenu('review')}
+            className={isReviewColor ? 'yesChangeColor' : 'notChangeColor'}
             onClick={() => changePositionScroll('reviewRef')}
           >
             상품후기
