@@ -17,18 +17,6 @@ class MainProductCard extends React.Component {
     });
   };
 
-  addComma = price => {
-    const commaPrice = (price + '')
-      .split('')
-      .reverse()
-      .map((num, i) => {
-        return i % 3 === 2 ? ',' + num : num;
-      })
-      .reverse()
-      .join('');
-    return commaPrice.charAt(0) === ',' ? commaPrice.slice(1) : commaPrice;
-  };
-
   render() {
     const { isHover } = this.state;
     const { id, name, price, imgUrl } = this.props.product;
@@ -47,7 +35,7 @@ class MainProductCard extends React.Component {
         </Link>
         <span className="productName">{name}</span>
         <div className="productPrice">
-          <span className="price">{this.addComma(price)}</span>
+          <span className="price">{price.toLocaleString('en')}</span>
           <span className="priceUnit">원</span>
         </div>
       </li>

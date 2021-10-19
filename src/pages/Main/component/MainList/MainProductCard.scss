@@ -1,25 +1,24 @@
+@import './variables';
+@import './mixin';
+
 .MainProductCard {
-  display: flex;
-  flex-direction: column;
-  margin: 0 60px 30px 0;
-  width: 360px;
-  color: #333333;
+  @include flexColumn(center);
 
   .productImg {
-    width: 100%;
-    height: 360px;
+    width: 370px;
+    height: 370px;
     object-fit: cover;
     cursor: pointer;
   }
 
   .productName {
-    display: flex;
     margin-top: 15px;
     padding: 5px 0;
     font-size: 17px;
   }
 
   .productPrice {
+    margin-top: 2px;
     .price {
       font-weight: 700;
     }

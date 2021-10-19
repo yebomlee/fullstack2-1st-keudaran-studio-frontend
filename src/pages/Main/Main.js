@@ -1,7 +1,7 @@
 import React from 'react';
-import BestReviewCarousel from '../../components/BestReviewCarousel/BestReviewCarousel';
-import Carousel from '../../components/Carousel/Carousel';
-import Mainlist from '../../components/MainList/MainList';
+import BestReviewCarousel from './component/BestReviewCarousel/BestReviewCarousel';
+import Carousel from './component/Carousel/Carousel';
+import Mainlist from './component/MainList/MainList';
 
 class Main extends React.Component {
   render() {
