@@ -1,0 +1,13 @@
+@import './variables';
+@import './mixin';
+
+.MainList {
+  width: 1200px;
+  margin: 10px auto 30px auto;
+
+  .productListWraper {
+    display: grid;
+    grid: auto-flow / repeat(3, 360px);
+    gap: 15px 55px;
+  }
+}

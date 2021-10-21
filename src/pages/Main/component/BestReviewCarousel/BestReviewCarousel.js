@@ -10,35 +10,35 @@ class BestReviewCarousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: reviews,
       currentIdx: 0,
     };
+    this.reviews = reviews;
   }
-  // 백엔드 API 수정 후 시간 나면
-  // componentDidMount() {
-  //   fetch('/review?id=2&sort=rating', {
-  //     method: 'GET',
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       this.setState({ reviews: data.result });
-  //     });
-  // }
 
   slideToRight = () => {
-    const { currentIdx, reviews } = this.state;
-    if (currentIdx === Math.ceil(reviews.length / 4) - 1) return;
-    this.setState({ currentIdx: currentIdx + 1 });
+    const { currentIdx } = this.state;
+    const lastPageIdx = Math.ceil(this.reviews.length / 4) - 1;
+    const newIdx = currentIdx + 1;
+
+    if (currentIdx === lastPageIdx) return;
+
+    this.setState({ currentIdx: newIdx });
   };
 
   slideToLeft = () => {
     const { currentIdx } = this.state;
+
     if (currentIdx === 0) return;
+
     this.setState({ currentIdx: currentIdx - 1 });
   };
 
   render() {
-    const { currentIdx, reviews, isTransformTimeOn } = this.state;
+    const { currentIdx } = this.state;
+    const reviewLength = this.reviews.length;
+    let isRightLast = currentIdx === Math.ceil(reviewLength / 4) - 1;
+    let isLeftLast = currentIdx === 0;
+
     return (
       <div className="BestReviewCarousel">
         <div className="titleWraper">
@@ -50,24 +50,24 @@ class BestReviewCarousel extends Component {
         <div className="btnNorm">
           <div className="containerWraper">
             <div
-              className={`container ${
-                isTransformTimeOn ? 'transformTimeOn' : ''
-              }`}
+              className="container"
               style={{ transform: `translateX(${-currentIdx * 1200}px)` }}
             >
-              {reviews.map((review, i) => {
-                return <ReviewCard key={i} review={review} />;
+              {reviews.map(review => {
+                return <ReviewCard key={review.id} review={review} />;
               })}
             </div>
           </div>
           <FontAwesomeIcon
             icon={faAngleLeft}
             className="leftBtn"
+            style={{ display: isLeftLast ? 'none' : '' }}
             onClick={this.slideToLeft}
           />
           <FontAwesomeIcon
             icon={faAngleRight}
             className="rightBtn"
+            style={{ display: isRightLast ? 'none' : '' }}
             onClick={this.slideToRight}
           />
         </div>

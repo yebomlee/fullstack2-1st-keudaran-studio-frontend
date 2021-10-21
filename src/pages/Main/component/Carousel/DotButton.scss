@@ -1,0 +1,25 @@
+@import './variables';
+@import './mixin';
+
+.DotButton {
+  @include flexRow(center);
+  position: relative;
+  bottom: 35px;
+
+  .dotBtn {
+    width: 15px;
+    height: 15px;
+    margin: -10px 3px;
+    background-color: $DotBtnColor;
+    border: none;
+    border-radius: 50px;
+    opacity: 0.6;
+    transition: $DotBtnTransition;
+    @include clickAniStandard;
+  }
+
+  .selected {
+    width: 75px;
+    opacity: 1;
+  }
+}
