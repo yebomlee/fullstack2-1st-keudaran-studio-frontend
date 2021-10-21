@@ -4,7 +4,7 @@
 .DotButton {
   @include flexRow(center);
   position: relative;
-  bottom: 15px;
+  bottom: 35px;
 
   .dotBtn {
     width: 15px;
