@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
+import { API_ENDPOINT } from '../../api';
 import './Review.scss';
 
 class Review extends React.Component {
@@ -15,7 +16,7 @@ class Review extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch(`/review?id=${this.props.id}`, {
+    fetch(`${API_ENDPOINT}/review?id=${this.props.id}`, {
       method: 'GET',
     })
       .then(res => res.json())
@@ -40,7 +41,7 @@ class Review extends React.Component {
     if (review === '') return alert('리뷰 내용을 입력해주세요.');
     if (new Cookies().get('user')) id = new Cookies().get('user').id;
 
-    fetch('/review', {
+    fetch(`${API_ENDPOINT}/review`, {
       headers: {
         'Content-Type': 'application/json',
       },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import SignUpBox from './SignUpBox';
+import { API_ENDPOINT } from '../../../api';
 import './SignUp.scss';
 
 class SignUp extends React.Component {
@@ -73,7 +74,7 @@ class SignUp extends React.Component {
     const { username } = this.state.userInfoData;
     if (username === '') return alert('아이디를 입력해주세요');
     if (username.length < 5) return alert('5글자 이상의 아이디를 입력해주세요');
-    fetch('/user/signup/username', {
+    fetch(`${API_ENDPOINT}/user/signup/username`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -148,7 +149,7 @@ class SignUp extends React.Component {
         '비밀번호는 8자 이상의 숫자와 문자, 특수문자가 들어가야 합니다'
       );
 
-    fetch('/user/signup', {
+    fetch(`${API_ENDPOINT}/user/signup`, {
       headers: {
         'Content-Type': 'application/json',
       },

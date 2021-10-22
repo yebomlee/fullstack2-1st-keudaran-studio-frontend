@@ -3,6 +3,7 @@ import ProductPhoto from './ProductPhoto/ProductPhoto';
 import ProductDescription from './ProductDescription/ProductDescription';
 import ProductInfo from './ProductInfo/ProductInfo';
 import HambergerIcon from './HambergerIconMenu/HambergerIconMenu';
+import { API_ENDPOINT } from '../../api';
 import './ProductDetail.scss';
 import Cookies from 'universal-cookie';
 
@@ -32,7 +33,7 @@ class ProductDetail extends Component {
     const CHANGE_IMG_INTERVER = 5000;
     let listId = this.props.match.params?.id;
     if (listId <= 0 || listId > 15) listId = 1;
-    fetch(`/product/detail?id=${listId}`, {
+    fetch(`${API_ENDPOINT}/product/detail?id=${listId}`, {
       method: 'GET',
     })
       .then(res => res.json())
