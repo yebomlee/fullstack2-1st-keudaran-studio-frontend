@@ -7,6 +7,7 @@ import {
   faShoppingCart,
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
+import { API_ENDPOINT } from '../../api';
 import './Nav.scss';
 
 class Nav extends Component {
@@ -42,12 +43,15 @@ class Nav extends Component {
 
   componentDidMount() {
     const { changeLoginState } = this.props;
-    fetch('/category', {
+    fetch(`${API_ENDPOINT}/category`, {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
         this.setState({ category: data.categories });
+      })
+      .catch(e => {
+        console.log(e);
       });
     changeLoginState();
   }

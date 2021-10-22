@@ -3,6 +3,7 @@ import qs from 'qs';
 import ProductListMdPicks from '../../components/List/ProductListMdPicks';
 import ProductSubCategory from '../../components/List/ProductSubCategory';
 import ProductListContainer from '../../components/List/ProductListContainer';
+import { API_ENDPOINT } from '../../api';
 import './ProductList.scss';
 
 class ProductList extends React.Component {
@@ -29,7 +30,7 @@ class ProductList extends React.Component {
   };
 
   componentDidMount() {
-    fetch('/category', {
+    fetch(`${API_ENDPOINT}/category`, {
       method: 'GET',
     })
       .then(res => res.json())
@@ -37,7 +38,7 @@ class ProductList extends React.Component {
         this.setState({ allCategoryData: data.categories });
       });
 
-    fetch('/data/subCategoryProduct.json')
+    fetch(`${API_ENDPOINT}/data/subCategoryProduct.json`)
       .then(res => res.json())
       .then(res => {
         const sub = res.MAIN_CATEGORY.SUB_CATEGORY;

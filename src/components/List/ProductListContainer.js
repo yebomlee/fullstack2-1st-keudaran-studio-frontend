@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import { API_ENDPOINT } from '../../api';
 import './ProductListContainer.scss';
 
 class ProductListContainer extends React.Component {
@@ -19,7 +20,7 @@ class ProductListContainer extends React.Component {
   };
 
   componentDidMount() {
-    fetch(`/product/sort?sort=${this.props.sorting}`)
+    fetch(`${API_ENDPOINT}/product/sort?sort=${this.props.sorting}`)
       .then(res => res.json())
       .then(res => {
         if (Number.isNaN(this.props.subCategoryId)) {
@@ -53,7 +54,7 @@ class ProductListContainer extends React.Component {
         this.props.subCategoryId) ||
       this.props.sorting !== prevProps.sorting
     ) {
-      fetch(`/product/sort?sort=${this.props.sorting}`)
+      fetch(`${API_ENDPOINT}/product/sort?sort=${this.props.sorting}`)
         .then(res => res.json())
         .then(res => {
           if (Number.isNaN(this.props.subCategoryId)) {
