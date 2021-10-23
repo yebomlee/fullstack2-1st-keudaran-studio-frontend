@@ -33,6 +33,7 @@ class SignIn extends React.Component {
         'Content-Type': 'application/json',
       },
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify({
         username: tempUserData.username,
         password: tempUserData.password,
