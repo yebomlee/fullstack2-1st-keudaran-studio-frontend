@@ -1,25 +1,11 @@
 # 🦖 크다란 스튜디오 Front-end 소개
 ![크다란](https://user-images.githubusercontent.com/87760409/137558624-5290cf93-db93-4d5f-8b24-00453ab28c64.png)
 
-- 조그만 스튜디오 스토어 클론 코딩 프로젝트 입니다.
-
-## 💁🏻‍♂️ 💁🏻‍♀️ 팀원
-
-- [김시원](https://github.com/k-cool)
-
-- [성지수](https://github.com/seong-ji-sue)
-
-- [신기철](https://github.com/PhilipShinnn)
-
-- [이욱창](https://github.com/wook95)
-
-- [이예봄](https://github.com/yebomlee)
-
-- [이은정](http://github.com/leecoder21)
+- '조구만 스토어'를 모티브로 하여 Web Full-Stack 6명으로 구성된 팀원들과 진행한 프로젝트 입니다.
 
 ## 📅 프로젝트 기간
 
-- 2021.10. 4 ~ 2021.10. 15 (11일)
+- 2021. 10. 4 ~ 2021. 10. 15 (11일)
 
 ## ✅ Skills
 
@@ -37,49 +23,23 @@
 
   ![](https://img.shields.io/badge/-GitHub-%23000000??style=flat&logo=github&logoColor=white) ![](https://img.shields.io/badge/-Slack-%234A154B??style=flat&logo=slack&logoColor=white) ![](https://img.shields.io/badge/-Postman-%23FF6C37??style=flat&logo=postman&logoColor=white) 
 
-## Back-end Repository
-
-- [keudaran-studio-backend Link](https://github.com/wecode-bootcamp-korea/fullstack2-1st-keudaran-studio-backend)
 
 ## Front-end 구현 기능 상세
 ### 1. 공통 구현 사항
 - 담당 컴포넌트, 페이지별 레이아웃 구현
 
- - Nav
-   - 유저가 로그인 했을시 유저네임, 로그아웃 버튼, 로그아웃 기능 구현
-   - 동적 라우팅 구현
+### 2. 본인 구현 사항
+
+![Peek 2021-10-08 17-29](https://user-images.githubusercontent.com/87700801/147833808-e9af9865-b166-4a19-9856-f1702d06c2c6.gif)
+
+ - Navigation
+   - Category 부분 Hover시 Category menu Dropdown 구현
+   - Haburger Icon 클릭시 Category menu 이미지 슬라이드 모달창 구현
+   - Category Id에 따른 Path Parameter를 통한 동적 라우팅 구현
+   - user가 로그인 했을시 user name 표시 기능 구현
  
  - Footer
-    - footer 리스트 mockdata 가져와 컴포넌트 구성
- 
-### 2. 메인 페이지
- - 메인 상단의 Carousel 구현
- - 상품 리스트 mockdata 가져와 페이지 구성
- - best review Carousel 구현
- 
-### 3. 상품 리스트 페이지
- - 카테고리 API와 연계하여 상품별 카테고리 분류 구현
- - 상품 정렬 API와 연계하여, 정렬 기능 구현
- 
-### 4. 상품 상세 페이지
- - 상품 ID에 따른 동적 라우팅 구현
- - 상품 상세 API와 연계하여, 상품 정보 동적 구현
- - 옵션 클릭 시, 상품 수량 및 가격 변동 기능 구현
- - 좋아요 기능 구현
- - 사용 후기 구현 (별점)
- - 호버, 버튼 클릭, Set time out시 썸네일 이미지 변경 기능 구현
- - Ref를 사용하여 클릭시 해당위치 스크롤 이동
- 
- ### 5. 로그인/회원가입
- - 로그인
-    - 로그인 성공시 발급 받은 토큰 `cookie`에 저장 후 , 메인으로 Redirect
-    - 아이디 또는 비밀번호가 일치하지 않을 시, Alert로 안내
- - 회원가입
-    - 회원가입 API와 연게
-    - 회원가입 성공 시 로그인 됨과 동시에 메인으로 Redirect
-    - 회원가입 폼의 약관 동의 Checkbox 전체 선택/해제 기능 구현
-    - 전체 선택 & 해제 (한 항목 해제 시 전체 선택 해제)
-
+    - Footer 리스트 Mockdata 가져와 컴포넌트 구성
 
 ## ☕️ Reference
 
